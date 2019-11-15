@@ -3,9 +3,12 @@ package net.mekomsolutions.c2c.extract;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.component.properties.PropertiesComponent;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import net.mekomsolutions.c2c.extract.Entity.Person;
 
 public class SpringAnnotationSplitterTest extends CamelSpringTestSupport {
     
@@ -34,10 +37,11 @@ public class SpringAnnotationSplitterTest extends CamelSpringTestSupport {
             public void configure() throws Exception {
                 from("file:data/inbox/?noop=true")
                 .split().jsonpath("$.[*].{{couchdb.bucket.name}}").streaming()
-                .log("Split line ${body}")
-                        .to("seda:split")
-                        .to("mock:split");
-            }
+                .convertBodyTo(Person.class)
+                .marshal().json(JsonLibrary.Jackson)
+                .to("file:data/outbox/?fileName=${header.type}-${header.uuid}")
+                .to("mock:split");
+                }
         };
     }
 }
