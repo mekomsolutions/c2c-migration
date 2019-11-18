@@ -1,55 +1,27 @@
 package net.mekomsolutions.c2c.extract.Entity;
 
-public class Person {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class Person extends BaseEntity {
 	
-	public Person(String person, String givenName, String middleName, String familyName) {
-		super();
-		this.person = person;
-		this.givenName = givenName;
-		this.middleName = middleName;
-		this.familyName = familyName;
-	}
+	@JsonProperty("patientUuid")
+	private String patient;
 
-	private String person;
-
+	@JsonProperty
 	private String givenName;
 	
+	@JsonProperty
 	private String middleName;
 	
+	@JsonProperty
 	private String familyName;
 
-	public String getPerson() {
-		return person;
-	}
-
-	public void setPerson(String person) {
-		this.person = person;
-	}
-
-	public String getGivenName() {
-		return givenName;
-	}
-
-	public void setGivenName(String givenName) {
+	public Person(String modelClassName, String uuid, String person, String givenName, String middleName, String familyName) {
+		super(modelClassName ,uuid);
+		this.patient = person;
 		this.givenName = givenName;
-	}
-
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
-	}
-
-	public String getFamilyName() {
-		return familyName;
-	}
-
-	public void setFamilyName(String familyName) {
 		this.familyName = familyName;
 	}
 
-	
 }
