@@ -1,15 +1,18 @@
 package net.mekomsolutions.c2c.extract;
 
+import java.io.File;
+
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.test.spring.CamelSpringTestSupport;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import net.mekomsolutions.c2c.extract.Entity.EntityWrapper;
-import net.mekomsolutions.c2c.extract.Entity.Person;
+import net.mekomsolutions.c2c.extract.Entity.Contact;
+import net.mekomsolutions.c2c.extract.Entity.Patient;
 
 public class ExtractRouteTest extends CamelSpringTestSupport {
 
@@ -23,8 +26,7 @@ public class ExtractRouteTest extends CamelSpringTestSupport {
 
 		MockEndpoint mockSplit = getMockEndpoint("mock:split");
 		mockSplit.setAssertPeriod(500);
-		mockSplit.expectedMessageCount(10);
-
+		mockSplit.expectedMessageCount(40);
 		assertMockEndpointsSatisfied();
 
 	}
@@ -43,16 +45,24 @@ public class ExtractRouteTest extends CamelSpringTestSupport {
 				.setHeader("type",simple("${body[dataElementKey]}"))
 				.choice()
 				.when(header("type").isEqualTo("dlm~00~c2c~contact"))
-				.to("seda:contact");
+				.to("seda:contact")
+				.when(header("type").isEqualTo("dlm~00~c2c~patient"))
+				.to("seda:patient");
 
-				from("seda:contact").convertBodyTo(Person.class)
-				.setHeader("modelClassName", simple("${body.getModelClassName}"))
-				.setHeader("uuid", simple("${body.getUuid}"))
+				from("seda:contact").convertBodyTo(Contact.class)
+				.split(simple("${body.entities}"))
 				.to("seda:save");
 
-				from("seda:save").convertBodyTo(EntityWrapper.class).marshal().json(JsonLibrary.Jackson)
-				.to("file:data/outbox/?fileName=${header.modelClassName}-${header.uuid}")
-				.log("Converted: ${body}")
+				from("seda:patient").convertBodyTo(Patient.class)
+				.split(simple("${body.entities}"))
+				.to("seda:save");
+				
+				from("seda:save")
+				.setHeader("modelClass", simple("${body.modelClass}"))
+				.setHeader("uuid", simple("${body.uuid}"))
+				.marshal().json(JsonLibrary.Jackson)
+				.to("file:data/outbox/?fileName=${header.modelClass}-${header.uuid}")
+				.log("As a JSON: ${body}")
 				.to("mock:split");
 
 			}

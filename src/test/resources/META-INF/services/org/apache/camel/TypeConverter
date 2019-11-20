@@ -1,2 +1,2 @@
-net.mekomsolutions.c2c.extract.converter.PersonConverter
-net.mekomsolutions.c2c.extract.converter.EntityWrapperConverter
+net.mekomsolutions.c2c.extract.converter.PatientConverter
+net.mekomsolutions.c2c.extract.converter.ContactConverter
