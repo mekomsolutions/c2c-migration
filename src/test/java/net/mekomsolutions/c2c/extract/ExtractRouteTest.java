@@ -1,13 +1,10 @@
 package net.mekomsolutions.c2c.extract;
 
-import java.io.File;
-
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.test.spring.CamelSpringTestSupport;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -26,7 +23,7 @@ public class ExtractRouteTest extends CamelSpringTestSupport {
 
 		MockEndpoint mockSplit = getMockEndpoint("mock:split");
 		mockSplit.setAssertPeriod(500);
-		mockSplit.expectedMessageCount(40);
+		mockSplit.expectedMessageCount(30);
 		assertMockEndpointsSatisfied();
 
 	}

@@ -5,19 +5,19 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.OpenMRSEntity;
-import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.OpenMRSPerson;
+import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.SyncEntity;
+import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.SyncPerson;
 
 public class Contact {
 
 	@JsonProperty
-	private List<EntityWrapper<OpenMRSEntity>> entities;
+	private List<EntityWrapper<SyncEntity>> entities;
 	
-	public Contact(OpenMRSPerson openMRSPerson) {
-		this.entities = Arrays.asList(new EntityWrapper<OpenMRSEntity>(openMRSPerson));
+	public Contact(SyncPerson SyncPerson) {
+		this.entities = Arrays.asList(new EntityWrapper<SyncEntity>(SyncPerson));
 	}
 
-	public List<EntityWrapper<OpenMRSEntity>> getEntities() {
+	public List<EntityWrapper<SyncEntity>> getEntities() {
 		return entities;
 	}
 	

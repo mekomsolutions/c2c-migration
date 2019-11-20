@@ -5,24 +5,24 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.OpenMRSEntity;
-import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.OpenMRSPatient;
-import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.OpenMRSPerson;
-import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.OpenMRSPersonName;
+import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.SyncEntity;
+import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.SyncPatient;
+import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.SyncPersonName;
 
 public class Patient {
 
 	@JsonProperty
-	private List<EntityWrapper<OpenMRSEntity>> entities;
-	
-	public Patient(OpenMRSPatient openMRSPatient, OpenMRSPerson openMRSPerson, OpenMRSPersonName openMRSPersonName) {
-		this.entities = Arrays.asList(new EntityWrapper<OpenMRSEntity>(openMRSPatient), 
-				new EntityWrapper<OpenMRSEntity>(openMRSPerson), 
-				new EntityWrapper<OpenMRSEntity>(openMRSPersonName));
+	private List<EntityWrapper<SyncEntity>> entities;
+
+	public Patient(SyncPatient openMRSPatient, SyncPersonName openMRSPersonName) {
+		this.entities = Arrays.asList(
+				new EntityWrapper<SyncEntity>(openMRSPatient), 
+				new EntityWrapper<SyncEntity>(openMRSPersonName)
+				);
 	}
 
-	public List<EntityWrapper<OpenMRSEntity>> getEntities() {
+	public List<EntityWrapper<SyncEntity>> getEntities() {
 		return entities;
 	}
-	
+
 }

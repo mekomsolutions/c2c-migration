@@ -7,7 +7,7 @@ import org.apache.camel.Converter;
 import org.apache.camel.Exchange;
 
 import net.mekomsolutions.c2c.extract.Entity.Contact;
-import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.OpenMRSPerson;
+import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.SyncPerson;
 
 @Converter
 public class ContactConverter {
@@ -15,7 +15,7 @@ public class ContactConverter {
 	@Converter
 	public Contact toPerson(HashMap<String,String> data , Exchange exchange) {
 
-		OpenMRSPerson person  = new OpenMRSPerson(UUID.nameUUIDFromBytes(data.get("objKey").getBytes()).toString());
+		SyncPerson person  = new SyncPerson(UUID.nameUUIDFromBytes(data.get("objKey").getBytes()).toString());
 		{
 //			person.setPatientChangedByUuid(Utils.getModelClassWithRef("PatientLight", UUID.nameUUIDFromBytes(data.get("patientKey").getBytes()));
 				

@@ -3,7 +3,7 @@ package net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class OpenMRSEntity {
+public class SyncEntity {
 
 	@JsonIgnore
 	private String modelClassName;
@@ -11,7 +11,7 @@ public class OpenMRSEntity {
 	@JsonProperty
 	private String uuid;
 	
-	public OpenMRSEntity(String modelClassName,String uuid) {
+	public SyncEntity(String modelClassName,String uuid) {
 		super();
 		this.uuid = uuid;
 		this.modelClassName = modelClassName;

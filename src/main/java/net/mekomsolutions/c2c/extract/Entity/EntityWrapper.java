@@ -3,9 +3,9 @@ package net.mekomsolutions.c2c.extract.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.OpenMRSEntity;
+import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.SyncEntity;
 
-public class EntityWrapper<T extends OpenMRSEntity> {
+public class EntityWrapper<T extends SyncEntity> {
 
 	@JsonProperty("tableToSyncModelClass")
 	private String modelClass;

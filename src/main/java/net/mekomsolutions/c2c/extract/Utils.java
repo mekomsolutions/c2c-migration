@@ -12,16 +12,16 @@ import java.util.UUID;
 
 public class Utils {
 
-	public static <T> String getModelClassNameFromType(Class<T> type) {
-		return getModelClassNameFromString(type.getSimpleName());
+	public static <T> String getModelClassFullFromType(Class<T> type) {
+		return getModelClassFullFromString(type.getSimpleName());
 	}
 	
-	public static String getModelClassNameFromString(String typeAsString) {
-		return Constants.MODEL_CLASS_NAMES.get(typeAsString);
+	public static String getModelClassFullFromString(String typeAsString) {
+		return Constants.FULL_MODEL_CLASS_NAMES.get(typeAsString);
 	}
-	
-	public static String getModelClassWithRef(String typeAsString, UUID uuid) {
-		return getModelClassNameFromString(typeAsString) + "(" + uuid.toString() + ")";
+		
+	public static String getModelClassLight(String typeAsString, UUID uuid) {
+		return Constants.LIGHT_MODEL_CLASS_NAMES.get(typeAsString) + "(" + uuid.toString() + ")";
 	}
 	
 	public static List<Integer> dateLongToArray(Long timeInMillisecs) {
@@ -30,7 +30,7 @@ public class Utils {
 		
 		List<Integer> array = new ArrayList<Integer>();
 		array.add(calendar.get(Calendar.YEAR));
-		array.add(calendar.get(Calendar.MONTH));
+		array.add(calendar.get(Calendar.MONTH) + 1);
 		array.add(calendar.get(Calendar.DAY_OF_MONTH));
 		array.add(calendar.get(Calendar.HOUR));
 		array.add(calendar.get(Calendar.MINUTE));
@@ -51,12 +51,17 @@ public class Utils {
 		calendar.setTime(date);
 		List<Integer> array = new ArrayList<Integer>();
 		array.add(calendar.get(Calendar.YEAR));
-		array.add(calendar.get(Calendar.MONTH));
+		array.add(calendar.get(Calendar.MONTH) + 1);
 		array.add(calendar.get(Calendar.DAY_OF_MONTH));
 		array.add(calendar.get(Calendar.HOUR));
 		array.add(calendar.get(Calendar.MINUTE));
 		array.add(calendar.get(Calendar.SECOND));
 		return array;
+	}
+
+	public static List<Integer> convertBirthdate(String string) {
+		List<Integer> birthdate = dateStringToArray(string);
+		return birthdate.subList(0, 3);
 	}
 
 }

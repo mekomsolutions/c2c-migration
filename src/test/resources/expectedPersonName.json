@@ -1,0 +1,35 @@
+{
+  "tableToSyncModelClass": "org.openmrs.sync.component.model.PersonNameModel",
+  "model": {
+    "uuid": "f105bb07-6899-42df-ab33-82fcb16ca138",
+    "creatorUuid": "org.openmrs.sync.component.entity.light.UserLight(1c3db49d-440a-11e6-a65c-00e04c680037)",
+    "dateCreated": [
+      2019,
+      8,
+      28,
+      13,
+      26,
+      28
+    ],
+    "changedByUuid": null,
+    "dateChanged": null,
+    "voided": false,
+    "voidedByUuid": null,
+    "dateVoided": null,
+    "voidReason": null,
+    "retired": false,
+    "retiredByUuid": null,
+    "dateRetired": null,
+    "retiredReason": null,
+    "preferred": true,
+    "personUuid": "org.openmrs.sync.component.entity.light.PatientLight(433e3c26-1ac9-4d39-9f81-87a6146f9c61)",
+    "prefix": null,
+    "givenName": "john mark",
+    "middleName": null,
+    "familyNamePrefix": null,
+    "familyName": "esplana",
+    "familyName2": null,
+    "familyNameSuffix2": null,
+    "degree": null
+  }
+}

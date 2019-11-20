@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.mekomsolutions.c2c.extract.Utils;
 
-public class OpenMRSPersonName extends OpenMRSEntity {
+public class SyncPatient extends SyncEntity {
 
 	@JsonProperty
 	private String creatorUuid;
@@ -95,8 +95,8 @@ public class OpenMRSPersonName extends OpenMRSEntity {
 	@JsonProperty
 	private String patientVoidReason;
 
-	public OpenMRSPersonName(String uuid) {
-		super(Utils.getModelClassNameFromType(OpenMRSPersonName.class), uuid);
+	public SyncPatient(String uuid) {
+		super(Utils.getModelClassFullFromType(SyncPatient.class), uuid);
 	}
 
 	public String getCreatorUuid() {
