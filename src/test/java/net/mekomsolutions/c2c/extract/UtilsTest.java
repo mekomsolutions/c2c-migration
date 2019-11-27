@@ -3,6 +3,7 @@ package net.mekomsolutions.c2c.extract;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
@@ -38,4 +39,20 @@ public class UtilsTest {
 				Integer.valueOf("2"));
 		assertEquals(expectedDate, dateArray);
 		}
+	
+	@Test
+	public void shouldReturnConcatenatedName() {
+		LinkedList<String> list =  new LinkedList<String>(Arrays.asList("firstname  ", "" , " lastname", null));
+		String name = Utils.concatName(list);
+		
+		assertEquals("Firstname Lastname", name);
+	}
+	
+	@Test
+	public void shouldReturnConcatenatedPhoneNumber() {
+		LinkedList<String> list =  new LinkedList<String>(Arrays.asList(" 0234", "" , " 98765", null));
+		String name = Utils.concatPhoneNumber(list);
+		
+		assertEquals("0234 / 98765", name);
+	}
 }

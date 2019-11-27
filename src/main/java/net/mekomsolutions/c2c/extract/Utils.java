@@ -4,11 +4,15 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Value;
 
 public class Utils {
 
@@ -62,6 +66,34 @@ public class Utils {
 	public static List<Integer> convertBirthdate(String string) {
 		List<Integer> birthdate = dateStringToArray(string);
 		return birthdate.subList(0, 3);
+	}
+	
+	private static List<String> trimAndCapitalize(LinkedList<String> list) {
+
+		list.removeAll(Arrays.asList("", null));
+		
+		// Trim
+		List<String> trimmedList = new ArrayList<String>();
+		for (String str : list) {
+			trimmedList.add(str.trim());
+		}
+		// Capitalize
+		List<String> capitalizedList = new ArrayList<String>();
+		for (String str : trimmedList) {
+			capitalizedList.add(str.substring(0, 1).toUpperCase() + str.substring(1));
+		}
+
+		return capitalizedList;
+	}
+	
+	public static String concatName (LinkedList<String> list) {
+		String name = String.join(" ", trimAndCapitalize(list));
+		return name;
+	}
+
+	public static String concatPhoneNumber (LinkedList<String> list) {
+		String name = String.join(" / ", trimAndCapitalize(list));
+		return name;
 	}
 
 }

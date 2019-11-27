@@ -1,4 +1,4 @@
-package net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity;
+package net.mekomsolutions.c2c.extract.entity.sync;
 
 import java.util.List;
 
@@ -6,6 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.mekomsolutions.c2c.extract.Utils;
 
+/**
+ * A PersonName ready to be marshaled in a message,
+ * compatible with the OpenMRS Camel component.
+ * 
+ */
 public class SyncPersonName extends SyncEntity {
 
 	@JsonProperty

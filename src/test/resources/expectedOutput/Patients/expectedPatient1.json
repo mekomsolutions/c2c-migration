@@ -1,0 +1,60 @@
+{
+  "tableToSyncModelClass": "org.openmrs.sync.component.model.PatientModel",
+  "model": {
+    "uuid": "05eeac8d-100e-3fd7-a258-a33a663661c1",
+    "creatorUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
+    "dateCreated": [
+      2019,
+      5,
+      3,
+      7,
+      25,
+      10
+    ],
+    "dateChanged": [
+      2019,
+      5,
+      3,
+      7,
+      25,
+      10
+    ],
+    "changedByUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
+    "voided": false,
+    "voidedByUuid": null,
+    "dateVoided": null,
+    "voidReason": null,
+    "retired": false,
+    "retiredByUuid": null,
+    "dateRetired": null,
+    "retiredReason": null,
+    "gender": "Female",
+    "birthdate": [
+      1968,
+      1,
+      28
+    ],
+    "birthdateEstimated": null,
+    "dead": false,
+    "deathDate": null,
+    "causeOfDeathUuid": null,
+    "deathdateEstimated": null,
+    "birthtime": null,
+    "allergyStatus": "Unknown",
+    "patientCreatorUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
+    "patientDateCreated": [
+      2019,
+      5,
+      3,
+      7,
+      25,
+      10
+    ],
+    "patientChangedByUuid": null,
+    "patientDateChanged": null,
+    "patientVoided": false,
+    "patientVoidedByUuid": null,
+    "patientDateVoided": null,
+    "patientVoidReason": null
+  }
+}

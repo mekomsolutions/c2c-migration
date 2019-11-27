@@ -1,5 +1,6 @@
 package net.mekomsolutions.c2c.extract.converter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -8,56 +9,78 @@ import org.apache.camel.Converter;
 import org.apache.camel.Exchange;
 import org.apache.camel.TypeConverter;
 
-import net.mekomsolutions.c2c.extract.Constants;
 import net.mekomsolutions.c2c.extract.Utils;
-import net.mekomsolutions.c2c.extract.Entity.Patient;
-import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.SyncPatient;
-import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.SyncPerson;
-import net.mekomsolutions.c2c.extract.Entity.OpenMRSEntity.SyncPersonName;
+import net.mekomsolutions.c2c.extract.entity.Patient;
+import net.mekomsolutions.c2c.extract.entity.sync.SyncEntity;
+import net.mekomsolutions.c2c.extract.entity.sync.SyncPatient;
+import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAttribute;
+import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonName;
 
 @Converter
 public class PatientConverter {
 
+	/**
+	 * Transform the data input, passed as a parameter, into a Patient.
+	 * @throws Exception 
+	 * 
+	 * @see net.mekomsolutions.c2c.extract.entity.Patient
+	 */
 	@Converter
-	public Patient toPatient(HashMap<String,String> data , Exchange exchange) {
+	public Patient toPatient(HashMap<String,String> data , Exchange exchange) throws Exception {
 
-		TypeConverter converter = exchange.getContext().getTypeConverter();
-		List<Integer> lastModifiedDate = Utils.dateLongToArray(converter.convertTo(Long.class, data.get("lastModified")));
+		List<SyncEntity> allEntities = new ArrayList<SyncEntity>();
 
 		UUID patientUuid = UUID.nameUUIDFromBytes(data.get("objKey").getBytes());
-		SyncPatient patient = new SyncPatient(UUID.nameUUIDFromBytes(data.get("objKey").getBytes()).toString());
-		{
-			String defaultUser = Utils.getModelClassLight("User", UUID.fromString(Constants.DEFAULT_USER_UUID));
-
-			// Created
-			patient.setCreatorUuid(defaultUser);
-			patient.setDateCreated(lastModifiedDate);
-			
-			// Changed
-			patient.setChangedByUuid(defaultUser);
-			patient.setDateChanged(lastModifiedDate);
-			
+		
+		// Create the Patient
+		{	
+			SyncPatient patient = new SyncPatient(patientUuid.toString());
 			patient.setAllergyStatus("Unknown");
 			patient.setGender(data.get("gender"));
 			patient.setBirthdate(Utils.convertBirthdate(data.get("dob")));
 
-			patient.setPatientDateCreated(lastModifiedDate);
-			patient.setPatientCreatorUuid(defaultUser);
-			
+			patient.setPatientDateCreated(patient.getDateCreated());
+			patient.setPatientCreatorUuid(patient.getCreatorUuid());
+			allEntities.add(patient);
 		}
-
-		// Build the UUID from a concatenation the firstName, lastName and dob
-		String uuidBaseString = data.get("firstname") + data.get("lastname") + data.get("dob");
-		SyncPersonName personName = new SyncPersonName(UUID.nameUUIDFromBytes(uuidBaseString.getBytes()).toString());
+		
+		// Create the PersonName
 		{
-			String defaultUser = Utils.getModelClassLight("User", UUID.fromString(Constants.DEFAULT_USER_UUID));
-			personName.setCreatorUuid(defaultUser);
-			personName.setDateCreated(lastModifiedDate);
+			// Build the UUID from a concatenation the firstName, lastName and dob
+			String uuidBaseString = data.get("firstname") + data.get("lastname") + data.get("dob");
+			SyncPersonName personName = new SyncPersonName(UUID.nameUUIDFromBytes(uuidBaseString.getBytes()).toString());
 			personName.setPersonUuid(Utils.getModelClassLight("Patient", patientUuid));
 			personName.setGivenName(data.get("firstname"));
 			personName.setFamilyName(data.get("lastname"));
+			allEntities.add(personName);
 		}
 
-		return new Patient(patient, personName);
+		// Possibly create a Phone number Person Attribute
+		if (! data.get("contactphone").isEmpty())
+		{
+			
+			SyncPersonAttribute phoneNumberAttribute = new SyncPersonAttribute(data, exchange);
+
+			String phoneNumberAttributeTypeUuid = exchange.getContext().
+					resolvePropertyPlaceholders("{{pat.phoneNumber.uuid}}");
+			phoneNumberAttribute.setPersonAttributeTypeUuid(
+					Utils.getModelClassLight("PersonAttributeType",
+					UUID.fromString(phoneNumberAttributeTypeUuid)));
+			phoneNumberAttribute.setValue(data.get("contactphone"));
+
+			phoneNumberAttribute.setPersonUuid(Utils.getModelClassLight("Patient", patientUuid));
+
+			// Override the default UUID
+			phoneNumberAttribute.setUuid(
+					UUID.nameUUIDFromBytes((phoneNumberAttribute.getPersonAttributeTypeUuid() + 
+					data.get("contactphone")).getBytes()).toString());
+
+			allEntities.add(phoneNumberAttribute);
+		}
+		
+		// TODO: Add Person Identifiers
+		
+		
+		return new Patient(allEntities);
 	}
 }

@@ -1,0 +1,28 @@
+{
+  "tableToSyncModelClass": "org.openmrs.sync.component.model.PersonAttributeModel",
+  "model": {
+    "uuid": "5944ab2e-9cc1-307e-897d-307949892e71",
+    "creatorUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
+    "dateCreated": [
+      2019,
+      5,
+      3,
+      5,
+      53,
+      46
+    ],
+    "dateChanged": null,
+    "changedByUuid": null,
+    "voided": false,
+    "voidedByUuid": null,
+    "dateVoided": null,
+    "voidReason": null,
+    "retired": false,
+    "retiredByUuid": null,
+    "dateRetired": null,
+    "retiredReason": null,
+    "personUuid": "org.openmrs.sync.component.entity.light.PatientLight(5126819d-80e5-31f2-a0e9-f42575f84a54)",
+    "value": "Kerlange",
+    "personAttributeTypeUuid": "org.openmrs.sync.component.entity.light.PersonAttributeTypeLight(e27326d8-0f8c-11ea-a75e-478143ec166b)"
+  }
+}
