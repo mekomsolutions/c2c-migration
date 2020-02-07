@@ -19,19 +19,19 @@ public class Utils {
 	public static <T> String getModelClassFullFromType(Class<T> type) {
 		return getModelClassFullFromString(type.getSimpleName());
 	}
-	
+
 	public static String getModelClassFullFromString(String typeAsString) {
 		return Constants.FULL_MODEL_CLASS_NAMES.get(typeAsString);
 	}
-		
+
 	public static String getModelClassLight(String typeAsString, UUID uuid) {
 		return Constants.LIGHT_MODEL_CLASS_NAMES.get(typeAsString) + "(" + uuid.toString() + ")";
 	}
-	
+
 	public static List<Integer> dateLongToArray(Long timeInMillisecs) {
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTimeInMillis(timeInMillisecs);
-		
+
 		List<Integer> array = new ArrayList<Integer>();
 		array.add(calendar.get(Calendar.YEAR));
 		array.add(calendar.get(Calendar.MONTH) + 1);
@@ -67,11 +67,11 @@ public class Utils {
 		List<Integer> birthdate = dateStringToArray(string);
 		return birthdate.subList(0, 3);
 	}
-	
+
 	private static List<String> trimAndCapitalize(LinkedList<String> list) {
 
 		list.removeAll(Arrays.asList("", null));
-		
+
 		// Trim
 		List<String> trimmedList = new ArrayList<String>();
 		for (String str : list) {
@@ -85,7 +85,7 @@ public class Utils {
 
 		return capitalizedList;
 	}
-	
+
 	public static String concatName (LinkedList<String> list) {
 		String name = String.join(" ", trimAndCapitalize(list));
 		return name;
@@ -96,4 +96,8 @@ public class Utils {
 		return name;
 	}
 
+	public static String concatAddresses (LinkedList<String> list) {
+		String name = String.join(", ", trimAndCapitalize(list));
+		return name;
+	}
 }

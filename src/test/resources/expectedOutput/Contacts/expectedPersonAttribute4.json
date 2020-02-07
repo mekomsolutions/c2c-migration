@@ -1,7 +1,7 @@
 {
   "tableToSyncModelClass": "org.openmrs.sync.component.model.PersonAttributeModel",
   "model": {
-    "uuid": "5cbe5e94-f345-3b62-9c52-e25d341649a7",
+    "uuid": "b49c1e94-ddd0-32f6-bcb9-f72a8a8d0eae",
     "creatorUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
     "dateCreated": [
       2019,
@@ -9,10 +9,10 @@
       3,
       5,
       53,
-      48
+      46
     ],
-    "dateChanged": null,
     "changedByUuid": null,
+    "dateChanged": null,
     "voided": false,
     "voidedByUuid": null,
     "dateVoided": null,
@@ -21,8 +21,8 @@
     "retiredByUuid": null,
     "dateRetired": null,
     "retiredReason": null,
-    "personUuid": "org.openmrs.sync.component.entity.light.PatientLight(86b5c1ca-034e-34a4-a85e-8ad56b038987)",
-    "value": "Joseph Roseleine",
-    "personAttributeTypeUuid": "org.openmrs.sync.component.entity.light.PersonAttributeTypeLight(e27326d8-0f8c-11ea-a75e-478143ec166b)"
+    "value": "Emergency Contact",
+    "personUuid": "org.openmrs.sync.component.entity.light.PatientLight(5126819d-80e5-31f2-a0e9-f42575f84a54)",
+    "personAttributeTypeUuid": "org.openmrs.sync.component.entity.light.PersonAttributeTypeLight(2601fa62-49c3-11ea-be03-ffa5a050979e)"
   }
 }

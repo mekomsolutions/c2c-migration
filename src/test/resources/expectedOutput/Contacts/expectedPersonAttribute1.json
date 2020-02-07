@@ -1,7 +1,7 @@
 {
   "tableToSyncModelClass": "org.openmrs.sync.component.model.PersonAttributeModel",
   "model": {
-    "uuid": "140b4bbd-259e-3bac-86b9-9bc74dbff674",
+    "uuid": "49f93bb5-bc0a-373e-9ab8-a32e163a179b",
     "creatorUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
     "dateCreated": [
       2019,
@@ -21,8 +21,8 @@
     "retiredByUuid": null,
     "dateRetired": null,
     "retiredReason": null,
-    "personUuid": "org.openmrs.sync.component.entity.light.PatientLight(86b5c1ca-034e-34a4-a85e-8ad56b038987)",
     "value": "02324543",
+    "personUuid": "org.openmrs.sync.component.entity.light.PatientLight(86b5c1ca-034e-34a4-a85e-8ad56b038987)",
     "personAttributeTypeUuid": "org.openmrs.sync.component.entity.light.PersonAttributeTypeLight(e66af4aa-0f8c-11ea-b030-9b9ece1192c2)"
   }
-}	
+}

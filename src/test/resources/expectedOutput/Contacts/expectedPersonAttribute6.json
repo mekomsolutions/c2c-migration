@@ -1,7 +1,7 @@
 {
   "tableToSyncModelClass": "org.openmrs.sync.component.model.PersonAttributeModel",
   "model": {
-    "uuid": "5cbe5e94-f345-3b62-9c52-e25d341649a7",
+    "uuid": "1a8ed59b-d3a5-3e16-beb7-be71f8c804c9",
     "creatorUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
     "dateCreated": [
       2019,
@@ -11,8 +11,8 @@
       53,
       48
     ],
-    "dateChanged": null,
     "changedByUuid": null,
+    "dateChanged": null,
     "voided": false,
     "voidedByUuid": null,
     "dateVoided": null,
@@ -21,8 +21,8 @@
     "retiredByUuid": null,
     "dateRetired": null,
     "retiredReason": null,
+    "value": "Graver",
     "personUuid": "org.openmrs.sync.component.entity.light.PatientLight(86b5c1ca-034e-34a4-a85e-8ad56b038987)",
-    "value": "Joseph Roseleine",
-    "personAttributeTypeUuid": "org.openmrs.sync.component.entity.light.PersonAttributeTypeLight(e27326d8-0f8c-11ea-a75e-478143ec166b)"
+    "personAttributeTypeUuid": "org.openmrs.sync.component.entity.light.PersonAttributeTypeLight(ffc71770-49cb-11ea-b9fc-83c088608e41)"
   }
 }
