@@ -1,6 +1,9 @@
 package net.mekomsolutions.c2c.extract.entity.sync;
 
+import java.util.HashMap;
 import java.util.List;
+
+import org.apache.camel.Exchange;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,12 +15,6 @@ import net.mekomsolutions.c2c.extract.Utils;
  * 
  */
 public class SyncPersonName extends SyncEntity {
-
-	@JsonProperty
-	private String creatorUuid;
-
-	@JsonProperty
-	private List<Integer> dateCreated;
 
 	@JsonProperty
 	private String changedByUuid;
@@ -83,20 +80,8 @@ public class SyncPersonName extends SyncEntity {
 		super(Utils.getModelClassFullFromType(SyncPersonName.class), uuid);
 	}
 
-	public String getCreatorUuid() {
-		return creatorUuid;
-	}
-
-	public void setCreatorUuid(String creatorUuid) {
-		this.creatorUuid = creatorUuid;
-	}
-
-	public List<Integer> getDateCreated() {
-		return dateCreated;
-	}
-
-	public void setDateCreated(List<Integer> dateCreated) {
-		this.dateCreated = dateCreated;
+	public SyncPersonName(HashMap<String,String> data, Exchange exchange) throws Exception {
+		super(Utils.getModelClassFullFromType(SyncPersonName.class), data, exchange);
 	}
 
 	public String getChangedByUuid() {

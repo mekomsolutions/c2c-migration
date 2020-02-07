@@ -34,7 +34,8 @@ public class PatientConverter {
 		
 		// Create the Patient
 		{	
-			SyncPatient patient = new SyncPatient(patientUuid.toString());
+			SyncPatient patient = new SyncPatient(data, exchange);
+			patient.setUuid(patientUuid.toString());
 			patient.setAllergyStatus("Unknown");
 			patient.setGender(data.get("gender"));
 			patient.setBirthdate(Utils.convertBirthdate(data.get("dob")));
@@ -47,8 +48,10 @@ public class PatientConverter {
 		// Create the PersonName
 		{
 			// Build the UUID from a concatenation the firstName, lastName and dob
+			SyncPersonName personName = new SyncPersonName(data, exchange);
 			String uuidBaseString = data.get("firstname") + data.get("lastname") + data.get("dob");
-			SyncPersonName personName = new SyncPersonName(UUID.nameUUIDFromBytes(uuidBaseString.getBytes()).toString());
+			personName.setUuid(UUID.nameUUIDFromBytes(uuidBaseString.getBytes()).toString());
+			//			SyncPersonName personName = new SyncPersonName(UUID.nameUUIDFromBytes(uuidBaseString.getBytes()).toString());
 			personName.setPersonUuid(Utils.getModelClassLight("Patient", patientUuid));
 			personName.setGivenName(data.get("firstname"));
 			personName.setFamilyName(data.get("lastname"));

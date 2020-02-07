@@ -77,5 +77,21 @@ public class SyncEntity {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
+
+	public String getCreatorUuid() {
+		return creatorUuid;
+	}
+
+	public void setCreatorUuid(String creatorUuid) {
+		this.creatorUuid = creatorUuid;
+	}
+
+	public List<Integer> getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(List<Integer> dateCreated) {
+		this.dateCreated = dateCreated;
+	}
 	
 }
