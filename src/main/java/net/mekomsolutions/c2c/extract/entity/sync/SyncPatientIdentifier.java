@@ -1,6 +1,7 @@
 package net.mekomsolutions.c2c.extract.entity.sync;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.camel.Exchange;
@@ -27,7 +28,7 @@ public class SyncPatientIdentifier extends SyncEntity {
 	@JsonProperty("locationUuid")
 	private String location;
 
-	public SyncPatientIdentifier(HashMap<String,String> data, Exchange exchange) throws Exception {
+	public SyncPatientIdentifier(Map<String, String> data, Exchange exchange) throws Exception {
 		super(Utils.getModelClassFullFromType(SyncPatientIdentifier.class), data, exchange);
 	}
 
@@ -36,7 +37,7 @@ public class SyncPatientIdentifier extends SyncEntity {
 	 * 
 	 * @param data The Camel body.
 	 */
-	public void computeNewUUID(String patientIdentifierTypeUuid, HashMap<String,String> data) {
+	public void computeNewUUID(String patientIdentifierTypeUuid, Map<String, String> data) {
 		setUuid(UUID.nameUUIDFromBytes((patientIdentifierTypeUuid +
 				data.get(Constants.OBJECT_KEY) + this.getIdentifier()).getBytes()).toString());
 	}

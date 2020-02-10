@@ -1,7 +1,7 @@
 package net.mekomsolutions.c2c.extract.entity.sync;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.camel.Exchange;
@@ -10,7 +10,7 @@ import net.mekomsolutions.c2c.extract.Utils;
 
 public class SyncEntityUtils {
 
-	public static void createAndAddPersonAttribute(String personAttributeTypeProperty, String attributeValue, String patientRefKey, HashMap<String,String> data, Exchange exchange, List<SyncEntity> allEntities) throws Exception {
+	public static void createAndAddPersonAttribute(String personAttributeTypeProperty, String attributeValue, String patientRefKey, Map<String, String> data, Exchange exchange, List<SyncEntity> allEntities) throws Exception {
 		if (Utils.hasKeyOrValue(attributeValue)) {
 
 			SyncPersonAttribute pa = new SyncPersonAttribute(data, exchange);
@@ -29,7 +29,7 @@ public class SyncEntityUtils {
 		}
 	}
 
-	public static void createAndAddPatientIdentifier(String patientIdentifierTypeProperty, String identifierValue, String patientRefKey, HashMap<String,String> data, Exchange exchange, List<SyncEntity> allEntities) throws Exception {
+	public static void createAndAddPatientIdentifier(String patientIdentifierTypeProperty, String identifierValue, String patientRefKey, Map<String, String> data, Exchange exchange, List<SyncEntity> allEntities) throws Exception {
 		if (Utils.hasKeyOrValue(identifierValue)) {
 			
 			SyncPatientIdentifier pi = new SyncPatientIdentifier(data, exchange);

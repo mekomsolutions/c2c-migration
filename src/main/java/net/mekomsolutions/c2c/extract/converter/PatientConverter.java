@@ -1,8 +1,8 @@
 package net.mekomsolutions.c2c.extract.converter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.camel.Converter;
@@ -14,8 +14,6 @@ import net.mekomsolutions.c2c.extract.entity.Patient;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncEntity;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncEntityUtils;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPatient;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPatientIdentifier;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAttribute;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonName;
 
 @Converter
@@ -42,9 +40,9 @@ public class PatientConverter {
 	 * @see net.mekomsolutions.c2c.extract.entity.Patient
 	 */
 	@Converter
-	public Patient toPatient(HashMap<String,String> data , Exchange exchange) throws Exception {
+	public Patient toPatient(Map<String,String> data , Exchange exchange) throws Exception {
 
-		List<SyncEntity> allEntities = new ArrayList<SyncEntity>();
+		List<SyncEntity> allEntities = new ArrayList<>();
 
 		UUID patientUuid = UUID.nameUUIDFromBytes(data.get(Constants.OBJECT_KEY).getBytes());
 

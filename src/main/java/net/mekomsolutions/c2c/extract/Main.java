@@ -4,7 +4,7 @@ import net.mekomsolutions.c2c.extract.route.Route1;
 
 public class Main {
 
-	public static void main(String args[]) throws Exception {
+	public static void main(String[] args) throws Exception {
 
 		org.apache.camel.main.Main main = new org.apache.camel.main.Main();
 		main.addRouteBuilder(new Route1());

@@ -1,14 +1,11 @@
 package net.mekomsolutions.c2c.extract.entity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.mekomsolutions.c2c.extract.entity.sync.SyncEntity;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPatient;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonName;
 
 /**
  * Describes a Patient, which is merely a {@link java.util.List list}
@@ -22,10 +19,10 @@ public class Patient {
 
 	public Patient(List<SyncEntity> syncEntities) {
 		
-		List<EntityWrapper<SyncEntity>> asWrappedEntities = new ArrayList<EntityWrapper<SyncEntity>>() ;
+		List<EntityWrapper<SyncEntity>> asWrappedEntities = new ArrayList<>() ;
 		
 		for (SyncEntity entity: syncEntities) {
-			asWrappedEntities.add(new EntityWrapper<SyncEntity>(entity));
+			asWrappedEntities.add(new EntityWrapper<>(entity));
 		}
 		
 		this.entities = asWrappedEntities;

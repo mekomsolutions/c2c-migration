@@ -1,11 +1,10 @@
 package net.mekomsolutions.c2c.extract.entity.sync;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.TypeConverter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -80,7 +79,7 @@ public class SyncEntity {
 	 * @param exchange
 	 * @throws Exception 
 	 */
-	public SyncEntity(String modelClassName, HashMap<String,String> data, Exchange exchange) throws Exception {
+	public SyncEntity(String modelClassName, Map<String, String> data, Exchange exchange) throws Exception {
 		super();
 		this.modelClassName = modelClassName;
 

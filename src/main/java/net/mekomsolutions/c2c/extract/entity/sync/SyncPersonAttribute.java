@@ -1,6 +1,7 @@
 package net.mekomsolutions.c2c.extract.entity.sync;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.camel.Exchange;
@@ -21,7 +22,7 @@ public class SyncPersonAttribute extends SyncEntity {
 	@JsonProperty("personAttributeTypeUuid")
 	private String personAttributeType;
 
-	public SyncPersonAttribute(HashMap<String,String> data, Exchange exchange) throws Exception {
+	public SyncPersonAttribute(Map<String,String> data, Exchange exchange) throws Exception {
 		super(Utils.getModelClassFullFromType(SyncPersonAttribute.class), data, exchange);
 	}
 
@@ -30,7 +31,7 @@ public class SyncPersonAttribute extends SyncEntity {
 	 * 
 	 * @param data The Camel body.
 	 */
-	public void computeNewUUID(String personAttributeTypeUuid, HashMap<String,String> data) {
+	public void computeNewUUID(String personAttributeTypeUuid, Map<String, String> data) {
 		setUuid(UUID.nameUUIDFromBytes((personAttributeTypeUuid +
 				data.get(Constants.OBJECT_KEY) + this.getValue()).getBytes()).toString());
 	}

@@ -1,7 +1,6 @@
 package net.mekomsolutions.c2c.extract.entity.sync;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 import org.apache.camel.Exchange;
 
@@ -50,7 +49,7 @@ public class SyncPersonName extends SyncEntity {
 		super(Utils.getModelClassFullFromType(SyncPersonName.class), uuid);
 	}
 
-	public SyncPersonName(HashMap<String,String> data, Exchange exchange) throws Exception {
+	public SyncPersonName(Map<String,String> data, Exchange exchange) throws Exception {
 		super(Utils.getModelClassFullFromType(SyncPersonName.class), data, exchange);
 	}
 

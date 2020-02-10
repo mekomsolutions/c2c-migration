@@ -1,7 +1,5 @@
 package net.mekomsolutions.c2c.extract.entity;
 
-import org.apache.log4j.LogManager;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,8 +14,6 @@ import net.mekomsolutions.c2c.extract.entity.sync.SyncEntity;
  * via the {@link com.fasterxml.jackson.annotation.JsonIgnore @JsonIgnore} annotation for the same purpose.
  */
 public class EntityWrapper<T extends SyncEntity> {
-
-	private static org.apache.log4j.Logger log = LogManager.getLogger(EntityWrapper.class);
 
 	@JsonProperty("tableToSyncModelClass")
 	private String modelClass;

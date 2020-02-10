@@ -2,9 +2,9 @@ package net.mekomsolutions.c2c.extract.converter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.camel.Converter;
 import org.apache.camel.Exchange;
@@ -33,10 +33,11 @@ public class ContactConverter {
 	private static String ADDRESS_LINE_1 = "addressline1";
 	private static String ADDRESS_LINE_2 = "addressline2";
 
-	private List<SyncEntity> allEntities = new ArrayList<SyncEntity>();
-
+	
 	@Converter
-	public Contact toContact(HashMap<String,String> data , Exchange exchange) throws Exception {
+	public Contact toContact(Map<String,String> data , Exchange exchange) throws Exception {
+
+		List<SyncEntity> allEntities = new ArrayList<>();
 
 		// Contact Person Name
 		String contactPersonName = Utils.concatName(new LinkedList<String>(

@@ -19,10 +19,10 @@ public class Contact {
 	
 	public Contact(List<SyncEntity> syncEntities) {
 		
-		List<EntityWrapper<SyncEntity>> asWrappedEntities = new ArrayList<EntityWrapper<SyncEntity>>() ;
+		List<EntityWrapper<SyncEntity>> asWrappedEntities = new ArrayList<>() ;
 		
 		for (SyncEntity entity: syncEntities) {
-			asWrappedEntities.add(new EntityWrapper<SyncEntity>(entity));
+			asWrappedEntities.add(new EntityWrapper<>(entity));
 		}
 		
 		this.entities = asWrappedEntities;

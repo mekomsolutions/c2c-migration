@@ -8,14 +8,14 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAttribute;
-
 public class Utils {
+
+	private Utils() {
+	}
 
 	public static <T> String getModelClassFullFromType(Class<T> type) {
 		return getModelClassFullFromString(type.getSimpleName());
@@ -33,7 +33,7 @@ public class Utils {
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTimeInMillis(timeInMillisecs);
 
-		List<Integer> array = new ArrayList<Integer>();
+		List<Integer> array = new ArrayList<>();
 		array.add(calendar.get(Calendar.YEAR));
 		array.add(calendar.get(Calendar.MONTH) + 1);
 		array.add(calendar.get(Calendar.DAY_OF_MONTH));
@@ -54,7 +54,7 @@ public class Utils {
 		}
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(date);
-		List<Integer> array = new ArrayList<Integer>();
+		List<Integer> array = new ArrayList<>();
 		array.add(calendar.get(Calendar.YEAR));
 		array.add(calendar.get(Calendar.MONTH) + 1);
 		array.add(calendar.get(Calendar.DAY_OF_MONTH));
@@ -74,12 +74,12 @@ public class Utils {
 		list.removeAll(Arrays.asList("", null));
 
 		// Trim
-		List<String> trimmedList = new ArrayList<String>();
+		List<String> trimmedList = new ArrayList<>();
 		for (String str : list) {
 			trimmedList.add(str.trim());
 		}
 		// Capitalize
-		List<String> capitalizedList = new ArrayList<String>();
+		List<String> capitalizedList = new ArrayList<>();
 		for (String str : trimmedList) {
 			capitalizedList.add(str.substring(0, 1).toUpperCase() + str.substring(1));
 		}
@@ -88,24 +88,18 @@ public class Utils {
 	}
 
 	public static String concatName (LinkedList<String> list) {
-		String name = String.join(" ", trimAndCapitalize(list));
-		return name;
+		return String.join(" ", trimAndCapitalize(list));
 	}
 
 	public static String concatPhoneNumber (LinkedList<String> list) {
-		String name = String.join(" / ", trimAndCapitalize(list));
-		return name;
+		return String.join(" / ", trimAndCapitalize(list));
 	}
 
 	public static String concatAddresses (LinkedList<String> list) {
-		String name = String.join(", ", trimAndCapitalize(list));
-		return name;
+		return String.join(", ", trimAndCapitalize(list));
 	}
 
 	public static boolean hasKeyOrValue (String value) {
-		if (value == null || value.isEmpty() ) {
-			return false;
-		}
-		return true;
+		return !(value == null || value.isEmpty());
 	}
 }
