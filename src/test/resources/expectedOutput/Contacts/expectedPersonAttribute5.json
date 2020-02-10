@@ -1,7 +1,7 @@
 {
   "tableToSyncModelClass": "org.openmrs.sync.component.model.PersonAttributeModel",
   "model": {
-    "uuid": "a1b5b097-b21c-3946-bdd4-23149cbe2886",
+    "uuid": "e19bc490-d02e-37d8-9c7b-6157f85977a4",
     "creatorUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
     "dateCreated": [
       2019,

@@ -8,11 +8,12 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Value;
+import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAttribute;
 
 public class Utils {
 
@@ -99,5 +100,12 @@ public class Utils {
 	public static String concatAddresses (LinkedList<String> list) {
 		String name = String.join(", ", trimAndCapitalize(list));
 		return name;
+	}
+
+	public static boolean hasKeyOrValue (String value) {
+		if (value == null || value.isEmpty() ) {
+			return false;
+		}
+		return true;
 	}
 }

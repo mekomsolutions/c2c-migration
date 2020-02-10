@@ -6,7 +6,6 @@ import java.util.Map;
 
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPatient;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPerson;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAddress;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAttribute;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonName;
 
@@ -22,6 +21,10 @@ public class Constants {
 
 	public static final Map<String, String> LIGHT_MODEL_CLASS_NAMES = createLight();
 
+	public static String OBJECT_KEY = "objKey";
+
+	public static String PATIENT_KEY = "patientKey";
+	
 	private static Map<String, String> createFull() {
 
 		Map<String, String> result = new HashMap<String, String>();

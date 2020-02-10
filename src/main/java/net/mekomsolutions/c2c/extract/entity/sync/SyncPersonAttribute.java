@@ -1,17 +1,19 @@
 package net.mekomsolutions.c2c.extract.entity.sync;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.apache.camel.Exchange;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import net.mekomsolutions.c2c.extract.Constants;
 import net.mekomsolutions.c2c.extract.Utils;
 
 public class SyncPersonAttribute extends SyncEntity {
 
-	@JsonProperty
-	private String changedByUuid;
+	@JsonProperty("changedByUuid")
+	private String changedBy;
 
 	@JsonProperty
 	private String dateChanged;
@@ -19,8 +21,8 @@ public class SyncPersonAttribute extends SyncEntity {
 	@JsonProperty
 	private boolean voided;
 
-	@JsonProperty
-	private String voidedByUuid;
+	@JsonProperty("voidedByUuid")
+	private String voidedBy;
 
 	@JsonProperty
 	private String dateVoided;
@@ -31,8 +33,8 @@ public class SyncPersonAttribute extends SyncEntity {
 	@JsonProperty
 	private boolean retired;
 
-	@JsonProperty
-	private String retiredByUuid;
+	@JsonProperty("retiredByUuid")
+	private String retiredBy;
 
 	@JsonProperty
 	private String dateRetired;
@@ -43,22 +45,32 @@ public class SyncPersonAttribute extends SyncEntity {
 	@JsonProperty
 	private String value;
 
-	@JsonProperty
-	private String personUuid;
+	@JsonProperty("personUuid")
+	private String person;
 
-	@JsonProperty
-	private String personAttributeTypeUuid;
+	@JsonProperty("personAttributeTypeUuid")
+	private String personAttributeType;
 
 	public SyncPersonAttribute(HashMap<String,String> data, Exchange exchange) throws Exception {
 		super(Utils.getModelClassFullFromType(SyncPersonAttribute.class), data, exchange);
 	}
 
-	public String getChangedByUuid() {
-		return changedByUuid;
+	/**
+	 * Hopefully computes a unique identifier for the {@link SyncPersonAttribute}
+	 * 
+	 * @param data The Camel body.
+	 */
+	public void computeNewUUID(String personAttributeTypeUuid, HashMap<String,String> data) {
+		setUuid(UUID.nameUUIDFromBytes((personAttributeTypeUuid +
+				data.get(Constants.OBJECT_KEY) + this.getValue()).getBytes()).toString());
 	}
 
-	public void setChangedByUuid(String changedByUuid) {
-		this.changedByUuid = changedByUuid;
+	public String getChangedBy() {
+		return changedBy;
+	}
+
+	public void setChangedBy(String changedBy) {
+		this.changedBy = changedBy;
 	}
 
 	public String getDateChanged() {
@@ -77,12 +89,12 @@ public class SyncPersonAttribute extends SyncEntity {
 		this.voided = voided;
 	}
 
-	public String getVoidedByUuid() {
-		return voidedByUuid;
+	public String getVoidedBy() {
+		return voidedBy;
 	}
 
-	public void setVoidedByUuid(String voidedByUuid) {
-		this.voidedByUuid = voidedByUuid;
+	public void setVoidedBy(String voidedBy) {
+		this.voidedBy = voidedBy;
 	}
 
 	public String getDateVoided() {
@@ -109,12 +121,12 @@ public class SyncPersonAttribute extends SyncEntity {
 		this.retired = retired;
 	}
 
-	public String getRetiredByUuid() {
-		return retiredByUuid;
+	public String getRetiredBy() {
+		return retiredBy;
 	}
 
-	public void setRetiredByUuid(String retiredByUuid) {
-		this.retiredByUuid = retiredByUuid;
+	public void setRetiredBy(String retiredBy) {
+		this.retiredBy = retiredBy;
 	}
 
 	public String getDateRetired() {
@@ -141,20 +153,20 @@ public class SyncPersonAttribute extends SyncEntity {
 		this.value = value;
 	}
 
-	public String getPersonUuid() {
-		return personUuid;
+	public String getPerson() {
+		return person;
 	}
 
-	public void setPersonUuid(String personUuid) {
-		this.personUuid = personUuid;
+	public void setPerson(String person) {
+		this.person = person;
 	}
 
-	public String getPersonAttributeTypeUuid() {
-		return personAttributeTypeUuid;
+	public String getPersonAttributeType() {
+		return personAttributeType;
 	}
 
-	public void setPersonAttributeTypeUuid(String personAttributeTypeUuid) {
-		this.personAttributeTypeUuid = personAttributeTypeUuid;
+	public void setPersonAttributeType(String personAttributeType) {
+		this.personAttributeType = personAttributeType;
 	}
 
 }

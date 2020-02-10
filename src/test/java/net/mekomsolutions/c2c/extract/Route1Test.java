@@ -43,6 +43,7 @@ public class Route1Test extends CamelSpringTestSupport {
 		return new Route1();
 	}
 
+//	@Ignore
 	@Test
 	public void shouldHandleContacts() throws Exception {
 
@@ -62,46 +63,47 @@ public class Route1Test extends CamelSpringTestSupport {
 		File expectedMessage1 = new File(getClass().getResource(expectedOutputFolder + "/expectedPersonAttribute1.json").getPath());
 		assertNotNull(expectedMessage1);
 		File actualMessage1 = new File("data/outbox/" + 
-				"org.openmrs.sync.component.model.PersonAttributeModel-49f93bb5-bc0a-373e-9ab8-a32e163a179b");
+				"org.openmrs.sync.component.model.PersonAttributeModel-e1e18f6f-e681-3eb1-bd91-0072ee7f7a36");
 		assertEquals(mapper.readTree(expectedMessage1), mapper.readTree(actualMessage1));
 
 		// Person Name
 		File expectedMessage2 = new File(getClass().getResource(expectedOutputFolder + "/expectedPersonAttribute2.json").getPath());
 		assertNotNull(expectedMessage2);
 		File acutalMessage2 = new File("data/outbox/" + 
-				"org.openmrs.sync.component.model.PersonAttributeModel-5cbe5e94-f345-3b62-9c52-e25d341649a7");
+				"org.openmrs.sync.component.model.PersonAttributeModel-77e70fb4-73cd-3c85-bcab-6ea8814de1d2");
 		assertEquals(mapper.readTree(expectedMessage2), mapper.readTree(acutalMessage2));
 
 		// Person Name
 		File expectedMessage3 = new File(getClass().getResource(expectedOutputFolder + "/expectedPersonAttribute3.json").getPath());
 		assertNotNull(expectedMessage3);
 		File actualMessage3 = new File("data/outbox/" + 
-				"org.openmrs.sync.component.model.PersonAttributeModel-0f6d198a-560e-399f-9f55-002f711909fc");
+				"org.openmrs.sync.component.model.PersonAttributeModel-a9110597-45c5-3827-a3e6-db64ecb04708");
 		assertEquals(mapper.readTree(expectedMessage3), mapper.readTree(actualMessage3));
 
 		// Contact Type
 		File expectedMessage4 = new File(getClass().getResource(expectedOutputFolder + "/expectedPersonAttribute4.json").getPath());
 		assertNotNull(expectedMessage4);
 		File actualMessage4 = new File("data/outbox/" + 
-				"org.openmrs.sync.component.model.PersonAttributeModel-b49c1e94-ddd0-32f6-bcb9-f72a8a8d0eae");
+				"org.openmrs.sync.component.model.PersonAttributeModel-dd199660-acf9-3093-9f9c-997d5fb9c9af");
 		assertEquals(mapper.readTree(expectedMessage4), mapper.readTree(actualMessage4));
 
 		// Contact Person Relationship
 		File expectedMessage5 = new File(getClass().getResource(expectedOutputFolder + "/expectedPersonAttribute5.json").getPath());
 		assertNotNull(expectedMessage5);
 		File actualMessage5 = new File("data/outbox/" + 
-				"org.openmrs.sync.component.model.PersonAttributeModel-a1b5b097-b21c-3946-bdd4-23149cbe2886");
+				"org.openmrs.sync.component.model.PersonAttributeModel-e19bc490-d02e-37d8-9c7b-6157f85977a4");
 		assertEquals(mapper.readTree(expectedMessage5), mapper.readTree(actualMessage5));
 
 		// Contact Person Address
 		File expectedMessage6 = new File(getClass().getResource(expectedOutputFolder + "/expectedPersonAttribute6.json").getPath());
 		assertNotNull(expectedMessage6);
 		File actualMessage6 = new File("data/outbox/" + 
-				"org.openmrs.sync.component.model.PersonAttributeModel-1a8ed59b-d3a5-3e16-beb7-be71f8c804c9");
+				"org.openmrs.sync.component.model.PersonAttributeModel-98cf2b12-3ad9-38ad-bc6f-7a954affaa09");
 		assertEquals(mapper.readTree(expectedMessage6), mapper.readTree(actualMessage6));
 
 	}
 
+//	@Ignore
 	@Test
 	public void shouldHandlePatients() throws Exception {
 
@@ -131,15 +133,27 @@ public class Route1Test extends CamelSpringTestSupport {
 				"org.openmrs.sync.component.model.PersonNameModel-9f8ee9e2-f855-3040-95a0-a16b82fbf36b");
 		assertEquals(mapper.readTree(expectedMessage2), mapper.readTree(actualMessage2));
 
-		// PersonAttribute
+		// Person Attribute: Phone Number
 		File expectedMessage3 = new File(getClass().getResource(expectedOutputFolder + "/expectedPersonAttribute1.json").getPath());
 		assertNotNull(expectedMessage3);	
 		File actualMessage3 = new File("data/outbox/" +
-				"org.openmrs.sync.component.model.PersonAttributeModel-6dac6000-1f0f-3c00-8930-2c02a0ff72de");
+				"org.openmrs.sync.component.model.PersonAttributeModel-fbf38a30-cfac-3f86-9f4f-ba2ba9e89767");
 		assertEquals(mapper.readTree(expectedMessage3), mapper.readTree(actualMessage3));
 
-		// PAT: Marital Status
-		// PAT: Employment
+		// Person Attribute: Marital Status
+		File expectedMessage4 = new File(getClass().getResource(expectedOutputFolder + "/expectedPersonAttribute2.json").getPath());
+		assertNotNull(expectedMessage4);	
+		File actualMessage4 = new File("data/outbox/" +
+				"org.openmrs.sync.component.model.PersonAttributeModel-f31c3e84-fa85-3e7c-83da-e54e9cd2bba2");
+		assertEquals(mapper.readTree(expectedMessage4), mapper.readTree(actualMessage4));
+		
+		// Person Attribute: Employment
+		File expectedMessage5 = new File(getClass().getResource(expectedOutputFolder + "/expectedPersonAttribute3.json").getPath());
+		assertNotNull(expectedMessage5);	
+		File actualMessage5 = new File("data/outbox/" +
+				"org.openmrs.sync.component.model.PersonAttributeModel-e1311a90-8f91-3d1f-8583-d229d5400b21");
+		assertEquals(mapper.readTree(expectedMessage5), mapper.readTree(actualMessage5));
+		
 		// PIT: Dossier Number
 		// PIT: VecnaID
 		// PIT: VecnaQUID
