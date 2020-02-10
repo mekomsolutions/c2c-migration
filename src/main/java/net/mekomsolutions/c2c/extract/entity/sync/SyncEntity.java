@@ -10,6 +10,7 @@ import org.apache.camel.TypeConverter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import net.mekomsolutions.c2c.extract.Constants;
 import net.mekomsolutions.c2c.extract.Utils;
 
 /**
@@ -30,7 +31,7 @@ public class SyncEntity {
 
 	@JsonProperty
 	private List<Integer> dateCreated;
-	
+
 	@JsonProperty("changedByUuid")
 	private String changedBy;
 
@@ -60,13 +61,13 @@ public class SyncEntity {
 
 	@JsonProperty
 	private String retiredReason;
-	
+
 	public SyncEntity(String modelClassName, String uuid) {
 		super();
 		this.uuid = uuid;
 		this.modelClassName = modelClassName;
 	}
-	
+
 	/**
 	 * 
 	 * A convenient constructor for the SyncEntity objects that sets default values to 
@@ -82,14 +83,14 @@ public class SyncEntity {
 	public SyncEntity(String modelClassName, HashMap<String,String> data, Exchange exchange) throws Exception {
 		super();
 		this.modelClassName = modelClassName;
-		
+
 		String userUuid = exchange.getContext().resolvePropertyPlaceholders("{{user.uuid}}");
-		String defaultUserLight = Utils.getModelClassLight("User",
-				UUID.fromString(userUuid));
-		this.uuid = UUID.nameUUIDFromBytes(data.get("objKey").getBytes()).toString();
+		this.uuid = UUID.nameUUIDFromBytes(data.get(Constants.OBJECT_KEY).getBytes()).toString();
+
+		String defaultUserLight = Utils.getModelClassLight("User", UUID.fromString(userUuid));
 		this.creatorUuid = defaultUserLight;
-		TypeConverter converter = exchange.getContext().getTypeConverter();
-		this.dateCreated = Utils.dateLongToArray(converter.convertTo(Long.class, data.get("lastModified")));
+
+		this.dateCreated = Utils.dateLongToArray(exchange.getContext().getTypeConverter().convertTo(Long.class, data.get("lastModified")));
 	}
 
 	public String getModelClassName() {

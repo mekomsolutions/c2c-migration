@@ -1,0 +1,30 @@
+{
+  "tableToSyncModelClass": "org.openmrs.sync.component.model.PatientIdentifierModel",
+  "model": {
+    "uuid": "fefe6836-281f-332c-ae92-724c4f7f3f84",
+    "creatorUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
+    "dateCreated": [
+      2019,
+      5,
+      3,
+      6,
+      17,
+      55
+    ],
+    "dateChanged": null,
+    "voided": false,
+    "dateVoided": null,
+    "voidReason": null,
+    "retired": false,
+    "dateRetired": null,
+    "retiredReason": null,
+    "identifier": "12297",
+    "preferred": false,
+    "changedByUuid": null,
+    "voidedByUuid": null,
+    "retiredByUuid": null,
+    "patientUuid": "org.openmrs.sync.component.entity.light.PatientLight(31ecfdf4-acf7-30a2-84c1-5c100ed05ad5)",
+    "patientIdentifierTypeUuid": "org.openmrs.sync.component.entity.light.PatientIdentifierTypeLight(b59bf8ac-4c21-11ea-907d-bf343505110b)",
+    "locationUuid": null
+  }
+}

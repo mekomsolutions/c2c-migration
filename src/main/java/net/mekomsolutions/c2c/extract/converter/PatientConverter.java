@@ -14,6 +14,7 @@ import net.mekomsolutions.c2c.extract.entity.Patient;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncEntity;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncEntityUtils;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPatient;
+import net.mekomsolutions.c2c.extract.entity.sync.SyncPatientIdentifier;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAttribute;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonName;
 
@@ -26,8 +27,13 @@ public class PatientConverter {
 	private static String DOB = "dob";
 	private static String GENDER = "gender";
 	private static String PHONE = "contactphone";
+	
 	private static String MARITAL_STATUS = "maritalstatus";
 	private static String EMPLOYMENT = "employment";
+
+	private static String DOSSIER_NUMBER = "dossiernumber";
+	private static String VECNA_ID = "vecnaid";
+	private static String VECNA_GUID = "vecnaguid";
 
 	/**
 	 * Transform the data input, passed as a parameter, into a Patient.
@@ -62,8 +68,7 @@ public class PatientConverter {
 			SyncPersonName personName = new SyncPersonName(data, exchange);
 			String uuidBaseString = data.get(FIRST_NAME) + data.get(MIDDLE_NAME) + data.get(LAST_NAME) + data.get(DOB);
 			personName.setUuid(UUID.nameUUIDFromBytes(uuidBaseString.getBytes()).toString());
-			//			SyncPersonName personName = new SyncPersonName(UUID.nameUUIDFromBytes(uuidBaseString.getBytes()).toString());
-			personName.setPersonUuid(Utils.getModelClassLight("Patient", patientUuid));
+			personName.setPerson(Utils.getModelClassLight("Patient", patientUuid));
 			personName.setGivenName(data.get(FIRST_NAME));
 			personName.setMiddleName(data.get(MIDDLE_NAME));
 			personName.setFamilyName(data.get(LAST_NAME));
@@ -79,7 +84,11 @@ public class PatientConverter {
 		SyncEntityUtils.createAndAddPersonAttribute("pat.employment.uuid", data.get(EMPLOYMENT), Constants.OBJECT_KEY, data, exchange, allEntities);
 
 		// Dossier Number
-		
+		SyncEntityUtils.createAndAddPatientIdentifier("pit.dossierNumber.uuid", data.get(DOSSIER_NUMBER), Constants.OBJECT_KEY, data, exchange, allEntities);
+		// Vecna ID
+		SyncEntityUtils.createAndAddPatientIdentifier("pit.vecnaId.uuid", data.get(VECNA_ID), Constants.OBJECT_KEY, data, exchange, allEntities);
+		// Vecna QUID
+		SyncEntityUtils.createAndAddPatientIdentifier("pit.vecnaGuid.uuid", data.get(VECNA_GUID), Constants.OBJECT_KEY, data, exchange, allEntities);
 		
 		return new Patient(allEntities);
 	}

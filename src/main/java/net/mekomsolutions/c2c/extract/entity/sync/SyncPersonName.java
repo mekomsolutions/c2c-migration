@@ -19,8 +19,8 @@ public class SyncPersonName extends SyncEntity {
 	@JsonProperty
 	private boolean preferred;
 
-	@JsonProperty
-	private String personUuid;
+	@JsonProperty("personUuid")
+	private String person;
 
 	@JsonProperty
 	private String prefix;
@@ -62,12 +62,12 @@ public class SyncPersonName extends SyncEntity {
 		this.preferred = preferred;
 	}
 
-	public String getPersonUuid() {
-		return personUuid;
+	public String getPerson() {
+		return person;
 	}
-
-	public void setPersonUuid(String personUuid) {
-		this.personUuid = personUuid;
+	
+	public void setPerson(String person) {
+		this.person = person;
 	}
 
 	public String getPrefix() {

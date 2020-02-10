@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPatient;
+import net.mekomsolutions.c2c.extract.entity.sync.SyncPatientIdentifier;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPerson;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAttribute;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonName;
@@ -32,6 +33,7 @@ public class Constants {
 		result.put(SyncPersonName.class.getSimpleName(), "org.openmrs.sync.component.model.PersonNameModel");
 		result.put(SyncPatient.class.getSimpleName(), "org.openmrs.sync.component.model.PatientModel");
 		result.put(SyncPersonAttribute.class.getSimpleName(), "org.openmrs.sync.component.model.PersonAttributeModel");
+		result.put(SyncPatientIdentifier.class.getSimpleName(), "org.openmrs.sync.component.model.PatientIdentifierModel");
 
 		return Collections.unmodifiableMap(result);
 	}
@@ -42,6 +44,7 @@ public class Constants {
 		result.put("Patient", "org.openmrs.sync.component.entity.light.PatientLight");
 		result.put("User", "org.openmrs.sync.component.entity.light.UserLight");
 		result.put("PersonAttributeType", "org.openmrs.sync.component.entity.light.PersonAttributeTypeLight");
+		result.put("PatientIdentifierType", "org.openmrs.sync.component.entity.light.PatientIdentifierTypeLight");
 
 		return Collections.unmodifiableMap(result);
 	}
