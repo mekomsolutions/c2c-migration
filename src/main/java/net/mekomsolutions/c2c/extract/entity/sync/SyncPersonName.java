@@ -17,36 +17,6 @@ import net.mekomsolutions.c2c.extract.Utils;
 public class SyncPersonName extends SyncEntity {
 
 	@JsonProperty
-	private String changedByUuid;
-
-	@JsonProperty
-	private List<Integer> dateChanged;
-
-	@JsonProperty
-	private boolean voided;
-
-	@JsonProperty
-	private String voidedByUuid;
-
-	@JsonProperty
-	private List<Integer> dateVoided;
-
-	@JsonProperty
-	private String voidReason;
-
-	@JsonProperty
-	private boolean retired;
-
-	@JsonProperty
-	private String retiredByUuid;
-
-	@JsonProperty
-	private List<Integer> dateRetired;
-
-	@JsonProperty
-	private String retiredReason;
-
-	@JsonProperty
 	private boolean preferred;
 
 	@JsonProperty
@@ -82,86 +52,6 @@ public class SyncPersonName extends SyncEntity {
 
 	public SyncPersonName(HashMap<String,String> data, Exchange exchange) throws Exception {
 		super(Utils.getModelClassFullFromType(SyncPersonName.class), data, exchange);
-	}
-
-	public String getChangedByUuid() {
-		return changedByUuid;
-	}
-
-	public void setChangedByUuid(String changedByUuid) {
-		this.changedByUuid = changedByUuid;
-	}
-
-	public List<Integer> getDateChanged() {
-		return dateChanged;
-	}
-
-	public void setDateChanged(List<Integer> dateChanged) {
-		this.dateChanged = dateChanged;
-	}
-
-	public boolean isVoided() {
-		return voided;
-	}
-
-	public void setVoided(boolean voided) {
-		this.voided = voided;
-	}
-
-	public String getVoidedByUuid() {
-		return voidedByUuid;
-	}
-
-	public void setVoidedByUuid(String voidedByUuid) {
-		this.voidedByUuid = voidedByUuid;
-	}
-
-	public List<Integer> getDateVoided() {
-		return dateVoided;
-	}
-
-	public void setDateVoided(List<Integer> dateVoided) {
-		this.dateVoided = dateVoided;
-	}
-
-	public String getVoidReason() {
-		return voidReason;
-	}
-
-	public void setVoidReason(String voidReason) {
-		this.voidReason = voidReason;
-	}
-
-	public boolean isRetired() {
-		return retired;
-	}
-
-	public void setRetired(boolean retired) {
-		this.retired = retired;
-	}
-
-	public String getRetiredByUuid() {
-		return retiredByUuid;
-	}
-
-	public void setRetiredByUuid(String retiredByUuid) {
-		this.retiredByUuid = retiredByUuid;
-	}
-
-	public List<Integer> getDateRetired() {
-		return dateRetired;
-	}
-
-	public void setDateRetired(List<Integer> dateRetired) {
-		this.dateRetired = dateRetired;
-	}
-
-	public String getRetiredReason() {
-		return retiredReason;
-	}
-
-	public void setRetiredReason(String retiredReason) {
-		this.retiredReason = retiredReason;
 	}
 
 	public boolean isPreferred() {

@@ -78,6 +78,9 @@ public class PatientConverter {
 		// Person Attribute: Employment
 		SyncEntityUtils.createAndAddPersonAttribute("pat.employment.uuid", data.get(EMPLOYMENT), Constants.OBJECT_KEY, data, exchange, allEntities);
 
+		// Dossier Number
+		
+		
 		return new Patient(allEntities);
 	}
 }
