@@ -26,16 +26,6 @@ public class SyncPersonAttribute extends SyncEntity {
 		super(Utils.getModelClassFullFromType(SyncPersonAttribute.class), data, exchange);
 	}
 
-	/**
-	 * Hopefully computes a unique identifier for the {@link SyncPersonAttribute}
-	 * 
-	 * @param data The Camel body.
-	 */
-	public void computeNewUUID(String personAttributeTypeUuid, Map<String, String> data) {
-		setUuid(UUID.nameUUIDFromBytes((personAttributeTypeUuid +
-				data.get(Constants.OBJECT_KEY) + this.getValue()).getBytes()).toString());
-	}
-
 	public String getValue() {
 		return value;
 	}

@@ -7,6 +7,7 @@ import java.util.Map;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPatient;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPatientIdentifier;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPerson;
+import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAddress;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAttribute;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonName;
 
@@ -37,6 +38,7 @@ public class Constants {
 		result.put(SyncPatient.class.getSimpleName(), "org.openmrs.sync.component.model.PatientModel");
 		result.put(SyncPersonAttribute.class.getSimpleName(), "org.openmrs.sync.component.model.PersonAttributeModel");
 		result.put(SyncPatientIdentifier.class.getSimpleName(), "org.openmrs.sync.component.model.PatientIdentifierModel");
+		result.put(SyncPersonAddress.class.getSimpleName(), "org.openmrs.sync.component.model.PersonAddressModel");
 
 		return Collections.unmodifiableMap(result);
 	}

@@ -189,6 +189,15 @@ public class Route1Test extends CamelSpringTestSupport {
 					"org.openmrs.sync.component.model.PatientIdentifierModel-fd1b1031-acd7-31c5-a47c-e1a9458ec3da");
 			assertEquals(mapper.readTree(expectedMessage), mapper.readTree(actualMessage));
 		}
+
+		// Person Address
+		{
+			File expectedMessage = new File(getClass().getResource(expectedOutputFolder + "/expectedPersonAddress1.json").getPath());
+			assertNotNull(expectedMessage);	
+			File actualMessage = new File("data/outbox/" +
+					"org.openmrs.sync.component.model.PersonAddressModel-223df7c6-520e-382d-ace4-1d5f2f8ff382");
+			assertEquals(mapper.readTree(expectedMessage), mapper.readTree(actualMessage));
+		}
 	}
 
 }

@@ -32,16 +32,6 @@ public class SyncPatientIdentifier extends SyncEntity {
 		super(Utils.getModelClassFullFromType(SyncPatientIdentifier.class), data, exchange);
 	}
 
-	/**
-	 * Hopefully computes a unique identifier for the {@link SyncPatientIdentifier}
-	 * 
-	 * @param data The Camel body.
-	 */
-	public void computeNewUUID(String patientIdentifierTypeUuid, Map<String, String> data) {
-		setUuid(UUID.nameUUIDFromBytes((patientIdentifierTypeUuid +
-				data.get(Constants.OBJECT_KEY) + this.getIdentifier()).getBytes()).toString());
-	}
-
 	public String getIdentifier() {
 		return identifier;
 	}

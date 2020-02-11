@@ -14,25 +14,29 @@ import net.mekomsolutions.c2c.extract.entity.Patient;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncEntity;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncEntityUtils;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPatient;
+import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAddress;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonName;
 
 @Converter
 public class PatientConverter {
 
-	private static String FIRST_NAME = "firstname";
-	private static String LAST_NAME = "lastname";
-	private static String MIDDLE_NAME = "middlename";
-	private static String DOB = "dob";
-	private static String GENDER = "gender";
-	private static String PHONE = "contactphone";
+	private static final String FIRST_NAME = "firstname";
+	private static final String LAST_NAME = "lastname";
+	private static final String MIDDLE_NAME = "middlename";
+	private static final String DOB = "dob";
+	private static final String GENDER = "gender";
+	private static final String PHONE = "contactphone";
 	
-	private static String MARITAL_STATUS = "maritalstatus";
-	private static String EMPLOYMENT = "employment";
+	private static final String MARITAL_STATUS = "maritalstatus";
+	private static final String EMPLOYMENT = "employment";
 
-	private static String DOSSIER_NUMBER = "dossiernumber";
-	private static String VECNA_ID = "vecnaid";
-	private static String VECNA_GUID = "vecnaguid";
+	private static final String DOSSIER_NUMBER = "dossiernumber";
+	private static final String VECNA_ID = "vecnaid";
+	private static final String VECNA_GUID = "vecnaguid";
 
+	private static final String ADDRESS_LINE_1 = "addressline1";
+	private static final String ADDRESS_LINE_2 = "addressline2";
+	
 	/**
 	 * Transform the data input, passed as a parameter, into a Patient.
 	 * @throws Exception 
@@ -87,6 +91,17 @@ public class PatientConverter {
 		SyncEntityUtils.createAndAddPatientIdentifier("pit.vecnaId.uuid", data.get(VECNA_ID), Constants.OBJECT_KEY, data, exchange, allEntities);
 		// Vecna QUID
 		SyncEntityUtils.createAndAddPatientIdentifier("pit.vecnaGuid.uuid", data.get(VECNA_GUID), Constants.OBJECT_KEY, data, exchange, allEntities);
+		
+		// Address
+		{
+			SyncPersonAddress address = new SyncPersonAddress(data, exchange);
+			address.setPerson(Utils.getModelClassLight("Patient", patientUuid));
+			address.setAddress1(data.get(ADDRESS_LINE_1));
+			address.setAddress2(data.get(ADDRESS_LINE_2));
+			address.setUuid(SyncEntityUtils.computeNewUUID(address.getAddress1() + address.getAddress2(), data.get(Constants.OBJECT_KEY), data));
+			
+			allEntities.add(address);
+		}
 		
 		return new Patient(allEntities);
 	}

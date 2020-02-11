@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.apache.camel.Exchange;
 
+import net.mekomsolutions.c2c.extract.Constants;
 import net.mekomsolutions.c2c.extract.Utils;
 
 public class SyncEntityUtils {
@@ -23,7 +24,7 @@ public class SyncEntityUtils {
 			pa.setPerson(Utils.getModelClassLight("Patient", UUID.nameUUIDFromBytes(data.get(patientRefKey).getBytes())));
 
 			// Do not forget to override the UUID to a unique one.
-			pa.computeNewUUID(personAttributeTypeUuid, data);
+			pa.setUuid(computeNewUUID(pa.getValue() ,personAttributeTypeUuid, data));
 
 			allEntities.add(pa);
 		}
@@ -31,20 +32,38 @@ public class SyncEntityUtils {
 
 	public static void createAndAddPatientIdentifier(String patientIdentifierTypeProperty, String identifierValue, String patientRefKey, Map<String, String> data, Exchange exchange, List<SyncEntity> allEntities) throws Exception {
 		if (Utils.hasKeyOrValue(identifierValue)) {
-			
+
 			SyncPatientIdentifier pi = new SyncPatientIdentifier(data, exchange);
-			
+
 			pi.setIdentifier(identifierValue);
-			
+
 			String patientIdentifierTypeUuid = exchange.getContext().resolvePropertyPlaceholders("{{" + patientIdentifierTypeProperty + "}}");
 			pi.setPatientIdentifierType(Utils.getModelClassLight("PatientIdentifierType", UUID.fromString(patientIdentifierTypeUuid)));
-			
+
 			pi.setPatient(Utils.getModelClassLight("Patient", UUID.nameUUIDFromBytes(data.get(patientRefKey).getBytes())));
-			
+
 			// Do not forget to override the UUID to a unique one.
-			pi.computeNewUUID(patientIdentifierTypeUuid, data);
+			pi.setUuid(computeNewUUID(pi.getIdentifier(), patientIdentifierTypeUuid, data));
 
 			allEntities.add(pi);
 		}
+	}
+	
+	/**
+	 * Hopefully computes a unique identifier based on 2 input strings. The first is the actual value of the entity.
+	 * This may be the Identifier value, the Attribute value etc...
+	 * The second argument is the UUID (as a String) of the type of entity being processed.
+	 * Could be the PersonAttributeTypeUuid or PatientIdentifierTypeUuid for instance.
+	 * 
+	 * @param value The entity actual value used computation (entity.getValue(), entity.getIdentifier()...)
+	 * @param entityTypeUuid UUID of the type of entity (PersonAttributeTypeUuid, PatientIdentifierTypeUuid...)
+	 * @param data The Camel data
+	 * 
+	 * @return uuid a computed UUID as a String.
+	 * 
+	 */
+	public static String computeNewUUID(String value, String entityTypeUuid, Map<String, String> data) {
+		return UUID.nameUUIDFromBytes((entityTypeUuid +
+				data.get(Constants.OBJECT_KEY) + value).getBytes()).toString();
 	}
 }
