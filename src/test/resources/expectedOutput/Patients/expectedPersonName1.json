@@ -28,7 +28,7 @@
     "retiredByUuid": null,
     "dateRetired": null,
     "retiredReason": null,
-    "preferred": false,
+    "preferred": true,
     "personUuid": "org.openmrs.sync.component.entity.light.PatientLight(05eeac8d-100e-3fd7-a258-a33a663661c1)",
     "prefix": null,
     "givenName": "Anouse",

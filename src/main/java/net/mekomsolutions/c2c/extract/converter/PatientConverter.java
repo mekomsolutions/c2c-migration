@@ -27,7 +27,7 @@ public class PatientConverter {
 	private static final String DOB = "dob";
 	private static final String GENDER = "gender";
 	private static final String PHONE = "contactphone";
-	
+
 	private static final String MARITAL_STATUS = "maritalstatus";
 	private static final String EMPLOYMENT = "employment";
 
@@ -37,7 +37,7 @@ public class PatientConverter {
 
 	private static final String ADDRESS_LINE_1 = "addressline1";
 	private static final String ADDRESS_LINE_2 = "addressline2";
-	
+
 	/**
 	 * Transform the data input, passed as a parameter, into a Patient.
 	 * @throws Exception 
@@ -75,6 +75,7 @@ public class PatientConverter {
 			personName.setGivenName(data.get(FIRST_NAME));
 			personName.setMiddleName(data.get(MIDDLE_NAME));
 			personName.setFamilyName(data.get(LAST_NAME));
+			personName.setPreferred(true);
 
 			allEntities.add(personName);
 		}
@@ -87,12 +88,12 @@ public class PatientConverter {
 		SyncEntityUtils.createAndAddPersonAttribute("pat.employment.uuid", data.get(EMPLOYMENT), Constants.OBJECT_KEY, data, exchange, allEntities);
 
 		// Dossier Number
-		SyncEntityUtils.createAndAddPatientIdentifier("pit.dossierNumber.uuid", data.get(DOSSIER_NUMBER), Constants.OBJECT_KEY, data, exchange, allEntities);
+		SyncEntityUtils.createAndAddPatientIdentifier("pit.dossierNumber.uuid", data.get(DOSSIER_NUMBER), Constants.OBJECT_KEY, true, data, exchange, allEntities);
 		// Vecna ID
-		SyncEntityUtils.createAndAddPatientIdentifier("pit.vecnaId.uuid", data.get(VECNA_ID), Constants.OBJECT_KEY, data, exchange, allEntities);
+		SyncEntityUtils.createAndAddPatientIdentifier("pit.vecnaId.uuid", data.get(VECNA_ID), Constants.OBJECT_KEY, false, data, exchange, allEntities);
 		// Vecna QUID
-		SyncEntityUtils.createAndAddPatientIdentifier("pit.vecnaGuid.uuid", data.get(VECNA_GUID), Constants.OBJECT_KEY, data, exchange, allEntities);
-		
+		SyncEntityUtils.createAndAddPatientIdentifier("pit.vecnaGuid.uuid", data.get(VECNA_GUID), Constants.OBJECT_KEY, false, data, exchange, allEntities);
+
 		// Address
 		{
 			SyncPersonAddress personAddress = new SyncPersonAddress(data, exchange);
@@ -100,13 +101,13 @@ public class PatientConverter {
 			Address address = new Address();
 			address.setAddress1(data.get(ADDRESS_LINE_1));
 			address.setAddress2(data.get(ADDRESS_LINE_2));
-			
+
 			personAddress.setAddress(address);
 			personAddress.setPerson(Utils.getModelClassLight("Patient", patientUuid));
 			personAddress.setUuid(SyncEntityUtils.computeNewUUID(personAddress.getAddress().getAddress1() + personAddress.getAddress().getAddress2(), data.get(Constants.OBJECT_KEY), data));
 			allEntities.add(personAddress);
 		}
-		
+
 		return new Patient(allEntities);
 	}
 }

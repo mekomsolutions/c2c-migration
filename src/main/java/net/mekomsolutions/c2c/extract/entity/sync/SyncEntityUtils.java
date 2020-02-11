@@ -30,13 +30,13 @@ public class SyncEntityUtils {
 		}
 	}
 
-	public static void createAndAddPatientIdentifier(String patientIdentifierTypeProperty, String identifierValue, String patientRefKey, Map<String, String> data, Exchange exchange, List<SyncEntity> allEntities) throws Exception {
+	public static void createAndAddPatientIdentifier(String patientIdentifierTypeProperty, String identifierValue, String patientRefKey, boolean preferred, Map<String, String> data, Exchange exchange, List<SyncEntity> allEntities) throws Exception {
 		if (Utils.hasKeyOrValue(identifierValue)) {
 
 			SyncPatientIdentifier pi = new SyncPatientIdentifier(data, exchange);
 
 			pi.setIdentifier(identifierValue);
-
+			pi.setPreferred(preferred);
 			String patientIdentifierTypeUuid = exchange.getContext().resolvePropertyPlaceholders("{{" + patientIdentifierTypeProperty + "}}");
 			pi.setPatientIdentifierType(Utils.getModelClassLight("PatientIdentifierType", UUID.fromString(patientIdentifierTypeUuid)));
 
