@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.apache.camel.Converter;
 import org.apache.camel.Exchange;
+import org.openmrs.sync.component.common.Address;
 
 import net.mekomsolutions.c2c.extract.Constants;
 import net.mekomsolutions.c2c.extract.Utils;
@@ -94,13 +95,16 @@ public class PatientConverter {
 		
 		// Address
 		{
-			SyncPersonAddress address = new SyncPersonAddress(data, exchange);
-			address.setPerson(Utils.getModelClassLight("Patient", patientUuid));
+			SyncPersonAddress personAddress = new SyncPersonAddress(data, exchange);
+
+			Address address = new Address();
 			address.setAddress1(data.get(ADDRESS_LINE_1));
 			address.setAddress2(data.get(ADDRESS_LINE_2));
-			address.setUuid(SyncEntityUtils.computeNewUUID(address.getAddress1() + address.getAddress2(), data.get(Constants.OBJECT_KEY), data));
 			
-			allEntities.add(address);
+			personAddress.setAddress(address);
+			personAddress.setPerson(Utils.getModelClassLight("Patient", patientUuid));
+			personAddress.setUuid(SyncEntityUtils.computeNewUUID(personAddress.getAddress().getAddress1() + personAddress.getAddress().getAddress2(), data.get(Constants.OBJECT_KEY), data));
+			allEntities.add(personAddress);
 		}
 		
 		return new Patient(allEntities);

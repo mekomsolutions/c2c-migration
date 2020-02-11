@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.mekomsolutions</groupId>
@@ -9,6 +11,8 @@
 	<name>c2c-extract</name>
 
 	<properties>
+
+		<camelopenmrs-version>1.0-SNAPSHOT</camelopenmrs-version>
 
 		<camel-version>2.24.2</camel-version>
 		<cxf-version>3.2.10</cxf-version>
@@ -25,6 +29,11 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.openmrs.sync</groupId>
+			<artifactId>camel-openmrs</artifactId>
+			<version>${camelopenmrs-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
