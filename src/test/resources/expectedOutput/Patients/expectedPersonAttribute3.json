@@ -11,7 +11,14 @@
       10,
       18
     ],
-    "dateChanged": null,
+    "dateChanged": [
+      2019,
+      5,
+      3,
+      7,
+      10,
+      18
+    ],
     "voided": false,
     "dateVoided": null,
     "voidReason": null,
@@ -19,7 +26,7 @@
     "dateRetired": null,
     "retiredReason": null,
     "value": "Commerçant",
-    "changedByUuid": null,
+    "changedByUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
     "voidedByUuid": null,
     "retiredByUuid": null,
     "personUuid": "org.openmrs.sync.component.entity.light.PatientLight(a38be1d7-6342-369d-ad7c-12919d451162)",

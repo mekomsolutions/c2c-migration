@@ -11,7 +11,14 @@
       17,
       55
     ],
-    "dateChanged": null,
+    "dateChanged": [
+      2019,
+      5,
+      3,
+      6,
+      17,
+      55
+    ],
     "voided": false,
     "dateVoided": null,
     "voidReason": null,
@@ -20,7 +27,7 @@
     "retiredReason": null,
     "identifier": "5956B33D-1110-4182-BC43-55D2FBE9A676",
     "preferred": false,
-    "changedByUuid": null,
+    "changedByUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
     "voidedByUuid": null,
     "retiredByUuid": null,
     "patientUuid": "org.openmrs.sync.component.entity.light.PatientLight(31ecfdf4-acf7-30a2-84c1-5c100ed05ad5)",

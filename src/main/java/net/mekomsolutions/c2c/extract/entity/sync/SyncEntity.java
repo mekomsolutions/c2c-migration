@@ -35,7 +35,7 @@ public class SyncEntity {
 	private String changedBy;
 
 	@JsonProperty
-	private String dateChanged;
+	private List<Integer> dateChanged;
 
 	@JsonProperty
 	private boolean voided;
@@ -88,8 +88,10 @@ public class SyncEntity {
 
 		String defaultUserLight = Utils.getModelClassLight("User", UUID.fromString(userUuid));
 		this.creatorUuid = defaultUserLight;
-
 		this.dateCreated = Utils.dateLongToArray(exchange.getContext().getTypeConverter().convertTo(Long.class, data.get("lastModified")));
+
+		this.changedBy = defaultUserLight;
+		this.dateChanged = Utils.dateLongToArray(exchange.getContext().getTypeConverter().convertTo(Long.class, data.get("lastModified")));
 	}
 
 	public String getModelClassName() {
@@ -132,11 +134,11 @@ public class SyncEntity {
 		this.changedBy = changedBy;
 	}
 
-	public String getDateChanged() {
+	public List<Integer> getDateChanged() {
 		return dateChanged;
 	}
 
-	public void setDateChanged(String dateChanged) {
+	public void setDateChanged(List<Integer> dateChanged) {
 		this.dateChanged = dateChanged;
 	}
 
