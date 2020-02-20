@@ -1,0 +1,45 @@
+{
+  "halix2": {
+    "addressline1": "Acul",
+    "addressline2": "Duty",
+    "clinicKey": "cli~H3",
+    "contactKeys": [
+      "con!~00~1~H3-1432cli~H3"
+    ],
+    "contactphone": "3-675-7027",
+    "dataElementKey": "dlm~00~c2c~patient",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~TwcAAAAAAAA~_JQ",
+      "dia!~00~TwcAAAAAAAA~_ZQ"
+    ],
+    "dob": "1995-03-24T00:00:00Z",
+    "dossiernumber": "H3-1432",
+    "employment": "Commerçant",
+    "firstname": "Frandeline",
+    "gender": "Female",
+    "importSource": "H3-2019-04-02.tar.gz",
+    "labtestKeys": [
+      "lae!~00~UQcAAAAAAAA~lpM",
+      "lae!~00~UQcAAAAAAAA~l5M",
+      "lae!~00~UQcAAAAAAAA~mJM"
+    ],
+    "lastModified": 1556902053105,
+    "lastname": "Lamatiniere",
+    "maritalstatus": "Married",
+    "medicineeventKeys": [
+      "mee!~00~UAcAAAAAAAA~Fkc",
+      "mee!~00~UAcAAAAAAAA~F0c",
+      "mee!~00~UAcAAAAAAAA~GEc"
+    ],
+    "middlename": "",
+    "objKey": "pat!~00~H3-1432cli~H3",
+    "objType": "SolutionObject",
+    "sandboxKey": "sbx~00~400",
+    "vecnaguid": "64F71B96-3352-4F26-8AD9-F08FCB0BCAC0",
+    "vecnaid": "47798",
+    "visitKeys": [
+      "vst!~00~1759571cli~H3"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "halix2": {
+    "addressline1": "Novion",
+    "addressline2": "",
+    "clinicKey": "cli~H6",
+    "contactKeys": [
+      "con!~00~1~H6-0596cli~H6"
+    ],
+    "contactphone": "",
+    "dataElementKey": "dlm~00~c2c~patient",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~YAcAAAAAAAA~bAM",
+      "dia!~00~YAcAAAAAAAA~RxA",
+      "dia!~00~YAcAAAAAAAA~zBI"
+    ],
+    "dob": "1968-01-28T00:00:00Z",
+    "dossiernumber": "H6-0596",
+    "employment": "Commerçant",
+    "firstname": "Anouse",
+    "gender": "Female",
+    "importSource": "H6-2019-04-09.tar.gz",
+    "labtestKeys": [
+      "lae!~00~YAcAAAAAAAA~oTw",
+      "lae!~00~YAcAAAAAAAA~ojw",
+      "lae!~00~YAcAAAAAAAA~ozw",
+      "lae!~00~YAcAAAAAAAA~pDw"
+    ],
+    "lastModified": 1556904310136,
+    "lastname": "Ilioma",
+    "medicineeventKeys": [
+      "mee!~00~YAcAAAAAAAA~3R8",
+      "mee!~00~YAcAAAAAAAA~3h8",
+      "mee!~00~YAcAAAAAAAA~3x8",
+      "mee!~00~YAcAAAAAAAA~4B8",
+      "mee!~00~YAcAAAAAAAA~4R8"
+    ],
+    "middlename": "",
+    "objKey": "pat!~00~H6-0596cli~H6",
+    "objType": "SolutionObject",
+    "sandboxKey": "sbx~00~400",
+    "vecnaguid": "523DD9A9-56AD-4D6B-8B12-64F3A305B4AB",
+    "vecnaid": "27703",
+    "visitKeys": [
+      "vst!~00~1018486cli~H6"
+    ]
+  }
+}

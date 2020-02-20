@@ -1,0 +1,66 @@
+{
+  "halix2": {
+    "addressline1": "Pillatre",
+    "addressline2": "",
+    "clinicKey": "cli~H3",
+    "contactKeys": [
+      "con!~00~1~H3-1250cli~H3"
+    ],
+    "contactphone": "4-485-4743",
+    "dataElementKey": "dlm~00~c2c~patient",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~TwcAAAAAAAA~uJI",
+      "dia!~00~TwcAAAAAAAA~uZI",
+      "dia!~00~TwcAAAAAAAA~MpM",
+      "dia!~00~TwcAAAAAAAA~M5M",
+      "dia!~00~TwcAAAAAAAA~sJQ",
+      "dia!~00~TwcAAAAAAAA~kJc",
+      "dia!~00~TwcAAAAAAAA~kZc"
+    ],
+    "dob": "1977-03-01T00:00:00Z",
+    "dossiernumber": "H3-1250",
+    "employment": "Commerçant",
+    "firstname": "Guerdeline",
+    "gender": "Female",
+    "importSource": "H3-2019-04-02.tar.gz",
+    "labtestKeys": [
+      "lae!~00~UQcAAAAAAAA~L5E",
+      "lae!~00~UQcAAAAAAAA~MJE",
+      "lae!~00~UQcAAAAAAAA~o5E",
+      "lae!~00~UQcAAAAAAAA~UJM",
+      "lae!~00~UQcAAAAAAAA~PZY",
+      "lae!~00~UQcAAAAAAAA~PpY",
+      "lae!~00~UQcAAAAAAAA~P5Y",
+      "lae!~00~UQcAAAAAAAA~QJY",
+      "lae!~00~UQcAAAAAAAA~QZY",
+      "lae!~00~UQcAAAAAAAA~QpY",
+      "lae!~00~UQcAAAAAAAA~Q5Y"
+    ],
+    "lastModified": 1556901962881,
+    "lastname": "Jean Baptiste",
+    "maritalstatus": "Married",
+    "medicineeventKeys": [
+      "mee!~00~UAcAAAAAAAA~BUM",
+      "mee!~00~UAcAAAAAAAA~BkM",
+      "mee!~00~UAcAAAAAAAA~B0M",
+      "mee!~00~UAcAAAAAAAA~CEM",
+      "mee!~00~UAcAAAAAAAA~sEM",
+      "mee!~00~UAcAAAAAAAA~10s",
+      "mee!~00~UAcAAAAAAAA~2Es",
+      "mee!~00~UAcAAAAAAAA~2Us"
+    ],
+    "middlename": "",
+    "objKey": "pat!~00~H3-1250cli~H3",
+    "objType": "SolutionObject",
+    "sandboxKey": "sbx~00~400",
+    "vecnaguid": "A8BA33D3-9FE7-4F24-A43F-4D10446242DC",
+    "vecnaid": "37736",
+    "visitKeys": [
+      "vst!~00~1377613cli~H3",
+      "vst!~00~1435170cli~H3",
+      "vst!~00~1692570cli~H3",
+      "vst!~00~2208693cli~H3"
+    ]
+  }
+}

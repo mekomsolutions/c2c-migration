@@ -13,7 +13,8 @@
 	<properties>
 
 		<camelopenmrs-version>1.0-SNAPSHOT</camelopenmrs-version>
-
+		<activemq-version>5.15.11</activemq-version>
+<!-- 	<activemq-junit-version></activemq-junit-version> -->
 		<camel-version>2.24.2</camel-version>
 		<cxf-version>3.2.10</cxf-version>
 		<jackson-version>2.9.7</jackson-version>
@@ -29,6 +30,41 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms</artifactId>
+			<version>${camel-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-client</artifactId>
+			<version>${activemq-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-broker</artifactId>
+			<version>${activemq-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq.tooling</groupId>
+			<artifactId>activemq-junit</artifactId>
+			<version>${activemq-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-camel</artifactId>
+			<version>${activemq-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.couchbase.client</groupId>
+			<artifactId>java-client</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.openmrs.sync</groupId>
 			<artifactId>camel-openmrs</artifactId>
@@ -261,5 +297,13 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<repositories>
+		<repository>
+			<id>mks-nexus-public</id>
+			<url>https://nexus.mekomsolutions.net/repository/maven-public/</url>
+			<snapshots>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
 </project>

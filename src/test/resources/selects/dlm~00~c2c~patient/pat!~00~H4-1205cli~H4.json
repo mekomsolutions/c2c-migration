@@ -1,0 +1,42 @@
+{
+  "halix2": {
+    "addressline1": "Bas Vertieres",
+    "addressline2": "",
+    "clinicKey": "cli~H4",
+    "contactKeys": [
+      "con!~00~1~H4-1205cli~H4"
+    ],
+    "contactphone": "4-770-1882",
+    "dataElementKey": "dlm~00~c2c~patient",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~VwcAAAAAAAA~j2g",
+      "dia!~00~VwcAAAAAAAA~kGg"
+    ],
+    "dob": "1992-08-11T00:00:00Z",
+    "dossiernumber": "H4-1205",
+    "employment": "Etudiant",
+    "firstname": "Marbens",
+    "gender": "Male",
+    "importSource": "H4-2019-04-05.tar.gz",
+    "labtestKeys": [
+      "lae!~00~WAcAAAAAAAA~r8c"
+    ],
+    "lastModified": 1556903401841,
+    "lastname": "Versane",
+    "maritalstatus": "Single",
+    "medicineeventKeys": [
+      "mee!~00~VwcAAAAAAAA~gvc",
+      "mee!~00~VwcAAAAAAAA~g_c"
+    ],
+    "middlename": "",
+    "objKey": "pat!~00~H4-1205cli~H4",
+    "objType": "SolutionObject",
+    "sandboxKey": "sbx~00~400",
+    "vecnaguid": "DB59A95F-D2DB-449B-8802-6429109FCC35",
+    "vecnaid": "59573",
+    "visitKeys": [
+      "vst!~00~2204373cli~H4"
+    ]
+  }
+}

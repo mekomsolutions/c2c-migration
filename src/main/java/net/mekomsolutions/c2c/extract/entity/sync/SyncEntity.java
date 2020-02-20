@@ -17,7 +17,12 @@ import net.mekomsolutions.c2c.extract.Utils;
  * mandatory fields of an entity. Ie, 'uuid', modelClass'...
  * 
  */
-public class SyncEntity {
+public class SyncEntity implements java.io.Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@JsonIgnore
 	private String modelClassName;

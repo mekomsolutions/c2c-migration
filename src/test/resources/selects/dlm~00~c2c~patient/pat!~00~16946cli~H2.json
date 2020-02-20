@@ -1,0 +1,50 @@
+{
+  "halix2": {
+    "addressline1": "Garrot",
+    "addressline2": "",
+    "clinicKey": "cli~H2",
+    "contactphone": "",
+    "dataElementKey": "dlm~00~c2c~patient",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~SQcAAAAAAAA~u0s",
+      "dia!~00~SQcAAAAAAAA~O1Q"
+    ],
+    "dob": "1999-01-09T00:00:00Z",
+    "dossiernumber": "16946",
+    "employment": "Lòt",
+    "firstname": "Landie",
+    "gender": "Female",
+    "importSource": "H2-2019-04-09.tar.gz",
+    "labtestKeys": [
+      "lae!~00~SwcAAAAAAAA~ehM",
+      "lae!~00~SwcAAAAAAAA~exM",
+      "lae!~00~SwcAAAAAAAA~fBM",
+      "lae!~00~SwcAAAAAAAA~fRM",
+      "lae!~00~SwcAAAAAAAA~fhM",
+      "lae!~00~SwcAAAAAAAA~fxM",
+      "lae!~00~SwcAAAAAAAA~gBM",
+      "lae!~00~SwcAAAAAAAA~gRM"
+    ],
+    "lastModified": 1556900131559,
+    "lastname": "Paulcin",
+    "medicineeventKeys": [
+      "mee!~00~SgcAAAAAAAA~nFQ",
+      "mee!~00~SgcAAAAAAAA~nVQ",
+      "mee!~00~SgcAAAAAAAA~nlQ",
+      "mee!~00~SgcAAAAAAAA~n1Q",
+      "mee!~00~SgcAAAAAAAA~d2M",
+      "mee!~00~SgcAAAAAAAA~eGM"
+    ],
+    "middlename": "",
+    "objKey": "pat!~00~16946cli~H2",
+    "objType": "SolutionObject",
+    "sandboxKey": "sbx~00~400",
+    "vecnaguid": "EA0C7B02-D808-4F9F-9B51-36B72E3E59CA",
+    "vecnaid": "621357",
+    "visitKeys": [
+      "vst!~00~22871129cli~H2",
+      "vst!~00~24036624cli~H2"
+    ]
+  }
+}

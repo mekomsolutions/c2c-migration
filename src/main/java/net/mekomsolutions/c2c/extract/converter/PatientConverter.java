@@ -7,11 +7,11 @@ import java.util.UUID;
 
 import org.apache.camel.Converter;
 import org.apache.camel.Exchange;
-import org.openmrs.sync.component.common.Address;
 
 import net.mekomsolutions.c2c.extract.Constants;
 import net.mekomsolutions.c2c.extract.Utils;
 import net.mekomsolutions.c2c.extract.entity.Patient;
+import net.mekomsolutions.c2c.extract.entity.Address;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncEntity;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncEntityUtils;
 import net.mekomsolutions.c2c.extract.entity.sync.SyncPatient;

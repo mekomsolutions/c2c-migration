@@ -15,6 +15,11 @@ import net.mekomsolutions.c2c.extract.Utils;
  */
 public class SyncPersonName extends SyncEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@JsonProperty
 	private boolean preferred;
 

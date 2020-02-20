@@ -66,12 +66,13 @@ public class Utils {
 
 	public static List<Integer> convertBirthdate(String string) {
 		List<Integer> birthdate = dateStringToArray(string);
-		return birthdate.subList(0, 3);
+		return new ArrayList<Integer>(birthdate.subList(0, 3));
 	}
 
 	private static List<String> trimAndCapitalize(LinkedList<String> list) {
 
 		list.removeAll(Arrays.asList("", null));
+		list.removeAll(Arrays.asList("	", null));
 
 		// Trim
 		List<String> trimmedList = new ArrayList<>();

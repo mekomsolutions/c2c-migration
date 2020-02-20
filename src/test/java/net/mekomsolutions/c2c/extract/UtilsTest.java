@@ -46,6 +46,12 @@ public class UtilsTest {
 		String name = Utils.concatName(list);
 		
 		assertEquals("Firstname Lastname", name);
+		
+		// Verify that it handles 'tab' character
+		list =  new LinkedList<String>(Arrays.asList("	", "" , " lastname", null));
+		name = Utils.concatName(list);
+		assertEquals("Lastname", name);
+		
 	}
 	
 	@Test

@@ -1,0 +1,52 @@
+{
+  "halix2": {
+    "addressline1": "Des Larue",
+    "addressline2": "",
+    "clinicKey": "cli~H2",
+    "contactKeys": [
+      "con!~00~1~11830cli~H2"
+    ],
+    "contactphone": "",
+    "dataElementKey": "dlm~00~c2c~patient",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~SQcAAAAAAAA~0xA",
+      "dia!~00~SQcAAAAAAAA~Lyc",
+      "dia!~00~SQcAAAAAAAA~MCc"
+    ],
+    "dob": "1968-02-20T00:00:00Z",
+    "dossiernumber": "11830",
+    "employment": "Cultivateur/Trice",
+    "firstname": "Louis",
+    "gender": "Female",
+    "importSource": "H2-2019-04-09.tar.gz",
+    "labtestKeys": [
+      "lae!~00~SgcAAAAAAAA~afs",
+      "lae!~00~SgcAAAAAAAA~avs"
+    ],
+    "lastModified": 1556900272629,
+    "lastname": "Silficia",
+    "medicineeventKeys": [
+      "mee!~00~SQcAAAAAAAA~8PI",
+      "mee!~00~SQcAAAAAAAA~8fI",
+      "mee!~00~SQcAAAAAAAA~8vI",
+      "mee!~00~SQcAAAAAAAA~8_I",
+      "mee!~00~SQcAAAAAAAA~9PI",
+      "mee!~00~SgcAAAAAAAA~oxY",
+      "mee!~00~SgcAAAAAAAA~pBY",
+      "mee!~00~SgcAAAAAAAA~pRY",
+      "mee!~00~SgcAAAAAAAA~phY",
+      "mee!~00~SgcAAAAAAAA~pxY"
+    ],
+    "middlename": "",
+    "objKey": "pat!~00~11830cli~H2",
+    "objType": "SolutionObject",
+    "sandboxKey": "sbx~00~400",
+    "vecnaguid": "62BAFA6A-04BA-4A83-BB63-21FA577DA86E",
+    "vecnaid": "404190",
+    "visitKeys": [
+      "vst!~00~14918600cli~H2",
+      "vst!~00~18244621cli~H2"
+    ]
+  }
+}

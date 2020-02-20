@@ -1,0 +1,46 @@
+{
+  "halix2": {
+    "addressline1": "Vertieres",
+    "addressline2": "Odn",
+    "clinicKey": "cli~H4",
+    "contactKeys": [
+      "con!~00~1~H4-6420cli~H4",
+      "con!~00~3~H4-6420cli~H4"
+    ],
+    "contactphone": "",
+    "dataElementKey": "dlm~00~c2c~patient",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~VwcAAAAAAAA~dNI",
+      "dia!~00~VwcAAAAAAAA~ddI",
+      "dia!~00~VwcAAAAAAAA~dtI",
+      "dia!~00~VwcAAAAAAAA~d9I"
+    ],
+    "dob": "2017-12-10T00:00:00Z",
+    "dossiernumber": "H4-6420",
+    "employment": "Lòt",
+    "firstname": "Annie Darah Leysha",
+    "gender": "Female",
+    "importSource": "H4-2019-04-05.tar.gz",
+    "labtestKeys": [
+      "lae!~00~WQcAAAAAAAA~fBw"
+    ],
+    "lastModified": 1556903332435,
+    "lastname": "Rene",
+    "medicineeventKeys": [
+      "mee!~00~WAcAAAAAAAA~G5U",
+      "mee!~00~WAcAAAAAAAA~HJU",
+      "mee!~00~WAcAAAAAAAA~HZU"
+    ],
+    "middlename": "",
+    "objKey": "pat!~00~H4-6420cli~H4",
+    "objType": "SolutionObject",
+    "preferredlanguage": "Milot",
+    "sandboxKey": "sbx~00~400",
+    "vecnaguid": "833618A1-8D11-45FE-956D-34573EE935EA",
+    "vecnaid": "445768",
+    "visitKeys": [
+      "vst!~00~16389540cli~H4"
+    ]
+  }
+}

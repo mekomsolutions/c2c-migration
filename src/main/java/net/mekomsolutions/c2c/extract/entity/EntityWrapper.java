@@ -1,5 +1,7 @@
 package net.mekomsolutions.c2c.extract.entity;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,7 +15,9 @@ import net.mekomsolutions.c2c.extract.entity.sync.SyncEntity;
  * Also provides the JSON field mapping to be used by the {@link com.fasterxml.jackson Jackson} library
  * via the {@link com.fasterxml.jackson.annotation.JsonIgnore @JsonIgnore} annotation for the same purpose.
  */
-public class EntityWrapper<T extends SyncEntity> {
+public class EntityWrapper<T extends SyncEntity> implements Serializable {
+
+	private static final long serialVersionUID = -6161174494661919383L;
 
 	@JsonProperty("tableToSyncModelClass")
 	private String modelClass;

@@ -1,0 +1,44 @@
+{
+  "halix2": {
+    "addressline1": "Morne A Dent",
+    "addressline2": "",
+    "clinicKey": "cli~H2",
+    "contactKeys": [
+      "con!~00~3~2979cli~H2"
+    ],
+    "contactphone": "4-901-8558",
+    "dataElementKey": "dlm~00~c2c~patient",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~SAcAAAAAAAA~wLE",
+      "dia!~00~SAcAAAAAAAA~wbE",
+      "dia!~00~SAcAAAAAAAA~_rg",
+      "dia!~00~SAcAAAAAAAA~_7g"
+    ],
+    "dob": "2015-11-10T00:00:00Z",
+    "dossiernumber": "2979",
+    "employment": "Lòt",
+    "firstname": "Worlf Mitchley",
+    "gender": "Male",
+    "importSource": "H2-2019-04-09.tar.gz",
+    "lastModified": 1556900185045,
+    "lastname": "Bataille",
+    "medicineeventKeys": [
+      "mee!~00~SQcAAAAAAAA~yGE",
+      "mee!~00~SQcAAAAAAAA~yWE",
+      "mee!~00~SQcAAAAAAAA~ymE",
+      "mee!~00~SQcAAAAAAAA~cG0",
+      "mee!~00~SQcAAAAAAAA~cW0"
+    ],
+    "middlename": "",
+    "objKey": "pat!~00~2979cli~H2",
+    "objType": "SolutionObject",
+    "sandboxKey": "sbx~00~400",
+    "vecnaguid": "0443D0F0-1EDE-4FA7-9B06-7BCC237796CA",
+    "vecnaid": "35833",
+    "visitKeys": [
+      "vst!~00~1050062cli~H2",
+      "vst!~00~2472446cli~H2"
+    ]
+  }
+}

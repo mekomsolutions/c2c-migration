@@ -1,0 +1,62 @@
+{
+  "halix2": {
+    "addressline1": "Champin",
+    "addressline2": "Ruelle Anna",
+    "clinicKey": "cli~H4",
+    "contactKeys": [
+      "con!~00~1~H4-4739cli~H4"
+    ],
+    "contactphone": "3-724-2654",
+    "dataElementKey": "dlm~00~c2c~patient",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~VwcAAAAAAAA~1ak",
+      "dia!~00~VwcAAAAAAAA~1qk",
+      "dia!~00~VwcAAAAAAAA~16k",
+      "dia!~00~VwcAAAAAAAA~FK0",
+      "dia!~00~VwcAAAAAAAA~Fa0",
+      "dia!~00~VwcAAAAAAAA~Fq0",
+      "dia!~00~VwcAAAAAAAA~TbQ",
+      "dia!~00~VwcAAAAAAAA~TrQ"
+    ],
+    "dob": "1974-08-14T00:00:00Z",
+    "dossiernumber": "H4-4739",
+    "employment": "Commerçant",
+    "firstname": "Josette",
+    "gender": "Female",
+    "importSource": "H4-2019-04-05.tar.gz",
+    "labtestKeys": [
+      "lae!~00~WAcAAAAAAAA~_v0",
+      "lae!~00~WAcAAAAAAAA~__0",
+      "lae!~00~WAcAAAAAAAA~AP4"
+    ],
+    "lastModified": 1556903418910,
+    "lastname": "Samilien",
+    "maritalstatus": "Married",
+    "medicineeventKeys": [
+      "mee!~00~WAcAAAAAAAA~x1c",
+      "mee!~00~WAcAAAAAAAA~yFc",
+      "mee!~00~WAcAAAAAAAA~yVc",
+      "mee!~00~WAcAAAAAAAA~ylc",
+      "mee!~00~WAcAAAAAAAA~y1c",
+      "mee!~00~WAcAAAAAAAA~uFw",
+      "mee!~00~WAcAAAAAAAA~uVw",
+      "mee!~00~WAcAAAAAAAA~ulw",
+      "mee!~00~WAcAAAAAAAA~u1w",
+      "mee!~00~WAcAAAAAAAA~42c",
+      "mee!~00~WAcAAAAAAAA~5Gc",
+      "mee!~00~WAcAAAAAAAA~5Wc"
+    ],
+    "middlename": "",
+    "objKey": "pat!~00~H4-4739cli~H4",
+    "objType": "SolutionObject",
+    "sandboxKey": "sbx~00~400",
+    "vecnaguid": "B63C6FAB-5508-4FA0-A5D1-5A6056BD7B36",
+    "vecnaid": "303195",
+    "visitKeys": [
+      "vst!~00~11388274cli~H4",
+      "vst!~00~11785393cli~H4",
+      "vst!~00~12710474cli~H4"
+    ]
+  }
+}
