@@ -1,4 +1,4 @@
-package net.mekomsolutions.c2c.extract;
+package net.mekomsolutions.c2c.migration;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
+
+import net.mekomsolutions.c2c.migration.Utils;
 
 public class UtilsTest {
 

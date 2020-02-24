@@ -1,15 +1,15 @@
-package net.mekomsolutions.c2c.extract;
+package net.mekomsolutions.c2c.migration;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPatient;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPatientIdentifier;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPerson;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAddress;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAttribute;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonName;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncPatient;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncPatientIdentifier;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncPerson;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncPersonAddress;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncPersonAttribute;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncPersonName;
 
 public class Constants {
 

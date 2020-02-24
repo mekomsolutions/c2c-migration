@@ -1,4 +1,4 @@
-package net.mekomsolutions.c2c.extract;
+package net.mekomsolutions.c2c.migration;
 
 import java.text.DateFormat;
 import java.text.ParseException;

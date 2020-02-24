@@ -1,4 +1,4 @@
-package net.mekomsolutions.c2c.extract;
+package net.mekomsolutions.c2c.migration;
 
 import java.io.File;
 import java.util.Arrays;
@@ -18,12 +18,14 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import net.mekomsolutions.c2c.extract.entity.EntityWrapper;
-import net.mekomsolutions.c2c.extract.route.Route1;
+import net.mekomsolutions.c2c.migration.ActiveMQConnectionFactoryConfigurer;
+import net.mekomsolutions.c2c.migration.entity.EntityWrapper;
+import net.mekomsolutions.c2c.migration.route.Route1;
 
 public class Route1Test extends CamelSpringTestSupport {
 
-	private final String OUTPUT_RESOURCES_FOLDER = "/expectedOutput";
+	private static final String EXPECTED_OUTPUT_RESOURCES_FOLDER = "/expected_output/";
+	private static final String COUCHBASE_SELECTS = "/couchbase_selects/";
 
 	@Rule
 	public EmbeddedActiveMQBroker broker = new EmbeddedActiveMQBroker();
@@ -59,16 +61,15 @@ public class Route1Test extends CamelSpringTestSupport {
 
 	@Test
 	public void shouldHandleContacts() throws Exception {
-
 		{
 			String contacts = context.getTypeConverter().convertTo(
-					String.class, new File("src/test/resources/selects/dlm~00~c2c~contact/con!~00~1~,6039cli~H2.json"));
+					String.class, new File(getClass().getResource(COUCHBASE_SELECTS + "dlm~00~c2c~contact/con!~00~1~,6039cli~H2.json").getFile()));
 			template.sendBodyAndHeader("jms:c2c.couchbase.halix2", contacts, Exchange.FILE_NAME, "con!~00~1~,6039cli~H2.json");
 		}
 
 		{
 			String contacts = context.getTypeConverter().convertTo(
-					String.class, new File("src/test/resources/selects/dlm~00~c2c~contact/con!~00~1~10001cli~H2.json"));
+					String.class, new File(getClass().getResource(COUCHBASE_SELECTS + "dlm~00~c2c~contact/con!~00~1~10001cli~H2.json").getFile()));
 			template.sendBodyAndHeader("jms:c2c.couchbase.halix2", contacts, Exchange.FILE_NAME, "con!~00~1~10001cli~H2.json");
 		}
 
@@ -77,11 +78,11 @@ public class Route1Test extends CamelSpringTestSupport {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		String expectedFilesFolder = OUTPUT_RESOURCES_FOLDER + "/Contacts";
+		String expectedFilesFolder = EXPECTED_OUTPUT_RESOURCES_FOLDER + "Contacts/";
 
 		// Phone Number
 		{
-			File expectedMessage = new File(getClass().getResource(expectedFilesFolder + "/expectedPersonAttribute1.json").getPath());
+			File expectedMessage = new File(getClass().getResource(expectedFilesFolder + "expectedPersonAttribute1.json").getPath());
 			assertNotNull(expectedMessage);
 			File actualMessage = new File("data/outbox/" + 
 					"org.openmrs.sync.component.model.PersonAttributeModel-e1e18f6f-e681-3eb1-bd91-0072ee7f7a36");
@@ -89,7 +90,7 @@ public class Route1Test extends CamelSpringTestSupport {
 		}
 		// Person Name
 		{
-			File expectedMessage = new File(getClass().getResource(expectedFilesFolder + "/expectedPersonAttribute2.json").getPath());
+			File expectedMessage = new File(getClass().getResource(expectedFilesFolder + "expectedPersonAttribute2.json").getPath());
 			assertNotNull(expectedMessage);
 			File acutalMessage2 = new File("data/outbox/" + 
 					"org.openmrs.sync.component.model.PersonAttributeModel-77e70fb4-73cd-3c85-bcab-6ea8814de1d2");
@@ -97,7 +98,7 @@ public class Route1Test extends CamelSpringTestSupport {
 		}
 		// Person Name
 		{
-			File expectedMessage = new File(getClass().getResource(expectedFilesFolder + "/expectedPersonAttribute3.json").getPath());
+			File expectedMessage = new File(getClass().getResource(expectedFilesFolder + "expectedPersonAttribute3.json").getPath());
 			assertNotNull(expectedMessage);
 			File actualMessage = new File("data/outbox/" + 
 					"org.openmrs.sync.component.model.PersonAttributeModel-a9110597-45c5-3827-a3e6-db64ecb04708");
@@ -105,7 +106,7 @@ public class Route1Test extends CamelSpringTestSupport {
 		}
 		// Contact Type
 		{
-			File expectedMessage = new File(getClass().getResource(expectedFilesFolder + "/expectedPersonAttribute4.json").getPath());
+			File expectedMessage = new File(getClass().getResource(expectedFilesFolder + "expectedPersonAttribute4.json").getPath());
 			assertNotNull(expectedMessage);
 			File actualMessage = new File("data/outbox/" + 
 					"org.openmrs.sync.component.model.PersonAttributeModel-dd199660-acf9-3093-9f9c-997d5fb9c9af");
@@ -113,7 +114,7 @@ public class Route1Test extends CamelSpringTestSupport {
 		}
 		// Contact Person Relationship
 		{
-			File expectedMessage = new File(getClass().getResource(expectedFilesFolder + "/expectedPersonAttribute5.json").getPath());
+			File expectedMessage = new File(getClass().getResource(expectedFilesFolder + "expectedPersonAttribute5.json").getPath());
 			assertNotNull(expectedMessage);
 			File actualMessage = new File("data/outbox/" + 
 					"org.openmrs.sync.component.model.PersonAttributeModel-e19bc490-d02e-37d8-9c7b-6157f85977a4");
@@ -121,7 +122,7 @@ public class Route1Test extends CamelSpringTestSupport {
 		}
 		// Contact Person Address
 		{
-			File expectedMessage = new File(getClass().getResource(expectedFilesFolder + "/expectedPersonAttribute6.json").getPath());
+			File expectedMessage = new File(getClass().getResource(expectedFilesFolder + "expectedPersonAttribute6.json").getPath());
 			assertNotNull(expectedMessage);
 			File actualMessage = new File("data/outbox/" + 
 					"org.openmrs.sync.component.model.PersonAttributeModel-98cf2b12-3ad9-38ad-bc6f-7a954affaa09");
@@ -132,7 +133,7 @@ public class Route1Test extends CamelSpringTestSupport {
 	@Test
 	public void shouldHandlePatients() throws Exception {
 		
-		String patientDirectoryName = "src/test/resources/selects/dlm~00~c2c~patient/";
+		String patientDirectoryName = "src/test/resources/couchbase_selects/dlm~00~c2c~patient/";
 		File patientsDirectory = new File(patientDirectoryName);
 		
 		// Dynamically load all files from the directory
@@ -145,7 +146,7 @@ public class Route1Test extends CamelSpringTestSupport {
 
 		Thread.sleep(2000);
 
-		String expectedFilesFolder = OUTPUT_RESOURCES_FOLDER + "/Patients";
+		String expectedFilesFolder = EXPECTED_OUTPUT_RESOURCES_FOLDER + "/Patients";
 
 		ObjectMapper mapper = new ObjectMapper(); 
 

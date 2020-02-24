@@ -1,4 +1,4 @@
-package net.mekomsolutions.c2c.extract.converter;
+package net.mekomsolutions.c2c.migration.converter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,11 +9,11 @@ import java.util.Map;
 import org.apache.camel.Converter;
 import org.apache.camel.Exchange;
 
-import net.mekomsolutions.c2c.extract.Constants;
-import net.mekomsolutions.c2c.extract.Utils;
-import net.mekomsolutions.c2c.extract.entity.Contact;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncEntity;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncEntityUtils;
+import net.mekomsolutions.c2c.migration.Constants;
+import net.mekomsolutions.c2c.migration.Utils;
+import net.mekomsolutions.c2c.migration.entity.Contact;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncEntity;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncEntityUtils;
 
 @Converter
 public class ContactConverter {

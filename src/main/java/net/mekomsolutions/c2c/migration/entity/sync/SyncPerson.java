@@ -1,10 +1,10 @@
-package net.mekomsolutions.c2c.extract.entity.sync;
+package net.mekomsolutions.c2c.migration.entity.sync;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import net.mekomsolutions.c2c.extract.Utils;
+import net.mekomsolutions.c2c.migration.Utils;
 
 /**
  * A Person ready to be marshaled as a message

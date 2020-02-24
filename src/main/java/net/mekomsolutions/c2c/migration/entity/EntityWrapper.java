@@ -1,14 +1,14 @@
-package net.mekomsolutions.c2c.extract.entity;
+package net.mekomsolutions.c2c.migration.entity;
 
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import net.mekomsolutions.c2c.extract.entity.sync.SyncEntity;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncEntity;
 
 /**
- * Wraps a {@link net.mekomsolutions.c2c.extract.entity.sync.SyncEntity SyncEntity} 
+ * Wraps a {@link net.mekomsolutions.c2c.migration.entity.sync.SyncEntity SyncEntity} 
  * to add metadata to it, such as {@link EntityWrapper#modelClass "modelClass"} for instance, that is
  * required to facilitate later marshaling of the entity it holds.
  * 

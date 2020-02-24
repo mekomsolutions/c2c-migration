@@ -1,4 +1,4 @@
-package net.mekomsolutions.c2c.extract.entity;
+package net.mekomsolutions.c2c.migration.entity;
 
 
 import java.io.Serializable;

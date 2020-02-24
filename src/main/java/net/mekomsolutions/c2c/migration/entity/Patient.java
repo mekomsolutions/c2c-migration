@@ -1,23 +1,23 @@
-package net.mekomsolutions.c2c.extract.entity;
+package net.mekomsolutions.c2c.migration.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import net.mekomsolutions.c2c.extract.entity.sync.SyncEntity;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncEntity;
 
 /**
- * Describes a Contact, which is merely a {@link java.util.List list}
- * of {@link net.mekomsolutions.c2c.extract.entity.EntityWrapper wrapped entities}
- * of type {@link net.mekomsolutions.c2c.extract.entity.sync.SyncEntity SyncEntity}.
+ * Describes a Patient, which is merely a {@link java.util.List list}
+ * of {@link net.mekomsolutions.c2c.migration.entity.EntityWrapper wrapped entities}
+ * of type {@link net.mekomsolutions.c2c.migration.entity.sync.SyncEntity SyncEntity}.
  */
-public class Contact {
+public class Patient {
 
 	@JsonProperty
 	private List<EntityWrapper<SyncEntity>> entities;
-	
-	public Contact(List<SyncEntity> syncEntities) {
+
+	public Patient(List<SyncEntity> syncEntities) {
 		
 		List<EntityWrapper<SyncEntity>> asWrappedEntities = new ArrayList<>() ;
 		
@@ -27,9 +27,9 @@ public class Contact {
 		
 		this.entities = asWrappedEntities;
 	}
-
+	
 	public List<EntityWrapper<SyncEntity>> getEntities() {
 		return entities;
 	}
-	
+
 }

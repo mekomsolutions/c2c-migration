@@ -1,4 +1,4 @@
-package net.mekomsolutions.c2c.extract.entity.sync;
+package net.mekomsolutions.c2c.migration.entity.sync;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,7 @@ import org.apache.camel.Exchange;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import net.mekomsolutions.c2c.extract.Utils;
+import net.mekomsolutions.c2c.migration.Utils;
 
 /**
  * A Patient ready to be marshaled as a message

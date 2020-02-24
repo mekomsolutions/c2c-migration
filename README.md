@@ -22,4 +22,4 @@ We assume that the server is running on `localhost` and the **Data Service** is 
 </p>
 
 ### Run:
-`mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.extract.Main"`
+`mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Main"`

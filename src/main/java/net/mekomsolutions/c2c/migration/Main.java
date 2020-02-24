@@ -1,4 +1,4 @@
-package net.mekomsolutions.c2c.extract;
+package net.mekomsolutions.c2c.migration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +9,9 @@ import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 
-import net.mekomsolutions.c2c.extract.entity.EntityWrapper;
-import net.mekomsolutions.c2c.extract.producer.C2CExtractProducer;
-import net.mekomsolutions.c2c.extract.route.Route1;
+import net.mekomsolutions.c2c.migration.entity.EntityWrapper;
+import net.mekomsolutions.c2c.migration.producer.C2CExtractProducer;
+import net.mekomsolutions.c2c.migration.route.Route1;
 
 public class Main {
 

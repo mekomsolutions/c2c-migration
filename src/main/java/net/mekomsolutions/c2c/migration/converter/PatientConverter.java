@@ -1,4 +1,4 @@
-package net.mekomsolutions.c2c.extract.converter;
+package net.mekomsolutions.c2c.migration.converter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,15 +8,15 @@ import java.util.UUID;
 import org.apache.camel.Converter;
 import org.apache.camel.Exchange;
 
-import net.mekomsolutions.c2c.extract.Constants;
-import net.mekomsolutions.c2c.extract.Utils;
-import net.mekomsolutions.c2c.extract.entity.Patient;
-import net.mekomsolutions.c2c.extract.entity.Address;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncEntity;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncEntityUtils;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPatient;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonAddress;
-import net.mekomsolutions.c2c.extract.entity.sync.SyncPersonName;
+import net.mekomsolutions.c2c.migration.Constants;
+import net.mekomsolutions.c2c.migration.Utils;
+import net.mekomsolutions.c2c.migration.entity.Address;
+import net.mekomsolutions.c2c.migration.entity.Patient;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncEntity;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncEntityUtils;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncPatient;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncPersonAddress;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncPersonName;
 
 @Converter
 public class PatientConverter {
@@ -42,7 +42,7 @@ public class PatientConverter {
 	 * Transform the data input, passed as a parameter, into a Patient.
 	 * @throws Exception 
 	 * 
-	 * @see net.mekomsolutions.c2c.extract.entity.Patient
+	 * @see net.mekomsolutions.c2c.migration.entity.Patient
 	 */
 	@Converter
 	public Patient toPatient(Map<String,String> data , Exchange exchange) throws Exception {

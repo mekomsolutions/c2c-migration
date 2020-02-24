@@ -1,10 +1,10 @@
-package net.mekomsolutions.c2c.extract.route;
+package net.mekomsolutions.c2c.migration.route;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 
-import net.mekomsolutions.c2c.extract.entity.Contact;
-import net.mekomsolutions.c2c.extract.entity.Patient;
+import net.mekomsolutions.c2c.migration.entity.Contact;
+import net.mekomsolutions.c2c.migration.entity.Patient;
 
 public class Route1 extends RouteBuilder {
 	

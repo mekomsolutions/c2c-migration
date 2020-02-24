@@ -1,11 +1,11 @@
-package net.mekomsolutions.c2c.extract;
+package net.mekomsolutions.c2c.migration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-import net.mekomsolutions.c2c.extract.entity.EntityWrapper;
+import net.mekomsolutions.c2c.migration.entity.EntityWrapper;
 
 public class ActiveMQConnectionFactoryConfigurer {
 

@@ -17,7 +17,7 @@
 	<camelContext
 		xmlns="http://camel.apache.org/schema/spring">
 		<packageScan>
-			<package>net.mekomsolutions.c2c.extract</package>
+			<package>net.mekomsolutions.c2c.migration</package>
 			<excludes>**.*Excluded*</excludes>
 			<includes>**.*</includes>
 		</packageScan>

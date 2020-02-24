@@ -1,4 +1,4 @@
-package net.mekomsolutions.c2c.extract.producer;
+package net.mekomsolutions.c2c.migration.producer;
 
 import java.util.List;
 

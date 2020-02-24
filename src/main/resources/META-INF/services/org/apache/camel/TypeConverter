@@ -1,2 +1,2 @@
-net.mekomsolutions.c2c.extract.converter.PatientConverter
-net.mekomsolutions.c2c.extract.converter.ContactConverter
+net.mekomsolutions.c2c.migration.converter.PatientConverter
+net.mekomsolutions.c2c.migration.converter.ContactConverter
