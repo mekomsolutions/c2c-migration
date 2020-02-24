@@ -12,9 +12,6 @@ Java project to migrate Care 2 Communities' historical data to OpenMRS. This pro
 
 ## Run the project:
 
-Start C2C's Couchbase database loaded with historical data.
-We assume that the server is running on `localhost` and the **Data Service** is accessible at the default `11210` port.
-
 ### Build:
 `mvn clean install`
 <p align="center">
@@ -22,4 +19,19 @@ We assume that the server is running on `localhost` and the **Data Service** is 
 </p>
 
 ### Run:
+
+#### Start Couchbase
+Start C2C's Couchbase database loaded with historical data.
+We assume that the server is running on `localhost` and the **Data Service** is accessible at the default `11210` port.
+
+#### Start ActiveMQ
+C2C Migration uses a standalone instance of ActiveMQ to store the messages between routes. Run ActiveMQ locally using the Docker Compose project in [docker/activemq/](docker/activemq/)
+```
+cd docker/activemq
+docker-compose up
+```
+
+#### Run C2C Migration
+Then run the program:
+
 `mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Main"`
