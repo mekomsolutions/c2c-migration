@@ -43,6 +43,7 @@ public class C2CExtractProducer {
 
 			// Create messages
 			Cluster cluster = Cluster.connect("localhost", "Administrator", "Admin123");
+			
 			QueryResult result = cluster.query("select * from halix2 where objType = 'SolutionObject' limit 10");
 			List<JsonObject> results = result.rowsAsObject();
 			
