@@ -21,8 +21,8 @@ public class ActiveMQConnectionFactoryConfigurer {
 		ActiveMQConnectionFactory connectionFactory = 
 				new ActiveMQConnectionFactory(brokerUrl);
 
-		connectionFactory.setUserName("admin");
-		connectionFactory.setPassword("password");
+		connectionFactory.setUserName(AppProperties.getProperty("activemq.username"));
+		connectionFactory.setPassword(AppProperties.getProperty("activemq.password"));
 
 		// Deal with security restrictions in latest ActiveMQ
 		List<String> allowedPacakges = new ArrayList<>();

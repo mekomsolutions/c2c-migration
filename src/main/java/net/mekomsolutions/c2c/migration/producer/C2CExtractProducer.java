@@ -16,10 +16,12 @@ import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.json.JsonObject;
 import com.couchbase.client.java.query.QueryResult;
 
+import net.mekomsolutions.c2c.migration.AppProperties;
+
 public class C2CExtractProducer {
 
 	private ActiveMQConnectionFactory connectionFactory;
-	
+
 	public C2CExtractProducer(ActiveMQConnectionFactory connectionFactory) {
 		this.connectionFactory = connectionFactory;
 	}
@@ -35,23 +37,28 @@ public class C2CExtractProducer {
 			Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
 			// Create the destination (Topic or Queue)
-			Destination destination = session.createQueue("c2c.couchbase.halix2");
+			Destination destination = session.createQueue("c2c.couchbase");
 
 			// Create a MessageProducer from the Session to the Topic or Queue
 			MessageProducer producer = session.createProducer(destination);
 			producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
 			// Create messages
-			Cluster cluster = Cluster.connect("localhost", "Administrator", "Admin123");
-			
-			QueryResult result = cluster.query("select * from halix2 where objType = 'SolutionObject' limit 10");
+			Cluster cluster = Cluster.connect(AppProperties.getProperty("couchbase.host"), 
+					AppProperties.getProperty("couchbase.username"), 
+					AppProperties.getProperty("couchbase.password"));
+
+			QueryResult result = cluster.query("select * from "
+					+ AppProperties.getProperty("couchbase.bucket.name")
+					+ " where objType = 'SolutionObject' limit "
+					+ AppProperties.getProperty("couchbase.query.limit"));
 			List<JsonObject> results = result.rowsAsObject();
-			
+
 			for (JsonObject entry : results) {
 				TextMessage message = session.createTextMessage(entry.toString());
 				producer.send(message);
 			}
-			
+
 			// Clean up
 			session.close();
 			connection.close();

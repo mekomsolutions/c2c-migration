@@ -64,13 +64,13 @@ public class Route1Test extends CamelSpringTestSupport {
 		{
 			String contacts = context.getTypeConverter().convertTo(
 					String.class, new File(getClass().getResource(COUCHBASE_SELECTS + "dlm~00~c2c~contact/con!~00~1~,6039cli~H2.json").getFile()));
-			template.sendBodyAndHeader("jms:c2c.couchbase.halix2", contacts, Exchange.FILE_NAME, "con!~00~1~,6039cli~H2.json");
+			template.sendBodyAndHeader("jms:" + Constants.JMS_COUCHBASE_QUEUE, contacts, Exchange.FILE_NAME, "con!~00~1~,6039cli~H2.json");
 		}
 
 		{
 			String contacts = context.getTypeConverter().convertTo(
 					String.class, new File(getClass().getResource(COUCHBASE_SELECTS + "dlm~00~c2c~contact/con!~00~1~10001cli~H2.json").getFile()));
-			template.sendBodyAndHeader("jms:c2c.couchbase.halix2", contacts, Exchange.FILE_NAME, "con!~00~1~10001cli~H2.json");
+			template.sendBodyAndHeader("jms:" + Constants.JMS_COUCHBASE_QUEUE, contacts, Exchange.FILE_NAME, "con!~00~1~10001cli~H2.json");
 		}
 
 
@@ -132,15 +132,15 @@ public class Route1Test extends CamelSpringTestSupport {
 
 	@Test
 	public void shouldHandlePatients() throws Exception {
-		
+
 		String patientDirectoryName = "src/test/resources/couchbase_selects/dlm~00~c2c~patient/";
 		File patientsDirectory = new File(patientDirectoryName);
-		
+
 		// Dynamically load all files from the directory
 		for (String fileName : patientsDirectory.list()) {
 			String contacts = context.getTypeConverter().convertTo(
 					String.class, new File(patientDirectoryName + fileName));
-			template.sendBodyAndHeader("jms:c2c.couchbase.halix2",
+			template.sendBodyAndHeader("jms:" + Constants.JMS_COUCHBASE_QUEUE,
 					contacts, Exchange.FILE_NAME, fileName);
 		}
 

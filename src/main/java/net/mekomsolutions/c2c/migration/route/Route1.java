@@ -10,8 +10,8 @@ public class Route1 extends RouteBuilder {
 	
 	public void configure() throws Exception {
 		
-		from("jms:queue:c2c.couchbase.halix2")
-		.split().jsonpath("$.{{couchdb.bucket.name}}").streaming()
+		from("jms:queue:c2c.couchbase")
+		.split().jsonpath("$.{{couchbase.bucket.name}}").streaming()
 		.setHeader("type",simple("${body[dataElementKey]}"))
 		.choice()
 		.when(header("type").isEqualTo("dlm~00~c2c~contact"))
