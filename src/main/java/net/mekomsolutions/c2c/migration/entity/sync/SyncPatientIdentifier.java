@@ -1,17 +1,19 @@
 package net.mekomsolutions.c2c.migration.entity.sync;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import org.apache.camel.Exchange;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import net.mekomsolutions.c2c.migration.Constants;
 import net.mekomsolutions.c2c.migration.Utils;
 
 public class SyncPatientIdentifier extends SyncEntity {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@JsonProperty
 	private String identifier;

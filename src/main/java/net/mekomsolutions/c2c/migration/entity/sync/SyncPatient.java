@@ -16,6 +16,11 @@ import net.mekomsolutions.c2c.migration.Utils;
  */
 public class SyncPatient extends SyncEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@JsonProperty
 	private String gender;
 	

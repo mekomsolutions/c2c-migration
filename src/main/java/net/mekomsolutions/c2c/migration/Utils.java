@@ -1,6 +1,5 @@
 package net.mekomsolutions.c2c.migration;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,23 +43,37 @@ public class Utils {
 	}
 
 	public static List<Integer> dateStringToArray(String formattedDateString) {
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
+		// 2017-07-28T08:48:17.429Z
+
 		Date date = new Date();
+		List<Integer> array = new ArrayList<>();
+
+		SimpleDateFormat s1 = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'Z'");
+		SimpleDateFormat s2 = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
+
 		try {
-			date  = format.parse(formattedDateString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			date = s1.parse(formattedDateString);
+		}
+		catch (ParseException pe1)
+		{
+			try
+			{
+				date = s2.parse(formattedDateString);
+			}
+			catch (ParseException pe2)
+			{
+				pe2.printStackTrace();
+			}    
 		}
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(date);
-		List<Integer> array = new ArrayList<>();
 		array.add(calendar.get(Calendar.YEAR));
 		array.add(calendar.get(Calendar.MONTH) + 1);
 		array.add(calendar.get(Calendar.DAY_OF_MONTH));
 		array.add(calendar.get(Calendar.HOUR));
 		array.add(calendar.get(Calendar.MINUTE));
 		array.add(calendar.get(Calendar.SECOND));
+
 		return array;
 	}
 

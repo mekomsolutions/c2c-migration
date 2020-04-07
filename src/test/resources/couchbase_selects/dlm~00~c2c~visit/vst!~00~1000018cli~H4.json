@@ -1,0 +1,70 @@
+{
+  "halix2": {
+    "ageatvisit": 21,
+    "bpdiastolic": 6,
+    "bpsystolic": 12,
+    "chiefcomplaint": "Leucorrhée",
+    "clinicKey": "cli~H4",
+    "dataElementKey": "dlm~00~c2c~visit",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~VwcAAAAAAAA~lmA",
+      "dia!~00~VwcAAAAAAAA~l2A"
+    ],
+    "diagnosisview": "Infection génito-urinaire",
+    "dob": "1996-06-07T00:00:00Z",
+    "dossiernumber": "H4-0666",
+    "endtime": "2017-06-07T13:22:47.504Z",
+    "firstname": "Fredeline",
+    "flag_consult": true,
+    "flag_lab": true,
+    "flag_labprescription": false,
+    "flag_newpatient": true,
+    "flag_prescription": false,
+    "gender": "Female",
+    "heartrate": 92,
+    "importSource": "H4-2019-04-05.tar.gz",
+    "insuranceupdatesaudited": "false",
+    "labsprescribed": "LAB-02 HEMATOCRITE  (1, 2017-06-07), LAB-05 URINES  (1, 2017-06-07), LAB-05 URINES  (2, 2017-06-07), LAB-06 GOUTTE PENDANTE (1, 2017-06-07), LAB-06 GOUTTE PENDANTE (2, 2017-06-07)",
+    "labspurchased": "LAB-02 HEMATOCRITE  (1, 2017-06-07), LAB-05 URINES  (1, 2017-06-07), LAB-06 GOUTTE PENDANTE (1, 2017-06-07)",
+    "labspurchasedcost": 235,
+    "labspurchaseddate": "2017-06-07T00:00:00Z",
+    "labtestKeys": [
+      "lae!~00~WAcAAAAAAAA~xsE",
+      "lae!~00~WAcAAAAAAAA~x8E",
+      "lae!~00~WAcAAAAAAAA~yME"
+    ],
+    "lastModified": 1556903315052,
+    "lastname": "Michel",
+    "lastupdated": "2017-06-07T13:06:46.739Z",
+    "medicineeventKeys": [
+      "mee!~00~VwcAAAAAAAA~Eew",
+      "mee!~00~VwcAAAAAAAA~Euw",
+      "mee!~00~VwcAAAAAAAA~E-w",
+      "mee!~00~VwcAAAAAAAA~FOw"
+    ],
+    "objKey": "vst!~00~1000018cli~H4",
+    "objType": "SolutionObject",
+    "patientKey": "pat!~00~H4-0666cli~H4",
+    "patientid": "1000019",
+    "pharmaprescribed": "DOX-01 DOXYCYCLINE CO - 20  (1, 2017-06-07), DOX-01 DOXYCYCLINE CO - 20  (2, 2017-06-07), MTR-01 METRO + NYSTATIN OVULES VAGINALES - 7 (1, 2017-06-07), MTR-01 METRO + NYSTATIN OVULES VAGINALES - 7 (2, 2017-06-07), CIP-01A - CIRPOX 500 MG CO - 20 (1, 2017-06-07), CIP-01A - CIRPOX 500 MG CO - 20 (2, 2017-06-07), MEZ-03 METRONIDAZOLE 500MG CO - 21  (1, 2017-06-07)",
+    "pharmapurchased": "DOX-01 DOXYCYCLINE CO - 20  (1, 2017-06-07), MTR-01 METRO + NYSTATIN OVULES VAGINALES - 7 (1, 2017-06-07), CIP-01A - CIRPOX 500 MG CO - 20 (1, 2017-06-07), MEZ-03 METRONIDAZOLE 500MG CO - 21  (1, 2017-06-07)",
+    "pharmapurchasedcost": 305,
+    "pharmapurchaseddate": "2017-06-07T00:00:00Z",
+    "problemupdateid": "1001201",
+    "respiratoryrate": 24,
+    "sandboxKey": "sbx~00~400",
+    "starttime": "2017-06-07T09:52:50.808Z",
+    "temperature": 99.5,
+    "totalrevenue": 540,
+    "vecnaid": "AF240172-0E63-42CB-AC12-69686780FD59",
+    "visitid": "1000018",
+    "visitsurveyKeys": [
+      "vsu!~00~1006238cli~H4",
+      "vsu!~00~1000682cli~H4",
+      "vsu!~00~1004877cli~H4",
+      "vsu!~00~1005642cli~H4"
+    ],
+    "weight": 130
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "halix2": {
+    "ageatvisit": 28,
+    "bpdiastolic": 6,
+    "bpsystolic": 10,
+    "chiefcomplaint": "Leucorrhée",
+    "clinicKey": "cli~H3",
+    "dataElementKey": "dlm~00~c2c~visit",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~TwcAAAAAAAA~K8s",
+      "dia!~00~TwcAAAAAAAA~LMs",
+      "dia!~00~TwcAAAAAAAA~Lcs"
+    ],
+    "diagnosisview": "Gastrite, Infection génito-urinaire",
+    "dob": "1989-03-18T00:00:00Z",
+    "dossiernumber": "H3-1390",
+    "endtime": "2017-07-28T10:05:15.358Z",
+    "firstname": "Wideline",
+    "gender": "Female",
+    "importSource": "H3-2019-04-02.tar.gz",
+    "insuranceupdatesaudited": "true",
+    "lastModified": 1556902017826,
+    "lastname": "Pierre Louis",
+    "lastupdated": "2017-07-28T09:51:17.56Z",
+    "medicineeventKeys": [
+      "mee!~00~UAcAAAAAAAA~K6I",
+      "mee!~00~UAcAAAAAAAA~LKI",
+      "mee!~00~UAcAAAAAAAA~LaI",
+      "mee!~00~UAcAAAAAAAA~LqI",
+      "mee!~00~UAcAAAAAAAA~L6I"
+    ],
+    "objKey": "vst!~00~10000040cli~H3",
+    "objType": "SolutionObject",
+    "patientKey": "pat!~00~H3-1390cli~H3",
+    "patientid": "10000041",
+    "pharmaprescribed": "OMP-01 OMEPRAZOLE (1, 2017-07-28), MTR-01 METRO+NYSTATIN OVULE VAGINALE (1, 2017-07-28), CIP-01A CIPROX (1, 2017-07-28), FER-04 VIVAFER SP (FER UP) (1, 2017-07-28), GAS-01 GASTROGEL (1, 2017-07-28)",
+    "pharmapurchased": "OMP-01 OMEPRAZOLE (1, 2017-07-28), MTR-01 METRO+NYSTATIN OVULE VAGINALE (1, 2017-07-28), CIP-01A CIPROX (1, 2017-07-28), FER-04 VIVAFER SP (FER UP) (1, 2017-07-28), GAS-01 GASTROGEL (1, 2017-07-28)",
+    "pharmapurchasedcost": 680,
+    "pharmapurchaseddate": "2017-07-28T00:00:00Z",
+    "problemupdateid": "10004954",
+    "sandboxKey": "sbx~00~400",
+    "starttime": "2017-07-28T08:48:17.429Z",
+    "temperature": 36.5,
+    "totalrevenue": 730,
+    "vecnaid": "004B34FE-C584-461D-A214-27BE41C83950",
+    "visitid": "10000040",
+    "visitsurveyKeys": [
+      "vsu!~00~10004997cli~H3"
+    ],
+    "weight": 54.8
+  }
+}

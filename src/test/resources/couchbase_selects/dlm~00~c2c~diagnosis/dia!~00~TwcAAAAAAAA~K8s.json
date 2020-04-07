@@ -1,0 +1,17 @@
+ {
+    "halix2": {
+      "clinicKey": "cli~H3",
+      "dataElementKey": "dlm~00~c2c~diagnosis",
+      "date": "2017-07-28T09:47:57.461Z",
+      "deleted": false,
+      "description": "Leucorrhée",
+      "importSource": "H3-2019-04-02.tar.gz",
+      "lastModified": 1556900716034,
+      "objKey": "dia!~00~TwcAAAAAAAA~K8s",
+      "objType": "SolutionObject",
+      "patientKey": "pat!~00~H3-1390cli~H3",
+      "sandboxKey": "sbx~00~400",
+      "type": "Complaint",
+      "visitKey": "vst!~00~10000040cli~H3"
+    }
+ }

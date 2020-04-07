@@ -1,0 +1,39 @@
+{
+  "halix2": {
+    "ageatvisit": 0,
+    "chiefcomplaint": "Pleurs incessants inexpliqués",
+    "clinicKey": "cli~H5",
+    "dataElementKey": "dlm~00~c2c~visit",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~XwcAAAAAAAA~Rwo"
+    ],
+    "dob": "2018-04-26T00:00:00Z",
+    "dossiernumber": "H5-078",
+    "endtime": "2018-04-26T13:00:37.494Z",
+    "firstname": "Guivens",
+    "gender": "Male",
+    "heartrate": 116,
+    "importSource": "H5-2019-04-04.tar.gz",
+    "insuranceupdatesaudited": "true",
+    "lastModified": 1556904102138,
+    "lastname": "Jean",
+    "lastupdated": "2018-04-26T13:00:36.022Z",
+    "objKey": "vst!~00~100001cli~H5",
+    "objType": "SolutionObject",
+    "patientKey": "pat!~00~H5-078cli~H5",
+    "patientid": "100002",
+    "problemupdateid": "103296",
+    "respiratoryrate": 36,
+    "sandboxKey": "sbx~00~400",
+    "starttime": "2018-04-26T12:05:27.744Z",
+    "temperature": 36.4,
+    "totalrevenue": 50,
+    "vecnaid": "6B990408-3125-4E54-ABBE-5DEAEE9196B0",
+    "visitid": "100001",
+    "visitsurveyKeys": [
+      "vsu!~00~100416cli~H5"
+    ],
+    "weight": 4.1
+  }
+}

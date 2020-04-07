@@ -66,4 +66,18 @@ public class SyncEntityUtils {
 		return UUID.nameUUIDFromBytes((entityTypeUuid +
 				data.get(Constants.OBJECT_KEY) + value).getBytes()).toString();
 	}
+	/**
+	 * An more flexible constructor for UUIDs that need to be generated and used across objects
+	 * 
+	 * @param entityTypeUuid UUID of the type of entity (PersonAttributeTypeUuid, PatientIdentifierTypeUuid...)
+	 * @param any reference, but likely a reference to the 'key' of a linked object. For instance the 'visitKey'
+	 * of a Diagnosis object.
+	 * 
+	 * @return uuid a computed UUID as a String.
+	 *
+	 */
+	public static String computeNewUUID(String entityTypeUuid, String ref) {
+		return UUID.nameUUIDFromBytes(
+				(entityTypeUuid + ref).getBytes()).toString();
+	}
 }

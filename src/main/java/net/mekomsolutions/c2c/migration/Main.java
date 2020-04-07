@@ -7,7 +7,7 @@ import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 
 import net.mekomsolutions.c2c.migration.producer.C2CExtractProducer;
-import net.mekomsolutions.c2c.migration.route.Route1;
+import net.mekomsolutions.c2c.migration.route.CouchbaseToOpenMRS;
 
 public class Main {
 
@@ -25,7 +25,7 @@ public class Main {
 		context.addComponent("jms",
 				JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
 
-		context.addRoutes(new Route1());
+		context.addRoutes(new CouchbaseToOpenMRS());
 		PropertiesComponent prop = context.getComponent(
 				"properties", PropertiesComponent.class);
 		prop.setLocation("classpath:application.properties");

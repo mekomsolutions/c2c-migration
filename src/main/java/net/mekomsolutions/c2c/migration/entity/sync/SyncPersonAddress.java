@@ -14,7 +14,7 @@ public class SyncPersonAddress extends SyncEntity {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6924860822976976763L;
+	private static final long serialVersionUID = 1L;
 
 	@JsonProperty("address")
 	private Address address;

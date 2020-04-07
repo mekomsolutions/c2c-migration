@@ -1,0 +1,50 @@
+{
+  "halix2": {
+    "ageatvisit": 32,
+    "bpdiastolic": 7,
+    "bpsystolic": 11,
+    "chiefcomplaint": "OB-Prénatal 2e visite",
+    "clinicKey": "cli~H3",
+    "dataElementKey": "dlm~00~c2c~visit",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~TwcAAAAAAAA~Mcs",
+      "dia!~00~TwcAAAAAAAA~Mss"
+    ],
+    "diagnosisview": "Grossesse intra utérine",
+    "dob": "1985-06-01T00:00:00Z",
+    "dossiernumber": "H3-4317",
+    "endtime": "2017-07-28T09:52:22.735Z",
+    "firstname": "Marise",
+    "gender": "Female",
+    "importSource": "H3-2019-04-02.tar.gz",
+    "insuranceupdatesaudited": "false",
+    "lastModified": 1556902020399,
+    "lastname": "Andre",
+    "lastupdated": "2017-07-28T09:44:33.735Z",
+    "medicineeventKeys": [
+      "mee!~00~UAcAAAAAAAA~M6I",
+      "mee!~00~UAcAAAAAAAA~NKI"
+    ],
+    "objKey": "vst!~00~10000615cli~H3",
+    "objType": "SolutionObject",
+    "patientKey": "pat!~00~H3-4317cli~H3",
+    "patientid": "10000616",
+    "pharmaprescribed": "GR-HYN-01 HYOSCIN BUTYL BROMID (1, 2017-07-28), VPN-01 VITAMINES PRENATALES - 30 (2, 2017-07-28)",
+    "pharmapurchased": "GR-HYN-01 HYOSCIN BUTYL BROMID (1, 2017-07-28), VPN-01 VITAMINES PRENATALES - 30 (2, 2017-07-28)",
+    "pharmapurchasedcost": 0,
+    "pharmapurchaseddate": "2017-07-28T00:00:00Z",
+    "problemupdateid": "10003024",
+    "sandboxKey": "sbx~00~400",
+    "starttime": "2017-07-28T08:58:26.733Z",
+    "temperature": 36.1,
+    "totalrevenue": 0,
+    "vecnaid": "6E4A0507-4B42-4838-85EB-B2C8373FD94C",
+    "visitid": "10000615",
+    "visitsurveyKeys": [
+      "vsu!~00~10003993cli~H3",
+      "vsu!~00~10003067cli~H3"
+    ],
+    "weight": 61.9
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "halix2": {
+    "ageatvisit": 22,
+    "bpdiastolic": 7,
+    "bpsystolic": 12,
+    "chiefcomplaint": "Brûlure",
+    "clinicKey": "cli~H3",
+    "dataElementKey": "dlm~00~c2c~visit",
+    "deleted": false,
+    "diagnosisKeys": [
+      "dia!~00~TwcAAAAAAAA~Lss",
+      "dia!~00~TwcAAAAAAAA~L8s",
+      "dia!~00~TwcAAAAAAAA~MMs"
+    ],
+    "diagnosisview": "Anémie Carentielle, Infection génito-urinaire",
+    "dob": "1995-07-28T00:00:00Z",
+    "dossiernumber": "H3-4821",
+    "endtime": "2017-07-28T14:40:26.354Z",
+    "firstname": "Kettena",
+    "gender": "Female",
+    "importSource": "H3-2019-04-02.tar.gz",
+    "insuranceupdatesaudited": "false",
+    "labsprescribed": "LAB-02 HEMATOCRITE (1, 2017-07-28), LAB-06 GOUTTE PENDANT (1, 2017-07-28)",
+    "labspurchased": "LAB-02 HEMATOCRITE (1, 2017-07-28), LAB-06 GOUTTE PENDANT (1, 2017-07-28)",
+    "labspurchasedcost": 135,
+    "labspurchaseddate": "2017-07-28T00:00:00Z",
+    "labtestKeys": [
+      "lae!~00~UQcAAAAAAAA~Ur8",
+      "lae!~00~UQcAAAAAAAA~U78"
+    ],
+    "lastModified": 1556901909306,
+    "lastname": "Pierre Louis",
+    "lastupdated": "2017-07-28T12:51:32.969Z",
+    "medicineeventKeys": [
+      "mee!~00~UAcAAAAAAAA~MKI",
+      "mee!~00~UAcAAAAAAAA~MaI",
+      "mee!~00~UAcAAAAAAAA~MqI"
+    ],
+    "objKey": "vst!~00~10000241cli~H3",
+    "objType": "SolutionObject",
+    "patientKey": "pat!~00~H3-4821cli~H3",
+    "patientid": "10000242",
+    "pharmaprescribed": "GR-NYS-01 NYSTATIN ET TRIAMCINOLONE CREME - 1 (1, 2017-07-28), SUL-02B SULFAPRIM FORTE 800-160MG, COTRIM 960MG CO (1, 2017-07-28), SUL-02B SULFAPRIM FORTE 800-160MG, COTRIM 960MG CO (2, 2017-07-28), FER-04 VIVAFER SP (FER UP) (1, 2017-07-28), FER-04 VIVAFER SP (FER UP) (2, 2017-07-28)",
+    "pharmapurchased": "GR-NYS-01 NYSTATIN ET TRIAMCINOLONE CREME - 1 (1, 2017-07-28), FER-04 VIVAFER SP (FER UP) (1, 2017-07-28)",
+    "pharmapurchasedcost": 75,
+    "pharmapurchaseddate": "2017-07-28T00:00:00Z",
+    "problemupdateid": "10006270",
+    "sandboxKey": "sbx~00~400",
+    "starttime": "2017-07-28T08:52:39.163Z",
+    "temperature": 37.1,
+    "totalrevenue": 210,
+    "vecnaid": "64B03AA5-547F-4CE3-BE7D-89F103003921",
+    "visitid": "10000241",
+    "visitsurveyKeys": [
+      "vsu!~00~10000458cli~H3",
+      "vsu!~00~10006328cli~H3",
+      "vsu!~00~10030375cli~H3",
+      "vsu!~00~10030394cli~H3"
+    ],
+    "weight": 45.5
+  }
+}

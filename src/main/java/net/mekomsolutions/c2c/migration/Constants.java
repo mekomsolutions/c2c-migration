@@ -4,12 +4,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.mekomsolutions.c2c.migration.entity.sync.SyncEncounter;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncObservation;
 import net.mekomsolutions.c2c.migration.entity.sync.SyncPatient;
 import net.mekomsolutions.c2c.migration.entity.sync.SyncPatientIdentifier;
 import net.mekomsolutions.c2c.migration.entity.sync.SyncPerson;
 import net.mekomsolutions.c2c.migration.entity.sync.SyncPersonAddress;
 import net.mekomsolutions.c2c.migration.entity.sync.SyncPersonAttribute;
 import net.mekomsolutions.c2c.migration.entity.sync.SyncPersonName;
+import net.mekomsolutions.c2c.migration.entity.sync.SyncVisit;
 
 public class Constants {
 
@@ -41,6 +44,9 @@ public class Constants {
 		result.put(SyncPersonAttribute.class.getSimpleName(), "org.openmrs.sync.component.model.PersonAttributeModel");
 		result.put(SyncPatientIdentifier.class.getSimpleName(), "org.openmrs.sync.component.model.PatientIdentifierModel");
 		result.put(SyncPersonAddress.class.getSimpleName(), "org.openmrs.sync.component.model.PersonAddressModel");
+		result.put(SyncVisit.class.getSimpleName(), "org.openmrs.sync.component.model.VisitModel");
+		result.put(SyncObservation.class.getSimpleName(), "org.openmrs.sync.component.model.ObservationModel");
+		result.put(SyncEncounter.class.getSimpleName(), "org.openmrs.sync.component.model.EncounterModel");
 
 		return Collections.unmodifiableMap(result);
 	}
@@ -52,6 +58,13 @@ public class Constants {
 		result.put("User", "org.openmrs.sync.component.entity.light.UserLight");
 		result.put("PersonAttributeType", "org.openmrs.sync.component.entity.light.PersonAttributeTypeLight");
 		result.put("PatientIdentifierType", "org.openmrs.sync.component.entity.light.PatientIdentifierTypeLight");
+		result.put("Visit", "org.openmrs.sync.component.entity.light.VisitLight");
+		result.put("VisitType", "org.openmrs.sync.component.entity.light.VisitTypeLight");
+		result.put("Concept", "org.openmrs.sync.component.entity.light.ConceptLight");
+		result.put("Encounter", "org.openmrs.sync.component.entity.light.EncounterLight");
+		result.put("EncounterType", "org.openmrs.sync.component.entity.light.EncounterTypeLight");
+		result.put("Location", "org.openmrs.sync.component.entity.light.LocationLight");
+		result.put("Observation", "org.openmrs.sync.component.entity.light.ObservationLight");
 
 		return Collections.unmodifiableMap(result);
 	}
