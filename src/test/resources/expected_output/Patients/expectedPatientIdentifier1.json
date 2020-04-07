@@ -1,7 +1,7 @@
 {
   "tableToSyncModelClass": "org.openmrs.sync.component.model.PatientIdentifierModel",
   "model": {
-    "uuid": "fefe6836-281f-332c-ae92-724c4f7f3f84",
+    "uuid": "fa2bc690-216e-3d10-9c97-54c5741d9a83",
     "creatorUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
     "dateCreated": [
       2019,

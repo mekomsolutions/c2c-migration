@@ -48,15 +48,58 @@ public class C2CExtractProducer {
 					AppProperties.getProperty("couchbase.username"), 
 					AppProperties.getProperty("couchbase.password"));
 
-			QueryResult result = cluster.query("select * from "
-					+ AppProperties.getProperty("couchbase.bucket.name")
-					+ " where objType = 'SolutionObject' limit "
-					+ AppProperties.getProperty("couchbase.query.limit"));
-			List<JsonObject> results = result.rowsAsObject();
 
-			for (JsonObject entry : results) {
-				TextMessage message = session.createTextMessage(entry.toString());
-				producer.send(message);
+			{
+				QueryResult result = cluster.query("select * from "
+						+ AppProperties.getProperty("couchbase.bucket.name")
+						+ " where objType = 'SolutionObject' "
+						+ "and dataElementKey = 'dlm~00~c2c~contact' limit "
+						+ AppProperties.getProperty("couchbase.query.limit"));
+				List<JsonObject> results = result.rowsAsObject();
+
+				for (JsonObject entry : results) {
+					TextMessage message = session.createTextMessage(entry.toString());
+					producer.send(message);
+				}
+			}
+			{
+				QueryResult result = cluster.query("select * from "
+						+ AppProperties.getProperty("couchbase.bucket.name")
+						+ " where objType = 'SolutionObject' "
+						+ "and dataElementKey = 'dlm~00~c2c~patient' limit "
+						+ AppProperties.getProperty("couchbase.query.limit"));
+				List<JsonObject> results = result.rowsAsObject();
+
+				for (JsonObject entry : results) {
+					TextMessage message = session.createTextMessage(entry.toString());
+					producer.send(message);
+				}
+			}
+			{
+				QueryResult result = cluster.query("select * from "
+						+ AppProperties.getProperty("couchbase.bucket.name")
+						+ " where objType = 'SolutionObject' "
+						+ "and dataElementKey = 'dlm~00~c2c~diagnosis' limit "
+						+ AppProperties.getProperty("couchbase.query.limit"));
+				List<JsonObject> results = result.rowsAsObject();
+
+				for (JsonObject entry : results) {
+					TextMessage message = session.createTextMessage(entry.toString());
+					producer.send(message);
+				}
+			}
+			{
+				QueryResult result = cluster.query("select * from "
+						+ AppProperties.getProperty("couchbase.bucket.name")
+						+ " where objType = 'SolutionObject' "
+						+ "and dataElementKey = 'dlm~00~c2c~visit' limit "
+						+ AppProperties.getProperty("couchbase.query.limit"));
+				List<JsonObject> results = result.rowsAsObject();
+
+				for (JsonObject entry : results) {
+					TextMessage message = session.createTextMessage(entry.toString());
+					producer.send(message);
+				}
 			}
 
 			// Clean up

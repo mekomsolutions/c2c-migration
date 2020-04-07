@@ -1,0 +1,23 @@
+ {
+    "halix2": {
+      "addressline1": "Camp Louis",
+      "addressline2": "",
+      "cellphone": "3-873-8041",
+      "clinicKey": "cli~H3",
+      "dataElementKey": "dlm~00~c2c~contact",
+      "deleted": false,
+      "firstname": "Anacilen",
+      "homephone": "",
+      "importSource": "H3-2019-04-02.tar.gz",
+      "lastModified": 1556900371004,
+      "lastname": "Elvaris",
+      "middlename": "",
+      "objKey": "con!~00~1~H3-1390cli~H3",
+      "objType": "SolutionObject",
+      "patientKey": "pat!~00~H3-1390cli~H3",
+      "relationship": "Son Mari",
+      "sandboxKey": "sbx~00~400",
+      "type": "Emergency Contact",
+      "workphone": "01234"
+    }
+  }

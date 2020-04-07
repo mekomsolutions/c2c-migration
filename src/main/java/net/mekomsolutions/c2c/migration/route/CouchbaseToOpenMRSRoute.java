@@ -8,7 +8,7 @@ import net.mekomsolutions.c2c.migration.entity.Diagnosis;
 import net.mekomsolutions.c2c.migration.entity.Patient;
 import net.mekomsolutions.c2c.migration.entity.Visit;
 
-public class CouchbaseToOpenMRS extends RouteBuilder {
+public class CouchbaseToOpenMRSRoute extends RouteBuilder {
 	
 	public void configure() throws Exception {
 		

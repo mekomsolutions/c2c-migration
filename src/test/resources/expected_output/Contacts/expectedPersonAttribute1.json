@@ -1,7 +1,7 @@
 {
   "tableToSyncModelClass": "org.openmrs.sync.component.model.PersonAttributeModel",
   "model": {
-    "uuid": "e1e18f6f-e681-3eb1-bd91-0072ee7f7a36",
+    "uuid": "6e8d20d3-d915-3d32-8e95-d94afb6fcab1",
     "creatorUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
     "dateCreated": [
       2019,
@@ -9,7 +9,7 @@
       3,
       5,
       53,
-      48
+      46
     ],
     "dateChanged": [
       2019,
@@ -17,19 +17,19 @@
       3,
       5,
       53,
-      48
+      46
     ],
-    "changedByUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
     "voided": false,
-    "voidedByUuid": null,
     "dateVoided": null,
     "voidReason": null,
     "retired": false,
-    "retiredByUuid": null,
     "dateRetired": null,
     "retiredReason": null,
-    "value": "02324543",
-    "personUuid": "org.openmrs.sync.component.entity.light.PatientLight(86b5c1ca-034e-34a4-a85e-8ad56b038987)",
-    "personAttributeTypeUuid": "org.openmrs.sync.component.entity.light.PersonAttributeTypeLight(e66af4aa-0f8c-11ea-b030-9b9ece1192c2)"
+    "value": "Kerlange",
+    "changedByUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
+    "voidedByUuid": null,
+    "retiredByUuid": null,
+    "personUuid": "org.openmrs.sync.component.entity.light.PatientLight(5126819d-80e5-31f2-a0e9-f42575f84a54)",
+    "personAttributeTypeUuid": "org.openmrs.sync.component.entity.light.PersonAttributeTypeLight(e27326d8-0f8c-11ea-a75e-478143ec166b)"
   }
 }

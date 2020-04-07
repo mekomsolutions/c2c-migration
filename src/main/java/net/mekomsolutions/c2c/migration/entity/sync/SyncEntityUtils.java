@@ -24,7 +24,7 @@ public class SyncEntityUtils {
 			pa.setPerson(Utils.getModelClassLight("Patient", UUID.nameUUIDFromBytes(data.get(patientRefKey).getBytes())));
 
 			// Do not forget to override the UUID to a unique one.
-			pa.setUuid(computeNewUUID(pa.getValue() ,personAttributeTypeUuid, data));
+			pa.setUuid(computeNewUUID(personAttributeTypeProperty, data.get(patientRefKey)));
 
 			allEntities.add(pa);
 		}
@@ -43,7 +43,7 @@ public class SyncEntityUtils {
 			pi.setPatient(Utils.getModelClassLight("Patient", UUID.nameUUIDFromBytes(data.get(patientRefKey).getBytes())));
 
 			// Do not forget to override the UUID to a unique one.
-			pi.setUuid(computeNewUUID(pi.getIdentifier(), patientIdentifierTypeUuid, data));
+			pi.setUuid(computeNewUUID(patientIdentifierTypeProperty, data.get(patientRefKey)));
 
 			allEntities.add(pi);
 		}
@@ -69,15 +69,15 @@ public class SyncEntityUtils {
 	/**
 	 * An more flexible constructor for UUIDs that need to be generated and used across objects
 	 * 
-	 * @param entityTypeUuid UUID of the type of entity (PersonAttributeTypeUuid, PatientIdentifierTypeUuid...)
+	 * @param entityTypeProperty Property name of the entity ("addressline1", "vecnaid"...)
 	 * @param any reference, but likely a reference to the 'key' of a linked object. For instance the 'visitKey'
 	 * of a Diagnosis object.
 	 * 
 	 * @return uuid a computed UUID as a String.
 	 *
 	 */
-	public static String computeNewUUID(String entityTypeUuid, String ref) {
+	public static String computeNewUUID(String entityTypeProperty, String ref) {
 		return UUID.nameUUIDFromBytes(
-				(entityTypeUuid + ref).getBytes()).toString();
+				(entityTypeProperty + ref).getBytes()).toString();
 	}
 }

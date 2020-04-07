@@ -69,7 +69,7 @@ public class PatientConverter {
 		{
 			// Build the UUID from a concatenation the firstName, middleName, lastName and dob
 			SyncPersonName personName = new SyncPersonName(data, exchange);
-			String uuidBaseString = data.get(FIRST_NAME) + data.get(MIDDLE_NAME) + data.get(LAST_NAME) + data.get(DOB);
+			String uuidBaseString = FIRST_NAME + MIDDLE_NAME + LAST_NAME + DOB + data.get(Constants.OBJECT_KEY);
 			personName.setUuid(UUID.nameUUIDFromBytes(uuidBaseString.getBytes()).toString());
 			personName.setPerson(Utils.getModelClassLight("Patient", patientUuid));
 			personName.setGivenName(data.get(FIRST_NAME));
@@ -81,7 +81,7 @@ public class PatientConverter {
 		}
 
 		// Person Attribute: Phone Number
-		SyncEntityUtils.createAndAddPersonAttribute("pat.contactPersonPhone.uuid", data.get(PHONE), Constants.OBJECT_KEY, data, exchange, allEntities);
+		SyncEntityUtils.createAndAddPersonAttribute("pat.phoneNumber.uuid", data.get(PHONE), Constants.OBJECT_KEY, data, exchange, allEntities);
 		// Person Attribute: Marital Status
 		SyncEntityUtils.createAndAddPersonAttribute("pat.maritalStatus.uuid", data.get(MARITAL_STATUS), Constants.OBJECT_KEY, data, exchange, allEntities);
 		// Person Attribute: Employment
@@ -91,7 +91,7 @@ public class PatientConverter {
 		SyncEntityUtils.createAndAddPatientIdentifier("pit.dossierNumber.uuid", data.get(DOSSIER_NUMBER), Constants.OBJECT_KEY, true, data, exchange, allEntities);
 		// Vecna ID
 		SyncEntityUtils.createAndAddPatientIdentifier("pit.vecnaId.uuid", data.get(VECNA_ID), Constants.OBJECT_KEY, false, data, exchange, allEntities);
-		// Vecna QUID
+		// Vecna GUID
 		SyncEntityUtils.createAndAddPatientIdentifier("pit.vecnaGuid.uuid", data.get(VECNA_GUID), Constants.OBJECT_KEY, false, data, exchange, allEntities);
 
 		// Address
