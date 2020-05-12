@@ -13,11 +13,14 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import net.mekomsolutions.c2c.migration.entity.Contact;
 import net.mekomsolutions.c2c.migration.entity.Diagnosis;
 import net.mekomsolutions.c2c.migration.entity.EntityWrapper;
+import net.mekomsolutions.c2c.migration.entity.LabTest;
+import net.mekomsolutions.c2c.migration.entity.MedicineEvent;
 import net.mekomsolutions.c2c.migration.entity.Patient;
 import net.mekomsolutions.c2c.migration.entity.Visit;
 import net.mekomsolutions.c2c.migration.entity.sync.SyncEncounter;
@@ -36,6 +39,8 @@ public class ConvertersTest extends CamelTestSupport {
 	private MockEndpoint mockDiagnoses;
 	private MockEndpoint mockPatients;
 	private MockEndpoint mockContacts;
+	private MockEndpoint mockMedicineEvents;
+	private MockEndpoint mockLabTests;
 
 	private UUID visitUuid;
 	private UUID patientUuid;
@@ -81,6 +86,20 @@ public class ConvertersTest extends CamelTestSupport {
 				.split(simple("${body.entities}"))
 				.log("${body.modelClass}")
 				.to("mock:diagnosis-messages");
+
+				from("seda:queue:c2c-medicineevent")
+				.split().jsonpath("$.{{couchbase.bucket.name}}").streaming()
+				.convertBodyTo(MedicineEvent.class)
+				.split(simple("${body.entities}"))
+				.log("${body.modelClass}")
+				.to("mock:medicineevent-messages");
+
+				from("seda:queue:c2c-labtest")
+				.split().jsonpath("$.{{couchbase.bucket.name}}").streaming()
+				.convertBodyTo(LabTest.class)
+				.split(simple("${body.entities}"))
+				.log("${body.modelClass}")
+				.to("mock:labtest-messages");
 			}
 		};
 	}
@@ -92,6 +111,8 @@ public class ConvertersTest extends CamelTestSupport {
 		mockContacts = getMockEndpoint("mock:contact-messages");
 		mockVisits = getMockEndpoint("mock:visit-messages");
 		mockDiagnoses = getMockEndpoint("mock:diagnosis-messages");
+		mockMedicineEvents = getMockEndpoint("mock:medicineevent-messages");
+		mockLabTests = getMockEndpoint("mock:labtest-messages");
 
 		// Load a patient
 		template.sendBodyAndHeader("seda:queue:c2c-patient", context.getTypeConverter().convertTo(
@@ -123,6 +144,19 @@ public class ConvertersTest extends CamelTestSupport {
 						.getResource(COUCHBASE_SELECTS + "/dlm~00~c2c~diagnosis/dia!~00~TwcAAAAAAAA~K8s.json")
 						.getFile())), Exchange.FILE_NAME, "dia!~00~TwcAAAAAAAA~K8s.json");
 
+		// TODO: Load a medicine event for that visit
+		//		template.sendBodyAndHeader("seda:queue:c2c-medicineevent", context.getTypeConverter().convertTo(
+		//				String.class, new File(getClass()
+		//						.getResource(COUCHBASE_SELECTS + "/dlm~00~c2c~medicineevent/mee!~00~UAcAAAAAAAA~K6I.json")
+		//						.getFile())), Exchange.FILE_NAME, "mee!~00~UAcAAAAAAAA~K6.json");
+
+		// TOOD: Load a lab test NOT FOR THAT VISIT, but still for that patient
+		//		template.sendBodyAndHeader("seda:queue:c2c-labtest", context.getTypeConverter().convertTo(
+		//				String.class, new File(getClass()
+		//						.getResource(COUCHBASE_SELECTS + "/dlm~00~c2c~labtest/lae!~00~UQcAAAAAAAA~pZM.json")
+		//						.getFile())), Exchange.FILE_NAME, "lae!~00~UQcAAAAAAAA~pZM.json");
+
+
 		mockPatients.expectedMessageCount(8);
 		mockPatients.assertIsSatisfied(); 
 
@@ -134,6 +168,9 @@ public class ConvertersTest extends CamelTestSupport {
 
 		mockDiagnoses.expectedMessageCount(5);
 		mockDiagnoses.assertIsSatisfied();
+
+		// TODO: assert count of mockMedicineEvents
+		// TODO: assert count of mockLabTests
 
 		visitUuid = UUID.nameUUIDFromBytes("vst!~00~10000040cli~H3".getBytes());
 		patientUuid = UUID.nameUUIDFromBytes("pat!~00~H3-1390cli~H3".getBytes());
@@ -343,6 +380,33 @@ public class ConvertersTest extends CamelTestSupport {
 				resolvePropertyPlaceholders("{{concept.chiefcomplaint.uuid}}")))));
 
 	}
+
+	@Ignore
+	@Test
+	public void shouldConvertMedicineEvent() throws Exception {
+
+		List<Exchange> meeMessages = mockMedicineEvents.getReceivedExchanges();
+
+		EntityWrapper<?> body0 = meeMessages.get(0).getIn().getBody(EntityWrapper.class);
+		SyncObservation visitDiag = (SyncObservation) body0.getEntity();
+		assertTrue(visitDiag.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
+		assertTrue(visitDiag.getConcept().equals(Utils.getModelClassLight("Concept", UUID.fromString(context().
+				resolvePropertyPlaceholders("{{concept.visitDiagnoses.uuid}}")))));
+	}
+
+	@Ignore
+	@Test
+	public void shouldConvertLabTest() throws Exception {
+
+		List<Exchange> labTestMessages = mockLabTests.getReceivedExchanges();
+
+		EntityWrapper<?> body0 = labTestMessages.get(0).getIn().getBody(EntityWrapper.class);
+		SyncObservation visitDiag = (SyncObservation) body0.getEntity();
+		assertTrue(visitDiag.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
+		assertTrue(visitDiag.getConcept().equals(Utils.getModelClassLight("Concept", UUID.fromString(context().
+				resolvePropertyPlaceholders("{{concept.visitDiagnoses.uuid}}")))));
+	}
+
 
 	@Test
 	public void visitAndObsShouldShareTheSameEncounter() throws Exception {

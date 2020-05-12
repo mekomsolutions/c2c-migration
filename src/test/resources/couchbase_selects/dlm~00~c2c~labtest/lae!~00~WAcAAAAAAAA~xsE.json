@@ -1,0 +1,20 @@
+  {
+    "halix2": {
+      "clinicKey": "cli~H4",
+      "cost": 47.13,
+      "dataElementKey": "dlm~00~c2c~labtest",
+      "date": "2017-06-07T09:52:50.808Z",
+      "deleted": false,
+      "dispensed": 1,
+      "importSource": "H4-2019-04-05.tar.gz",
+      "lastModified": 1556902508428,
+      "name": "Lab-02 Hematocrite ",
+      "objKey": "lae!~00~WAcAAAAAAAA~xsE",
+      "objType": "SolutionObject",
+      "patientKey": "pat!~00~H4-0666cli~H4",
+      "prescribed": 1,
+      "sandboxKey": "sbx~00~400",
+      "unitprice": 60,
+      "visitKey": "vst!~00~1000018cli~H4"
+    }
+  }

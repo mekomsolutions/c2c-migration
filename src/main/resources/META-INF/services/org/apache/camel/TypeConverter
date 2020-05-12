@@ -2,3 +2,5 @@ net.mekomsolutions.c2c.migration.converter.PatientConverter
 net.mekomsolutions.c2c.migration.converter.ContactConverter
 net.mekomsolutions.c2c.migration.converter.VisitConverter
 net.mekomsolutions.c2c.migration.converter.DiagnosisConverter
+net.mekomsolutions.c2c.migration.converter.MedicineEventConverter
+net.mekomsolutions.c2c.migration.converter.LabTestConverter

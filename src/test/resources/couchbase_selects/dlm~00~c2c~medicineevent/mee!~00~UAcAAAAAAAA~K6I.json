@@ -1,0 +1,20 @@
+  {
+    "halix2": {
+      "clinicKey": "cli~H3",
+      "cost": 60,
+      "dataElementKey": "dlm~00~c2c~medicineevent",
+      "date": "2017-07-28T08:48:17.429Z",
+      "deleted": false,
+      "dispensed": 1,
+      "importSource": "H3-2019-04-02.tar.gz",
+      "lastModified": 1556900803035,
+      "name": "CIP-01A CIPROX",
+      "objKey": "mee!~00~UAcAAAAAAAA~K6I",
+      "objType": "SolutionObject",
+      "patientKey": "pat!~00~H3-1390cli~H3",
+      "prescribed": 1,
+      "sandboxKey": "sbx~00~400",
+      "unitprice": 75,
+      "visitKey": "vst!~00~10000040cli~H3"
+    }
+  }
