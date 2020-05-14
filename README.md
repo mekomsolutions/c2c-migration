@@ -65,6 +65,12 @@ spring.activemq.broker-url=tcp://localhost:62616
 spring.activemq.user=admin
 spring.activemq.password=password
 ```
+
+Rebuild the application:
+```
+mvn clean install
+```
+
 Run the app:
 ```
 cd sample/sample_springboot_setup/receiver
