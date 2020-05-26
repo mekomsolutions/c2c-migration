@@ -3,7 +3,7 @@
 Java project to migrate Care 2 Communities' historical data to OpenMRS. This project relies heavily on the [Apache Camel](https://camel.apache.org/) library, [Apache ActiveMQ](https://activemq.apache.org/) and the [OpenMRS DB Sync](https://github.com/openmrs/openmrs-dbsync) project.
 
 <p align="left">
-<img src="./readme/camel-long.png" alt="Apcahe Camel" height="80">
+<img src="./readme/camel-long.png" alt="Apcahe Camel" height="70">
 &nbsp;&nbsp;&nbsp
 <img src="./readme/active-mq-long.png" alt="Apache ActiveMQ" height="80">
 &nbsp;&nbsp;

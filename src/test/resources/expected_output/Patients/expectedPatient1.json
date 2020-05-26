@@ -11,23 +11,9 @@
       25,
       10
     ],
-    "dateChanged": [
-      2019,
-      5,
-      3,
-      7,
-      25,
-      10
-    ],
-    "changedByUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
     "voided": false,
-    "voidedByUuid": null,
     "dateVoided": null,
     "voidReason": null,
-    "retired": false,
-    "retiredByUuid": null,
-    "dateRetired": null,
-    "retiredReason": null,
     "gender": "Female",
     "birthdate": [
       1968,
@@ -55,6 +41,7 @@
     "patientVoided": false,
     "patientVoidedByUuid": null,
     "patientDateVoided": null,
-    "patientVoidReason": null
+    "patientVoidReason": null,
+    "voidedByUuid": null
   }
 }

@@ -13,7 +13,7 @@ import net.mekomsolutions.c2c.migration.Utils;
  * compatible with the OpenMRS Camel component.
  * 
  */
-public class SyncPersonName extends SyncEntity {
+public class SyncPersonName extends SyncDataEntity {
 
 	/**
 	 * 

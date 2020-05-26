@@ -14,7 +14,7 @@ import net.mekomsolutions.c2c.migration.Utils;
  * compatible with the OpenMRS Camel component.
  * 
  */
-public class SyncPatient extends SyncEntity {
+public class SyncPatient extends SyncDataEntity {
 
 	/**
 	 * 

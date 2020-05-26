@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import net.mekomsolutions.c2c.migration.entity.sync.SyncDataEntity;
 import net.mekomsolutions.c2c.migration.entity.sync.SyncEntity;
 
 /**
@@ -17,11 +18,11 @@ public class Diagnosis {
 	@JsonProperty
 	private List<EntityWrapper<SyncEntity>> entities;
 
-	public Diagnosis(List<SyncEntity> syncEntities) {
+	public Diagnosis(List<SyncEntity> allEntities) {
 
 		List<EntityWrapper<SyncEntity>> asWrappedEntities = new ArrayList<>() ;
 
-		for (SyncEntity entity: syncEntities) {
+		for (SyncEntity entity: allEntities) {
 			asWrappedEntities.add(new EntityWrapper<>(entity));
 		}
 

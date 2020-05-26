@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import net.mekomsolutions.c2c.migration.Utils;
 import net.mekomsolutions.c2c.migration.entity.Address;
 
-public class SyncPersonAddress extends SyncEntity {
+public class SyncPersonAddress extends SyncDataEntity {
 
 	/**
 	 * 

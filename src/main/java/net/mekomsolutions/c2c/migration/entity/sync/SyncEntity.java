@@ -36,36 +36,6 @@ public class SyncEntity implements java.io.Serializable{
 	@JsonProperty
 	private List<Integer> dateCreated;
 
-	@JsonProperty("changedByUuid")
-	private String changedBy;
-
-	@JsonProperty
-	private List<Integer> dateChanged;
-
-	@JsonProperty
-	private boolean voided;
-
-	@JsonProperty("voidedByUuid")
-	private String voidedBy;
-
-	@JsonProperty
-	private String dateVoided;
-
-	@JsonProperty
-	private String voidReason;
-
-	@JsonProperty
-	private boolean retired;
-
-	@JsonProperty("retiredByUuid")
-	private String retiredBy;
-
-	@JsonProperty
-	private String dateRetired;
-
-	@JsonProperty
-	private String retiredReason;
-
 	public SyncEntity(String modelClassName, String uuid) {
 		super();
 		this.uuid = uuid;
@@ -94,9 +64,6 @@ public class SyncEntity implements java.io.Serializable{
 		String defaultUserLight = Utils.getModelClassLight("User", UUID.fromString(userUuid));
 		this.creatorUuid = defaultUserLight;
 		this.dateCreated = Utils.dateLongToArray(exchange.getContext().getTypeConverter().convertTo(Long.class, data.get("lastModified")));
-
-		this.changedBy = defaultUserLight;
-		this.dateChanged = Utils.dateLongToArray(exchange.getContext().getTypeConverter().convertTo(Long.class, data.get("lastModified")));
 	}
 
 	public String getModelClassName() {
@@ -129,86 +96,6 @@ public class SyncEntity implements java.io.Serializable{
 
 	public void setDateCreated(List<Integer> dateCreated) {
 		this.dateCreated = dateCreated;
-	}
-
-	public String getChangedBy() {
-		return changedBy;
-	}
-
-	public void setChangedBy(String changedBy) {
-		this.changedBy = changedBy;
-	}
-
-	public List<Integer> getDateChanged() {
-		return dateChanged;
-	}
-
-	public void setDateChanged(List<Integer> dateChanged) {
-		this.dateChanged = dateChanged;
-	}
-
-	public boolean isVoided() {
-		return voided;
-	}
-
-	public void setVoided(boolean voided) {
-		this.voided = voided;
-	}
-
-	public String getVoidedBy() {
-		return voidedBy;
-	}
-
-	public void setVoidedBy(String voidedBy) {
-		this.voidedBy = voidedBy;
-	}
-
-	public String getDateVoided() {
-		return dateVoided;
-	}
-
-	public void setDateVoided(String dateVoided) {
-		this.dateVoided = dateVoided;
-	}
-
-	public String getVoidReason() {
-		return voidReason;
-	}
-
-	public void setVoidReason(String voidReason) {
-		this.voidReason = voidReason;
-	}
-
-	public boolean isRetired() {
-		return retired;
-	}
-
-	public void setRetired(boolean retired) {
-		this.retired = retired;
-	}
-
-	public String getRetiredBy() {
-		return retiredBy;
-	}
-
-	public void setRetiredBy(String retiredBy) {
-		this.retiredBy = retiredBy;
-	}
-
-	public String getDateRetired() {
-		return dateRetired;
-	}
-
-	public void setDateRetired(String dateRetired) {
-		this.dateRetired = dateRetired;
-	}
-
-	public String getRetiredReason() {
-		return retiredReason;
-	}
-
-	public void setRetiredReason(String retiredReason) {
-		this.retiredReason = retiredReason;
 	}
 
 }

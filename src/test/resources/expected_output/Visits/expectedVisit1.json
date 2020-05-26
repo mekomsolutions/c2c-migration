@@ -11,25 +11,13 @@
       46,
       57
     ],
-    "changedByUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
-    "dateChanged": [
-      2019,
-      5,
-      3,
-      6,
-      46,
-      57
-    ],
     "voided": false,
-    "voidedByUuid": null,
     "dateVoided": null,
     "voidReason": null,
-    "retired": false,
-    "retiredByUuid": null,
-    "dateRetired": null,
-    "retiredReason": null,
-  	"patientUuid": "org.openmrs.sync.component.entity.light.PatientLight(f6b3c755-acbc-3220-8bf9-863a26eff14b)",
+    "voidedByUuid": null,
     "visitTypeUuid": "org.openmrs.sync.component.entity.light.VisitTypeLight(1bc7ebf6-eed8-45e1-b28b-1cd80105d82e)",
+    "patientUuid": "org.openmrs.sync.component.entity.light.PatientLight(f6b3c755-acbc-3220-8bf9-863a26eff14b)",
+    "locationUuid": "org.openmrs.sync.component.entity.light.LocationLight(51ca9bc0-1e57-475e-9065-ad13154ef401)",
     "dateStarted": [
       2017,
       7,
@@ -46,7 +34,6 @@
       5,
       15
     ],
-    "indicationConceptUuid": null,
-    "locationUuid": "org.openmrs.sync.component.entity.light.LocationLight(51ca9bc0-1e57-475e-9065-ad13154ef401)"
+    "indicationConceptUuid": null
   }
 }

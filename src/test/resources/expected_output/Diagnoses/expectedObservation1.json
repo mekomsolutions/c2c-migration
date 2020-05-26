@@ -11,20 +11,9 @@
       25,
       16
     ],
-    "dateChanged": [
-      2019,
-      5,
-      3,
-      6,
-      25,
-      16
-    ],
     "voided": false,
     "dateVoided": null,
     "voidReason": null,
-    "retired": false,
-    "dateRetired": null,
-    "retiredReason": null,
     "obsDatetime": [
       2017,
       7,
@@ -44,9 +33,7 @@
     "formNamespaceAndPath": null,
     "status": "FINAL",
     "interpretation": null,
-    "changedByUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
     "voidedByUuid": null,
-    "retiredByUuid": null,
     "personUuid": "org.openmrs.sync.component.entity.light.PatientLight(f6b3c755-acbc-3220-8bf9-863a26eff14b)",
     "conceptUuid": "org.openmrs.sync.component.entity.light.ConceptLight(576cdbd7-059f-4e59-a5bb-990f8932788f)",
     "encounterUuid": "org.openmrs.sync.component.entity.light.EncounterLight(fbd1978b-9c72-3db5-8f82-365b39e66421)",

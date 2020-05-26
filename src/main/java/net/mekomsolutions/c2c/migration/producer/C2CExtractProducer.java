@@ -30,18 +30,13 @@ public class C2CExtractProducer {
 	public void start() {
 
 		try {
-			// Create a Connection
 			Connection connection = connectionFactory.createConnection();
 			connection.start();
-
-			// Create a Session
 			Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
-			// Create a MessageProducer from the Session to the Topic or Queue
 			MessageProducer producer = session.createProducer(session.createQueue("c2c.couchbase"));
 			producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
-			// Create messages
 			Cluster cluster = Cluster.connect(AppProperties.getProperty("couchbase.host"), 
 					AppProperties.getProperty("couchbase.username"), 
 					AppProperties.getProperty("couchbase.password"));

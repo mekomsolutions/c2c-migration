@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.mekomsolutions.c2c.migration.Utils;
 
-public class SyncPersonAttribute extends SyncEntity {
+public class SyncPersonAttribute extends SyncDataEntity {
 
 	/**
 	 * 
