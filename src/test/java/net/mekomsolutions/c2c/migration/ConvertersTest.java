@@ -151,10 +151,10 @@ public class ConvertersTest extends CamelTestSupport {
 		//						.getFile())), Exchange.FILE_NAME, "mee!~00~UAcAAAAAAAA~K6.json");
 
 		// TOOD: Load a lab test NOT FOR THAT VISIT, but still for that patient
-		//		template.sendBodyAndHeader("seda:queue:c2c-labtest", context.getTypeConverter().convertTo(
-		//				String.class, new File(getClass()
-		//						.getResource(COUCHBASE_SELECTS + "/dlm~00~c2c~labtest/lae!~00~UQcAAAAAAAA~pZM.json")
-		//						.getFile())), Exchange.FILE_NAME, "lae!~00~UQcAAAAAAAA~pZM.json");
+		template.sendBodyAndHeader("seda:queue:c2c-labtest", context.getTypeConverter().convertTo(
+				String.class, new File(getClass()
+						.getResource(COUCHBASE_SELECTS + "/dlm~00~c2c~labtest/lae!~00~UQcAAAAAAAA~pZM.json")
+						.getFile())), Exchange.FILE_NAME, "lae!~00~UQcAAAAAAAA~pZM.json");
 
 
 		mockPatients.expectedMessageCount(8);
@@ -170,7 +170,9 @@ public class ConvertersTest extends CamelTestSupport {
 		mockDiagnoses.assertIsSatisfied();
 
 		// TODO: assert count of mockMedicineEvents
-		// TODO: assert count of mockLabTests
+
+		mockLabTests.expectedMessageCount(6);
+		mockLabTests.assertIsSatisfied();
 
 		visitUuid = UUID.nameUUIDFromBytes("vst!~00~10000040cli~H3".getBytes());
 		patientUuid = UUID.nameUUIDFromBytes("pat!~00~H3-1390cli~H3".getBytes());
@@ -394,17 +396,47 @@ public class ConvertersTest extends CamelTestSupport {
 				resolvePropertyPlaceholders("{{concept.visitDiagnoses.uuid}}")))));
 	}
 
-	@Ignore
 	@Test
 	public void shouldConvertLabTest() throws Exception {
 
 		List<Exchange> labTestMessages = mockLabTests.getReceivedExchanges();
 
 		EntityWrapper<?> body0 = labTestMessages.get(0).getIn().getBody(EntityWrapper.class);
-		SyncObservation visitDiag = (SyncObservation) body0.getEntity();
-		assertTrue(visitDiag.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
-		assertTrue(visitDiag.getConcept().equals(Utils.getModelClassLight("Concept", UUID.fromString(context().
-				resolvePropertyPlaceholders("{{concept.visitDiagnoses.uuid}}")))));
+		SyncObservation obsgroup = (SyncObservation) body0.getEntity();
+		assertTrue(obsgroup.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
+		assertTrue(obsgroup.getConcept().equals(Utils.getModelClassLight("Concept", UUID.fromString(context().
+				resolvePropertyPlaceholders("{{concept.labtest.uuid}}")))));
+
+		EntityWrapper<?> body1 = labTestMessages.get(1).getIn().getBody(EntityWrapper.class);
+		SyncObservation name = (SyncObservation) body1.getEntity();
+		assertTrue(name.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
+		assertTrue(name.getConcept().equals(Utils.getModelClassLight("Concept", UUID.fromString(context().
+				resolvePropertyPlaceholders("{{concept.labtestName.uuid}}")))));
+
+		EntityWrapper<?> body2 = labTestMessages.get(2).getIn().getBody(EntityWrapper.class);
+		SyncObservation price = (SyncObservation) body2.getEntity();
+		assertTrue(price.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
+		assertTrue(price.getConcept().equals(Utils.getModelClassLight("Concept", UUID.fromString(context().
+				resolvePropertyPlaceholders("{{concept.labtestPrice.uuid}}")))));
+
+		EntityWrapper<?> body3 = labTestMessages.get(3).getIn().getBody(EntityWrapper.class);
+		SyncObservation cost = (SyncObservation) body3.getEntity();
+		assertTrue(cost.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
+		assertTrue(cost.getConcept().equals(Utils.getModelClassLight("Concept", UUID.fromString(context().
+				resolvePropertyPlaceholders("{{concept.labtestCost.uuid}}")))));
+
+		EntityWrapper<?> body4 = labTestMessages.get(4).getIn().getBody(EntityWrapper.class);
+		SyncObservation dispensed = (SyncObservation) body4.getEntity();
+		assertTrue(dispensed.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
+		assertTrue(dispensed.getConcept().equals(Utils.getModelClassLight("Concept", UUID.fromString(context().
+				resolvePropertyPlaceholders("{{concept.labtestDispensed.uuid}}")))));
+
+		EntityWrapper<?> body5 = labTestMessages.get(5).getIn().getBody(EntityWrapper.class);
+		SyncObservation prescribed = (SyncObservation) body5.getEntity();
+		assertTrue(prescribed.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
+		assertTrue(prescribed.getConcept().equals(Utils.getModelClassLight("Concept", UUID.fromString(context().
+				resolvePropertyPlaceholders("{{concept.labtestPrescribed.uuid}}")))));
+
 	}
 
 

@@ -47,22 +47,22 @@ public class DiagnosisConverter {
 		if (data.get("type").equals("Diagnosis")) {
 
 			// VisitDiagnoses: The parent obsGroup
-			SyncObservation obsGroup = createObs(data, exchange, encounterLight, patientLight, "visitDiagnoses", "");
+			SyncObservation obsGroup = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "visitDiagnoses", "");
 			String obsGroupUuidLight = Utils.getModelClassLight("Observation", UUID.fromString(obsGroup.getUuid()));
 
 			// Non-Coded Diagnosis
-			SyncObservation nonCodedDiag = createObs(data, exchange, encounterLight, patientLight, "nonCodedDiagnosis", data.get(DESCRIPTION));
+			SyncObservation nonCodedDiag = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "nonCodedDiagnosis", data.get(DESCRIPTION));
 			nonCodedDiag.setValueText(data.get(DESCRIPTION));
 			nonCodedDiag.setObsGroup(obsGroupUuidLight);
 
 			// Diagnosis Certainty
-			SyncObservation diagCertainty = createObs(data, exchange, encounterLight, patientLight, "diagnosisCertainty", "");
+			SyncObservation diagCertainty = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "diagnosisCertainty", "");
 			String diagConfirmedUuid = exchange.getContext().resolvePropertyPlaceholders("{{concept.diagnosisCertainty.confirmed.uuid}}");
 			diagCertainty.setValueCoded(Utils.getModelClassLight("Concept", UUID.fromString(diagConfirmedUuid)));
 			diagCertainty.setObsGroup(obsGroupUuidLight);
 
 			// Diagnosis Order
-			SyncObservation diagOrder = createObs(data, exchange, encounterLight, patientLight, "diagnosisOrder", "");
+			SyncObservation diagOrder = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "diagnosisOrder", "");
 			String diagPrimaryUuid = exchange.getContext().resolvePropertyPlaceholders("{{concept.diagnosisOrder.primary.uuid}}");
 			diagOrder.setValueCoded(Utils.getModelClassLight("Concept", UUID.fromString(diagPrimaryUuid)));
 			diagOrder.setObsGroup(obsGroupUuidLight);
@@ -76,7 +76,7 @@ public class DiagnosisConverter {
 
 			// Obs: Chief Complaint
 			{
-				SyncObservation chiefComplaint = createObs(data, exchange, encounterLight, patientLight, "chiefcomplaint", data.get(DESCRIPTION));
+				SyncObservation chiefComplaint = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "chiefcomplaint", data.get(DESCRIPTION));
 				chiefComplaint.setValueText(data.get(DESCRIPTION));
 				allEntities.add(chiefComplaint);
 			}			
@@ -85,22 +85,4 @@ public class DiagnosisConverter {
 		return new Diagnosis(allEntities);
 	}
 
-	private SyncObservation createObs(Map <String, String> data, 
-			Exchange exchange, String encounterLight, String patientLight,
-			String conceptName, String obsValue) throws Exception {
-
-		SyncObservation obs = new SyncObservation(data, exchange);
-		String conceptUuid = exchange.getContext().resolvePropertyPlaceholders("{{concept." + conceptName + ".uuid}}");
-		obs.setUuid(SyncEntityUtils.computeNewUUID(obsValue, conceptUuid, data));
-		// Assuming the obsDatetime is the Visit start time
-		obs.setObsDatetime(Utils.dateStringToArray(data.get(DATE)));
-		obs.setConcept(Utils.getModelClassLight("Concept", UUID.fromString(conceptUuid)));
-		obs.setEncounter(encounterLight);
-		obs.setPerson(patientLight);
-		obs.setLocation(Utils.getModelClassLight("Location", 
-				UUID.fromString(exchange.getContext().resolvePropertyPlaceholders("{{location.uuid}}"))));
-		obs.setStatus("FINAL");
-		return obs;
-
-	}
 }

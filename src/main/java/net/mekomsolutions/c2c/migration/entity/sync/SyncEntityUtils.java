@@ -80,4 +80,25 @@ public class SyncEntityUtils {
 		return UUID.nameUUIDFromBytes(
 				(entityTypeProperty + ref).getBytes()).toString();
 	}
+	
+	public static SyncObservation createObs(Map <String, String> data, 
+			Exchange exchange, String encounterLight, String patientLight,
+			String conceptName, String obsValue) throws Exception {
+
+		String DATE = "date";
+		
+		SyncObservation obs = new SyncObservation(data, exchange);
+		String conceptUuid = exchange.getContext().resolvePropertyPlaceholders("{{concept." + conceptName + ".uuid}}");
+		obs.setUuid(SyncEntityUtils.computeNewUUID(obsValue, conceptUuid, data));
+		// Assuming the obsDatetime is the Visit start time
+		obs.setObsDatetime(Utils.dateStringToArray(data.get(DATE)));
+		obs.setConcept(Utils.getModelClassLight("Concept", UUID.fromString(conceptUuid)));
+		obs.setEncounter(encounterLight);
+		obs.setPerson(patientLight);
+		obs.setLocation(Utils.getModelClassLight("Location", 
+				UUID.fromString(exchange.getContext().resolvePropertyPlaceholders("{{location.uuid}}"))));
+		obs.setStatus("FINAL");
+		return obs;
+
+	}
 }
