@@ -6,6 +6,7 @@ import org.apache.camel.model.dataformat.JsonLibrary;
 import net.mekomsolutions.c2c.migration.entity.Contact;
 import net.mekomsolutions.c2c.migration.entity.Diagnosis;
 import net.mekomsolutions.c2c.migration.entity.LabTest;
+import net.mekomsolutions.c2c.migration.entity.MedicineEvent;
 import net.mekomsolutions.c2c.migration.entity.Patient;
 import net.mekomsolutions.c2c.migration.entity.Visit;
 
@@ -26,7 +27,9 @@ public class CouchbaseToOpenMRSRoute extends RouteBuilder {
 		.when(header("type").isEqualTo("dlm~00~c2c~diagnosis"))
 		.to("jms:queue:c2c-diagnosis")
 		.when(header("type").isEqualTo("dlm~00~c2c~labtest"))
-		.to("jms:queue:c2c-labtest");
+		.to("jms:queue:c2c-labtest")
+		.when(header("type").isEqualTo("dlm~00~c2c~medicineevent"))
+		.to("jms:queue:c2c-medicineevent");
 		
 		from("jms:queue:c2c-contact").convertBodyTo(Contact.class)
 		.split(simple("${body.entities}"))
@@ -45,6 +48,10 @@ public class CouchbaseToOpenMRSRoute extends RouteBuilder {
 		.to("jms:queue:openmrs-save");
 
 		from("jms:queue:c2c-labtest").convertBodyTo(LabTest.class)
+		.split(simple("${body.entities}"))
+		.to("jms:queue:openmrs-save");
+
+		from("jms:queue:c2c-medicineevent").convertBodyTo(MedicineEvent.class)
 		.split(simple("${body.entities}"))
 		.to("jms:queue:openmrs-save");
 		

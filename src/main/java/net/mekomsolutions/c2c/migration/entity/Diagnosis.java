@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import net.mekomsolutions.c2c.migration.entity.sync.SyncDataEntity;
 import net.mekomsolutions.c2c.migration.entity.sync.SyncEntity;
 
 /**

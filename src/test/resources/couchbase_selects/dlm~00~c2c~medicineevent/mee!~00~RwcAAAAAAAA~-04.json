@@ -1,0 +1,20 @@
+  {
+    "halix2": {
+      "clinicKey": "cli~H2",
+      "dataElementKey": "dlm~00~c2c~medicineevent",
+      "date": "2015-01-20T12:51:59.476Z",
+      "deleted": false,
+      "dispensed": 1,
+      "importSource": "H2-2019-04-09.tar.gzlegacy",
+      "lastModified": 1556898374631,
+      "name": "ENA-01 Enalapril 10mg",
+      "objKey": "mee!~00~RwcAAAAAAAA~-04",
+      "objType": "SolutionObject",
+      "patientKey": "pat!~00~180cli~H2",
+      "prescribed": 1,
+      "recommendeddose": 30,
+      "sandboxKey": "sbx~00~400",
+      "totalprice": 100,
+      "visitKey": "vst!~00~2141850cli~H2"
+    }
+  }

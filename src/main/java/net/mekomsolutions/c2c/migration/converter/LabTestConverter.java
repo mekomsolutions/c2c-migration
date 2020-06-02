@@ -61,7 +61,7 @@ public class LabTestConverter {
 		price.setValueNumeric(converter.convertTo(String.class, data.get(UNIT_PRICE)));
 		price.setObsGroup(obsGroupUuidLight);
 
-		// Lab Test Price
+		// Lab Test Cost
 		SyncObservation cost = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "labtestCost", "");
 		cost.setValueNumeric(converter.convertTo(String.class, data.get(COST)));
 		cost.setObsGroup(obsGroupUuidLight);

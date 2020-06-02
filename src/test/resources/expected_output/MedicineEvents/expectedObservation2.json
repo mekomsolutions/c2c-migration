@@ -1,0 +1,48 @@
+{
+  "tableToSyncModelClass": "org.openmrs.sync.component.model.ObservationModel",
+  "model": {
+    "uuid": "3c7bc61a-0041-38b8-a3ff-a1f24b629163",
+    "creatorUuid": "org.openmrs.sync.component.entity.light.UserLight(dc52355a-0f8c-11ea-872f-37831adb4910)",
+    "dateCreated": [
+      2019,
+      5,
+      3,
+      5,
+      46,
+      14
+    ],
+    "voided": false,
+    "dateVoided": null,
+    "voidReason": null,
+    "obsDatetime": [
+      2015,
+      1,
+      20,
+      0,
+      51,
+      59
+    ],
+    "accessionNumber": null,
+    "valueGroupId": null,
+    "valueDatetime": null,
+    "valueNumeric": "100",
+    "valueModifier": null,
+    "valueText": null,
+    "valueComplex": null,
+    "comments": null,
+    "formNamespaceAndPath": null,
+    "status": "FINAL",
+    "interpretation": null,
+    "voidedByUuid": null,
+    "personUuid": "org.openmrs.sync.component.entity.light.PatientLight(dc51b3e9-1cf0-320e-9daa-5698b630afcf)",
+    "conceptUuid": "org.openmrs.sync.component.entity.light.ConceptLight(b2e14900-d32c-4dee-be79-bdca3a8d2881)",
+    "encounterUuid": "org.openmrs.sync.component.entity.light.EncounterLight(cffc2896-cfd0-3fdc-b74e-4bdbd80c9836)",
+    "orderUuid": null,
+    "locationUuid": "org.openmrs.sync.component.entity.light.LocationLight(51ca9bc0-1e57-475e-9065-ad13154ef401)",
+    "obsGroupUuid": "org.openmrs.sync.component.entity.light.ObservationLight(bff72591-94e1-31a5-8c0c-eec7ec1a65d3)",
+    "valueCodedUuid": null,
+    "valueCodedNameUuid": null,
+    "valueDrugUuid": null,
+    "previousVersionUuid": null
+  }
+}

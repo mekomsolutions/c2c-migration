@@ -58,14 +58,14 @@ public class CouchbaseToOpenMRSRouteTest extends CamelSpringTestSupport {
 	@Test
 	public void shouldProcessContactsAndOutputFiles() throws Exception {
 
-		String contactsDirectoryName = "src/test/resources" + COUCHBASE_SELECTS + "dlm~00~c2c~contact/";
-		File contactsDirectory = new File(contactsDirectoryName);
+		String dirName = "src/test/resources" + COUCHBASE_SELECTS + "dlm~00~c2c~contact/";
+		File dir = new File(dirName);
 
 		// Dynamically load all files from the couchbase_selects directory
-		for (String fileName : contactsDirectory.list()) {
+		for (String fileName : dir.list()) {
 			template.sendBodyAndHeader("jms:" + Constants.JMS_COUCHBASE_QUEUE,
 					context.getTypeConverter().convertTo(
-							String.class, new File(contactsDirectoryName + fileName)), Exchange.FILE_NAME, fileName);
+							String.class, new File(dirName + fileName)), Exchange.FILE_NAME, fileName);
 		}
 
 		Thread.sleep(2000);
@@ -84,14 +84,14 @@ public class CouchbaseToOpenMRSRouteTest extends CamelSpringTestSupport {
 	@Test
 	public void shouldProcessPatientsAndOutputFiles() throws Exception {
 
-		String patientDirectoryName = "src/test/resources" + COUCHBASE_SELECTS + "dlm~00~c2c~patient/";
-		File patientsDirectory = new File(patientDirectoryName);
+		String dirName = "src/test/resources" + COUCHBASE_SELECTS + "dlm~00~c2c~patient/";
+		File dir = new File(dirName);
 
 		// Dynamically load all files from the couchbase_selects directory
-		for (String fileName : patientsDirectory.list()) {
+		for (String fileName : dir.list()) {
 			template.sendBodyAndHeader("jms:" + Constants.JMS_COUCHBASE_QUEUE,
 					context.getTypeConverter().convertTo(
-							String.class, new File(patientDirectoryName + fileName)), Exchange.FILE_NAME, fileName);
+							String.class, new File(dirName + fileName)), Exchange.FILE_NAME, fileName);
 		}
 
 		Thread.sleep(2000);
@@ -108,14 +108,14 @@ public class CouchbaseToOpenMRSRouteTest extends CamelSpringTestSupport {
 	@Test
 	public void shouldProcessVisitsAndOutputFiles() throws Exception {
 
-		String patientDirectoryName = "src/test/resources" + COUCHBASE_SELECTS + "dlm~00~c2c~visit/";
-		File patientsDirectory = new File(patientDirectoryName);
+		String dirName = "src/test/resources" + COUCHBASE_SELECTS + "dlm~00~c2c~visit/";
+		File dir = new File(dirName);
 
 		// Dynamically load all files from the couchbase_selects directory
-		for (String fileName : patientsDirectory.list()) {
+		for (String fileName : dir.list()) {
 			template.sendBodyAndHeader("jms:" + Constants.JMS_COUCHBASE_QUEUE,
 					context.getTypeConverter().convertTo(
-							String.class, new File(patientDirectoryName + fileName)), Exchange.FILE_NAME, fileName);
+							String.class, new File(dirName + fileName)), Exchange.FILE_NAME, fileName);
 		}
 
 		Thread.sleep(1000);
@@ -134,14 +134,14 @@ public class CouchbaseToOpenMRSRouteTest extends CamelSpringTestSupport {
 	@Test
 	public void shouldProcessDiagnosesAndOutputFiles() throws Exception {
 
-		String diagnosisDirectoryName = "src/test/resources" + COUCHBASE_SELECTS + "dlm~00~c2c~diagnosis/";
-		File diagnosisDirectory = new File(diagnosisDirectoryName);
+		String dirName = "src/test/resources" + COUCHBASE_SELECTS + "dlm~00~c2c~diagnosis/";
+		File dir = new File(dirName);
 
 		// Dynamically load all files from the couchbase_selects directory
-		for (String fileName : diagnosisDirectory.list()) {
+		for (String fileName : dir.list()) {
 			template.sendBodyAndHeader("jms:" + Constants.JMS_COUCHBASE_QUEUE,
 					context.getTypeConverter().convertTo(
-							String.class, new File(diagnosisDirectoryName + fileName)), Exchange.FILE_NAME, fileName);
+							String.class, new File(dirName + fileName)), Exchange.FILE_NAME, fileName);
 		}
 
 		Thread.sleep(2000);
@@ -159,14 +159,14 @@ public class CouchbaseToOpenMRSRouteTest extends CamelSpringTestSupport {
 	@Test
 	public void shouldProcessLabtestsAndOutputFiles() throws Exception {
 
-		String labtestDirectoryName = "src/test/resources" + COUCHBASE_SELECTS + "dlm~00~c2c~labtest/";
-		File labtestDirectory = new File(labtestDirectoryName);
+		String dirName = "src/test/resources" + COUCHBASE_SELECTS + "dlm~00~c2c~labtest/";
+		File dir = new File(dirName);
 
 		// Dynamically load all files from the couchbase_selects directory
-		for (String fileName : labtestDirectory.list()) {
+		for (String fileName : dir.list()) {
 			template.sendBodyAndHeader("jms:" + Constants.JMS_COUCHBASE_QUEUE,
 					context.getTypeConverter().convertTo(
-							String.class, new File(labtestDirectoryName + fileName)), Exchange.FILE_NAME, fileName);
+							String.class, new File(dirName + fileName)), Exchange.FILE_NAME, fileName);
 		}
 
 		Thread.sleep(2000);
@@ -185,6 +185,39 @@ public class CouchbaseToOpenMRSRouteTest extends CamelSpringTestSupport {
 		assertNotNull(expectedMessage);
 		File actualMessage2 = new File("data/outbox/" +
 				"org.openmrs.sync.component.model.ObservationModel-a37ee6f3-8c49-33de-815b-569d19328356");
+		assertEquals(mapper.readTree(expectedMessage2), mapper.readTree(actualMessage2));
+
+	}
+
+	@Test
+	public void shouldProcessMedicineEventsAndOutputFiles() throws Exception {
+
+		String dirName = "src/test/resources" + COUCHBASE_SELECTS + "dlm~00~c2c~medicineevent/";
+		File dir = new File(dirName);
+
+		// Dynamically load all files from the couchbase_selects directory
+		for (String fileName : dir.list()) {
+			template.sendBodyAndHeader("jms:" + Constants.JMS_COUCHBASE_QUEUE,
+					context.getTypeConverter().convertTo(
+							String.class, new File(dirName + fileName)), Exchange.FILE_NAME, fileName);
+		}
+
+		Thread.sleep(2000);
+
+		String expectedFilesFolder = EXPECTED_OUTPUT_RESOURCES_FOLDER + "/MedicineEvents";
+
+		ObjectMapper mapper = new ObjectMapper(); 
+		
+		File expectedMessage = new File(getClass().getResource(expectedFilesFolder + "/expectedObservation1.json").getPath());
+		assertNotNull(expectedMessage);
+		File actualMessage = new File("data/outbox/" +
+				"org.openmrs.sync.component.model.ObservationModel-025194f6-7f62-3efd-973b-447a83f6f263");
+		assertEquals(mapper.readTree(expectedMessage), mapper.readTree(actualMessage));
+
+		File expectedMessage2 = new File(getClass().getResource(expectedFilesFolder + "/expectedObservation2.json").getPath());
+		assertNotNull(expectedMessage);
+		File actualMessage2 = new File("data/outbox/" +
+				"org.openmrs.sync.component.model.ObservationModel-3c7bc61a-0041-38b8-a3ff-a1f24b629163");
 		assertEquals(mapper.readTree(expectedMessage2), mapper.readTree(actualMessage2));
 
 	}
