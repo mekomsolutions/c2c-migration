@@ -14,7 +14,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 
 		ActiveMQConnectionFactory connectionFactory = 
-				new ActiveMQConnectionFactoryConfigurer("tcp://localhost:62616").configure();
+				new ActiveMQConnectionFactoryConfigurer(AppProperties.getProperty("activemq.brokerUrl")).configure();
 
 		// Initiate the JMS Queue with C2C Couchbase objects
 		C2CExtractProducer extractor = new  C2CExtractProducer(connectionFactory);
