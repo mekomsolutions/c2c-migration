@@ -1,8 +1,11 @@
 package net.mekomsolutions.c2c.migration;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
-import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 
@@ -13,11 +16,9 @@ import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 
 import com.couchbase.client.java.Cluster;
-import com.couchbase.client.java.ReactiveCluster;
-import com.couchbase.client.java.json.JsonObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.mekomsolutions.c2c.migration.route.CouchbaseToOpenMRSRoute;
-import reactor.core.publisher.Flux;
 
 /**
  * Not used in production. Just a convenient class to run as an entry point
@@ -39,25 +40,32 @@ public class Trials {
 		MessageProducer producer = session.createProducer(session.createQueue("c2c.couchbase"));
 		producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
-		Cluster cluster = Cluster.connect(AppProperties.getProperty("couchbase.host"),
-				AppProperties.getProperty("couchbase.username"),
-				AppProperties.getProperty("couchbase.password"));
+//		Cluster cluster = Cluster.connect(AppProperties.getProperty("couchbase.host"),
+//				AppProperties.getProperty("couchbase.username"),
+//				AppProperties.getProperty("couchbase.password"));
+//
+//		String query = "select * from halix2 where dataElementKey = 'dlm~00~c2c~patient'"
+//				+ " and clinicKey = 'cli~H4' limit 1 offset 1";
 
-		String query = "select * from halix2 where clinicKey = 'cli~H4' limit 100000 offset 0";
+//		ReactiveCluster reactiveCluster = cluster.reactive();
+//		reactiveCluster.query(query).flux()
+//		.flatMap(result -> {
+//			Flux<JsonObject> rows = result.rowsAs(JsonObject.class);
+//			return rows;
+//		}).subscribe(row -> {
+//			try {
+//				producer.send(session.createTextMessage(row.toString()));
+//			} catch (JMSException e) {
+//				e.printStackTrace();
+//			}
+//		});
 
-		ReactiveCluster reactiveCluster = cluster.reactive();
-		reactiveCluster.query(query).flux()
-		.flatMap(result -> {
-			Flux<JsonObject> rows = result.rowsAs(JsonObject.class);
-			return rows;
-		}).subscribe(row -> {
-			try {
-				producer.send(session.createTextMessage(row.toString()));
-			} catch (JMSException e) {
-				e.printStackTrace();
-			}
-		});
-
+		ObjectMapper mapper = new ObjectMapper();
+//		String patients = mapper.readValue(new File("src/test/resources/patients.json"), String.class);
+		String patients = Files.readString(Paths.get("src/test/resources/contacts.json"));
+		
+		producer.send(session.createTextMessage(patients));
+		
 		CamelContext context = new DefaultCamelContext();
 
 		context.addComponent("jms",

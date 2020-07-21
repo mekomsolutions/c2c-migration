@@ -1,0 +1,24 @@
+ {
+    "halix2": {
+      "cellphone": "",
+      "clinicKey": "cli~H2",
+      "dataElementKey": "dlm~00~c2c~contact",
+      "deleted": false,
+      "firstname": "	",
+      "homephone": "",
+      "importSource": "H2-2019-04-09.tar.gz",
+      "anotherField": [
+      	"value1",
+      	"value2"
+      ],
+      "lastModified": 1556898826993,
+      "lastname": "Kerlange",
+      "middlename": "",
+      "objKey": "con!~00~1~,6039cli~H2",
+      "objType": "SolutionObject",
+      "patientKey": "pat!~00~,6039cli~H2",
+      "sandboxKey": "sbx~00~400",
+      "type": "Emergency Contact",
+      "workphone": ""
+    }
+  }
