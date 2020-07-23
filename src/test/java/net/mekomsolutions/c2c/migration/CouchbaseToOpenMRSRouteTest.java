@@ -3,14 +3,16 @@ package net.mekomsolutions.c2c.migration;
 import java.io.File;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.activemq.junit.EmbeddedActiveMQBroker;
+import org.apache.activemq.artemis.core.config.Configuration;
+import org.apache.activemq.artemis.core.config.impl.ConfigurationImpl;
+import org.apache.activemq.artemis.core.server.ActiveMQServer;
+import org.apache.activemq.artemis.core.server.impl.ActiveMQServerImpl;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jms.JmsComponent;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.test.spring.CamelSpringTestSupport;
-import org.junit.Rule;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -23,8 +25,8 @@ public class CouchbaseToOpenMRSRouteTest extends CamelSpringTestSupport {
 	private static final String EXPECTED_OUTPUT_RESOURCES_FOLDER = "/expected_output/";
 	private static final String COUCHBASE_SELECTS = "/couchbase_selects/";
 
-	@Rule
-	public EmbeddedActiveMQBroker broker = new EmbeddedActiveMQBroker();
+//	@Rule
+//	public EmbeddedActiveMQBroker broker = new EmbeddedActiveMQBroker();
 
 	@Override
 	protected AnnotationConfigApplicationContext createApplicationContext() {
@@ -43,8 +45,17 @@ public class CouchbaseToOpenMRSRouteTest extends CamelSpringTestSupport {
 				"properties", PropertiesComponent.class);
 		prop.setLocation("application-test.properties");
 
-		// Setup the JMS VM
-		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactoryConfigurer("vm://embedded-broker?create=false").configure();
+		// Setup Artemis embedded broker
+		Configuration config = new ConfigurationImpl();
+		config.addAcceptorConfiguration("in-vm", "vm://0");
+		config.setSecurityEnabled(false);
+		config.setPersistenceEnabled(false);
+		
+		ActiveMQServer server = new ActiveMQServerImpl(config);
+		server.start();
+		
+		// Setup the JMS component
+		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactoryConfigurer("vm://0").configure();
 		context.addComponent("jms", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
 
 		return context;
