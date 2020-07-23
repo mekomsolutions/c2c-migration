@@ -19,39 +19,39 @@ public class CouchbaseToOpenMRSRoute extends RouteBuilder {
 		.setHeader("type",simple("${body[dataElementKey]}"))
 		.choice()
 		.when(header("type").isEqualTo("dlm~00~c2c~contact"))
-		.to("jms:queue:c2c-contact")
+		.to("direct:c2c-contact")
 		.when(header("type").isEqualTo("dlm~00~c2c~patient"))
-		.to("jms:queue:c2c-patient")
+		.to("direct:c2c-patient")
 		.when(header("type").isEqualTo("dlm~00~c2c~visit"))
-		.to("jms:queue:c2c-visit")
+		.to("direct:c2c-visit")
 		.when(header("type").isEqualTo("dlm~00~c2c~diagnosis"))
-		.to("jms:queue:c2c-diagnosis")
+		.to("direct:c2c-diagnosis")
 		.when(header("type").isEqualTo("dlm~00~c2c~labtest"))
-		.to("jms:queue:c2c-labtest")
+		.to("direct:c2c-labtest")
 		.when(header("type").isEqualTo("dlm~00~c2c~medicineevent"))
-		.to("jms:queue:c2c-medicineevent");
+		.to("direct:c2c-medicineevent");
 		
-		from("jms:queue:c2c-contact").convertBodyTo(Contact.class)
+		from("direct:c2c-contact").convertBodyTo(Contact.class)
 		.split(simple("${body.entities}"))
 		.to("jms:queue:openmrs-save");
 
-		from("jms:queue:c2c-patient").convertBodyTo(Patient.class)
+		from("direct:c2c-patient").log("See the message body: \\n\\n${body}\\n\\n").convertBodyTo(Patient.class)
 		.split(simple("${body.entities}"))
 		.to("jms:queue:openmrs-save");
 
-		from("jms:queue:c2c-visit").convertBodyTo(Visit.class)
+		from("direct:c2c-visit").convertBodyTo(Visit.class)
 		.split(simple("${body.entities}"))
 		.to("jms:queue:openmrs-save");
 
-		from("jms:queue:c2c-diagnosis").convertBodyTo(Diagnosis.class)
+		from("direct:c2c-diagnosis").convertBodyTo(Diagnosis.class)
 		.split(simple("${body.entities}"))
 		.to("jms:queue:openmrs-save");
 
-		from("jms:queue:c2c-labtest").convertBodyTo(LabTest.class)
+		from("direct:c2c-labtest").convertBodyTo(LabTest.class)
 		.split(simple("${body.entities}"))
 		.to("jms:queue:openmrs-save");
 
-		from("jms:queue:c2c-medicineevent").convertBodyTo(MedicineEvent.class)
+		from("direct:c2c-medicineevent").convertBodyTo(MedicineEvent.class)
 		.split(simple("${body.entities}"))
 		.to("jms:queue:openmrs-save");
 		
