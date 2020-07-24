@@ -16,6 +16,7 @@ public class CouchbaseToOpenMRSRoute extends RouteBuilder {
 		
 		from("jms:queue:c2c.couchbase")
 		.split().jsonpath("$.{{couchbase.bucket.name}}").streaming()
+		.log("BODY: \\n ${body}\\n HEADERS: \\n${headers}")
 		.setHeader("type",simple("${body[dataElementKey]}"))
 		.choice()
 		.when(header("type").isEqualTo("dlm~00~c2c~contact"))

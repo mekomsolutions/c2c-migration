@@ -46,6 +46,8 @@ public class C2CExtractProducer {
 			supportedEntities.add("dlm~00~c2c~patient");
 			supportedEntities.add("dlm~00~c2c~visit");
 			supportedEntities.add("dlm~00~c2c~diagnosis");
+			supportedEntities.add("dlm~00~c2c~medicineevent");
+			supportedEntities.add("dlm~00~c2c~labtest");
 
 			List<String> uniqueImportSources = supportedEntities.stream()
 					// Generate queries to get each entity import source
