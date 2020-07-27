@@ -158,7 +158,7 @@ public class VisitConverter {
 		obs.setUuid(SyncEntityUtils.computeNewUUID(obsValue, conceptUuid, data));
 		// Assuming the obsDatetime is the Visit start time
 		obs.setObsDatetime(Utils.dateStringToArray(data.get(START_TIME)));
-		obs.setConcept(Utils.getModelClassLight("Concept", UUID.fromString(conceptUuid)));
+		obs.setConcept(Utils.getModelClassLight("Concept", conceptUuid));
 		obs.setEncounter(encounterLight);
 		obs.setPerson(patientLight);
 		obs.setLocation(Utils.getModelClassLight("Location", 

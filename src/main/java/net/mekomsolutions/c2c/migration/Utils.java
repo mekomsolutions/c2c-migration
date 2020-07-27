@@ -27,7 +27,11 @@ public class Utils {
 	public static String getModelClassLight(String typeAsString, UUID uuid) {
 		return Constants.LIGHT_MODEL_CLASS_NAMES.get(typeAsString) + "(" + uuid.toString() + ")";
 	}
-
+	
+	public static String getModelClassLight(String typeAsString, String uuid) {
+		return Constants.LIGHT_MODEL_CLASS_NAMES.get(typeAsString) + "(" + uuid + ")";
+	}
+	
 	public static List<Integer> dateLongToArray(Long timeInMillisecs) {
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTimeInMillis(timeInMillisecs);
