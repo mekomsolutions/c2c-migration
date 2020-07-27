@@ -168,7 +168,7 @@ public class ConvertersTest extends CamelTestSupport {
 		mockContacts.expectedMessageCount(5);
 		mockContacts.assertIsSatisfied();
 
-		mockVisits.expectedMessageCount(6);
+		mockVisits.expectedMessageCount(7);
 		mockVisits.assertIsSatisfied(); 
 
 		mockDiagnoses.expectedMessageCount(5);
@@ -337,14 +337,21 @@ public class ConvertersTest extends CamelTestSupport {
 		assertTrue(weight.getObsDatetime().equals(visit.getDateStarted()));
 
 		EntityWrapper<?> body4 = visitMessages.get(4).getIn().getBody(EntityWrapper.class);
-		SyncObservation bpdiastolic = (SyncObservation) body4.getEntity();
+		SyncObservation rr = (SyncObservation) body4.getEntity();
+		assertTrue(rr.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
+		assertTrue(rr.getConcept().equals(Utils.getModelClassLight("Concept", context().
+				resolvePropertyPlaceholders("{{concept.respiratoryrate.uuid}}"))));
+		assertTrue(rr.getObsDatetime().equals(visit.getDateStarted()));
+		
+		EntityWrapper<?> body5 = visitMessages.get(5).getIn().getBody(EntityWrapper.class);
+		SyncObservation bpdiastolic = (SyncObservation) body5.getEntity();
 		assertTrue(bpdiastolic.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(bpdiastolic.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.bpdiastolic.uuid}}"))));
 		assertTrue(bpdiastolic.getObsDatetime().equals(visit.getDateStarted()));
 
-		EntityWrapper<?> body5 = visitMessages.get(5).getIn().getBody(EntityWrapper.class);
-		SyncObservation bpsystolic = (SyncObservation) body5.getEntity();
+		EntityWrapper<?> body6 = visitMessages.get(6).getIn().getBody(EntityWrapper.class);
+		SyncObservation bpsystolic = (SyncObservation) body6.getEntity();
 		assertTrue(bpsystolic.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(bpsystolic.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.bpsystolic.uuid}}"))));
