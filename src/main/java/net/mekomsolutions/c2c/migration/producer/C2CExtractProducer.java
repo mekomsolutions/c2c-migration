@@ -37,9 +37,8 @@ public class C2CExtractProducer {
 			MessageProducer producer = session.createProducer(session.createQueue("c2c.couchbase"));
 			producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
-			Cluster cluster = Cluster.connect(AppProperties.getProperty("couchbase.host"), 
-					AppProperties.getProperty("couchbase.username"), 
-					AppProperties.getProperty("couchbase.password"));
+			Cluster cluster = Cluster.connect(AppProperties.getProperty("couchbase.host"),
+					AppProperties.getProperty("couchbase.username"), AppProperties.getProperty("couchbase.password"));
 
 			List<String> supportedEntities = new ArrayList<String>();
 			supportedEntities.add("dlm~00~c2c~contact");
@@ -51,30 +50,27 @@ public class C2CExtractProducer {
 
 			List<String> uniqueImportSources = supportedEntities.stream()
 					// Generate queries to get each entity import source
-					.map( entity -> "select distinct raw importSource from " + 
-							AppProperties.getProperty("couchbase.bucket.name") +
-							" where dataElementKey = '" + entity + "'")
+					.map(entity -> "select distinct raw importSource from "
+							+ AppProperties.getProperty("couchbase.bucket.name") + " where dataElementKey = '" + entity
+							+ "'")
 					.collect(Collectors.toList()).stream()
 					// Run the queries
 					.map(query -> cluster.query(query).rowsAs(String.class))
 					// Merge that into one unique import source.
-					.flatMap(x -> x.stream())
-					.collect(Collectors.toList());
+					.flatMap(x -> x.stream()).collect(Collectors.toList());
 
 			// Use the Async cluster
 			ReactiveCluster reactiveCluster = cluster.reactive();
 
 			uniqueImportSources.stream()
 			// Generate queries to get data from each import source and each entity
-			.flatMap(importSource -> supportedEntities.stream().map(entity -> "select * from " + 
-					AppProperties.getProperty("couchbase.bucket.name") +
-					" where importSource = '" + importSource + "'"
-					+ " and dataElementKey = '" + entity + "'"))
+			.flatMap(importSource -> supportedEntities.stream()
+					.map(entity -> "select * from " + AppProperties.getProperty("couchbase.bucket.name")
+					+ " where importSource = '" + importSource + "'" + " and dataElementKey = '"
+					+ entity + "'"))
 			// Run the queries asynchronously
 			.forEach(query -> {
-				reactiveCluster.query(query)
-				.flux()
-				.flatMap(result -> {
+				reactiveCluster.query(query).flux().flatMap(result -> {
 					Flux<JsonObject> rows = result.rowsAs(JsonObject.class);
 					return rows;
 				}).subscribe(row -> {
@@ -83,11 +79,10 @@ public class C2CExtractProducer {
 					} catch (JMSException e) {
 						e.printStackTrace();
 					}
-				});	
+				});
 			});
 
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("Caught: " + e);
 			e.printStackTrace();
 		}

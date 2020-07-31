@@ -43,8 +43,8 @@ public class Trials {
 				AppProperties.getProperty("couchbase.username"),
 				AppProperties.getProperty("couchbase.password"));
 
-		String query = "select * from halix2 where clinicKey = 'cli~H4' limit 100000 offset 0";
-
+		String query = System.getProperty("couchbase.query");
+		
 		ReactiveCluster reactiveCluster = cluster.reactive();
 		reactiveCluster.query(query).flux()
 		.flatMap(result -> {
