@@ -31,23 +31,24 @@ See [Bahmni Docker]() project instructions for more info.
 In short:
 
 - `docker-compose up`
--
+
 Create a **docker-compose.override.yml** to override the OpenMRS MySQL port on the host so that OpenMRS DB Sync 'reciever' can access it:
 
 **docker-compose.override.yml**
 ```
 [...]
-openmrs-mysql:
+mysql:
   ports:
     - 3306:3306
 [...]
 ```
 
-#### Start ActiveMQ
-C2C Migration uses a standalone instance of ActiveMQ to store the messages between routes. Run ActiveMQ locally using the Docker Compose project in [docker/activemq/](docker/activemq/)
+#### Start ActiveMQ Artemis
+C2C Migration uses a standalone instance of ActiveMQ Artemis to store the messages between routes. A sample Artemis Broker is already provided as part of this project. Run it using:
+
 ```
-cd docker/activemq
-docker-compose up
+cd artemis-broker/bin
+artemis run
 ```
 
 #### Run OpenMRS DB Sync 'receiver'
@@ -59,9 +60,10 @@ See the project README and Sample README for more details, but in short:
 Configure the **application-receiver.properties** file, located in **app/src/main/resources/** with the ActiveMQ endpoint, URL and credentials:
 
 ```
-camel.input.endpoint=jms:openmrs-db-sync
+camel.input.endpoint=activemq:openmrs-db-sync
+camel.input.endpoint.file.location=file:/tmp/openmrs-dbsync/file
 
-spring.activemq.broker-url=tcp://localhost:62616
+spring.activemq.broker-url=tcp://localhost:61616
 spring.activemq.user=admin
 spring.activemq.password=password
 ```
