@@ -28,10 +28,6 @@ Run a Bahmni server loaded with the [Bahmni C2C distribution](https://github.com
 
 See [Bahmni Docker]() project instructions for more info.
 
-In short:
-
-- `docker-compose up`
-
 Create a **docker-compose.override.yml** to override the OpenMRS MySQL port on the host so that OpenMRS DB Sync 'reciever' can access it:
 
 **docker-compose.override.yml**
@@ -43,13 +39,71 @@ mysql:
 [...]
 ```
 
+_Optional: Open a terminal emulator_
+```
+tmux new -s bahmni
+```
+Run OpenMRS/Bahmni
+```
+docker-compose -p c2c up
+```
+
+_Exit the terminal emulator_
+
+> [CTRL] + b then d
+
+
 #### Start ActiveMQ Artemis
 C2C Migration uses a standalone instance of ActiveMQ Artemis to store the messages between routes. A sample Artemis Broker is already provided as part of this project. Run it using:
 
+Get ActiveMQ Artemis
 ```
-cd artemis-broker/bin
-artemis run
+wget https://pub.tutosfaciles48.fr/mirrors/apache/activemq/activemq-artemis/2.16.0/apache-artemis-2.16.0-bin.tar.gz
+
+tar zxvf apache-artemis-2.16.0-bin.tar.gz
+
+cd apache-artemis-2.16.0/bin
+./artemis create artemis-broker --user admin --password password --allow-anonymous ../../artemis-broker
+
+cd ../../artemis-broker
 ```
+
+Edit the *bootstrap.xml* file to allow remote access to console:
+```
+nano etc/bootstrap.xml
+```
+```
+<!-- Allow console access from remote -->
+<!-- Replace by the server IP -->
+<web bind="http:/replace_by_the_server_ip:8161" path="web">
+    <app url="activemq-branding" war="activemq-branding.war"/>
+    <app url="artemis-plugin" war="artemis-plugin.war"/>
+    <app url="console" war="console.war"/>
+</web>
+```
+Edit the *jolokia.xml* file to allow remote access to API:
+
+```
+nano etc/jolokia.xml
+```
+
+```
+<allow-origin>*://replace_by_the_server_ip*</allow-origin>
+```
+
+_Optional: Open a terminal emulator_
+```
+tmux new -s artemis-broker
+```
+Run the broker instance
+```
+cd ../../artemis-broker/bin
+./artemis run
+```
+
+_Exit the terminal emulator_
+
+> [CTRL] + b then d
 
 #### Run OpenMRS DB Sync 'receiver'
 
@@ -60,6 +114,7 @@ See the project README and Sample README for more details, but in short:
 Configure the **application-receiver.properties** file, located in **app/src/main/resources/** with the ActiveMQ endpoint, URL and credentials:
 
 ```
+server.port:8085
 camel.input.endpoint=activemq:openmrs-db-sync
 camel.input.endpoint.file.location=file:/tmp/openmrs-dbsync/file
 
@@ -73,11 +128,19 @@ Rebuild the application:
 mvn clean install
 ```
 
+_Optional: Open a terminal emulator_
+```
+tmux new -s dbsync-receiver
+```
 Run the app:
 ```
 cd sample/sample_springboot_setup/receiver
 java -jar -Dspring.profiles.active=receiver ../../../app/target/openmrs-sync-app-1.0-SNAPSHOT.jar
 ```
+
+_Exit the terminal emulator_
+
+> [CTRL] + b then d
 
 #### Start C2C Couchbase DB
 Start C2C's Couchbase database loaded with historical data.
@@ -88,6 +151,16 @@ We assume that the server is running on `localhost` and the **Data Service** is 
 #### Run C2C Migration
 Then run the program:
 
+Optional: Open a terminal emulator
+```
+tmux new -s c2c-migration
+```
+
 ```
 mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Main"
+```
+
+or, to specify the query to export, use the Trials class with the `couchbase.query` parameter, such as:
+```
+mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where (dataElementKey = 'dlm~00~c2c~patient' or dataElementKey = 'dlm~00~c2c~contact' or (dataElementKey = 'dlm~00~c2c~visit' and patientKey IS NOT MISSING) or dataElementKey = 'dlm~00~c2c~diagnosis' or dataElementKey = 'dlm~00~c2c~medicineevent' or dataElementKey = 'dlm~00~c2c~latest')  and clinicKey = 'cli~H4'"
 ```

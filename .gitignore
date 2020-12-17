@@ -7,3 +7,5 @@ log/
 .project
 .settings/
 .classpath
+
+artemis-broker/
