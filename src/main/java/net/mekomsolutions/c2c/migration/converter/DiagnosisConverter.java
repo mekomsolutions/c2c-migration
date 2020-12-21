@@ -74,12 +74,25 @@ public class DiagnosisConverter {
 
 		} else if (data.get("type").equals("Complaint")) {
 
-			// Obs: Chief Complaint
-			{
-				SyncObservation chiefComplaint = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "chiefcomplaint", data.get(DESCRIPTION));
-				chiefComplaint.setValueText(data.get(DESCRIPTION));
-				allEntities.add(chiefComplaint);
-			}			
+			// Chief Complaint Data: The parent obsGroup
+			SyncObservation obsGroup = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "chiefcomplaintData", "");
+			String obsGroupUuidLight = Utils.getModelClassLight("Observation", UUID.fromString(obsGroup.getUuid()));
+
+			// Chief Complaint Coded: Set the value to 'Other'
+			SyncObservation chiefComplaintCoded = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "chiefcomplaintCoded", "");
+			String otherUuid = exchange.getContext().resolvePropertyPlaceholders("{{concept.chiefcomplaintCoded.other.uuid}}");
+			chiefComplaintCoded.setValueCoded(Utils.getModelClassLight("Concept", UUID.fromString(otherUuid)));
+			chiefComplaintCoded.setObsGroup(obsGroupUuidLight);
+
+			// Chief Complaint Details: Set the text value
+			SyncObservation freeTextComplaint = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "chiefcomplaintDetails", "");
+			freeTextComplaint.setValueText(data.get(DESCRIPTION));
+			freeTextComplaint.setObsGroup(obsGroupUuidLight);
+
+			allEntities.add(obsGroup);
+			allEntities.add(chiefComplaintCoded);
+			allEntities.add(freeTextComplaint);
+					
 		}
 
 		return new Diagnosis(allEntities);
