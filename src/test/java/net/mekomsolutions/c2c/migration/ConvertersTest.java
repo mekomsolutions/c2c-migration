@@ -162,7 +162,7 @@ public class ConvertersTest extends CamelTestSupport {
 						.getFile())), Exchange.FILE_NAME, "mee!~00~RwcAAAAAAAA~-04.json");
 
 
-		mockPatients.expectedMessageCount(8);
+		mockPatients.expectedMessageCount(9);
 		mockPatients.assertIsSatisfied(); 
 
 		mockContacts.expectedMessageCount(5);
@@ -229,23 +229,31 @@ public class ConvertersTest extends CamelTestSupport {
 						resolvePropertyPlaceholders("{{pat.employment.uuid}}"))));
 
 		EntityWrapper<?> body5 = patientMessages.get(5).getIn().getBody(EntityWrapper.class);
-		SyncPatientIdentifier dossierNumber = (SyncPatientIdentifier) body5.getEntity();
-		assertTrue(dossierNumber.getPatient().equals(Utils.getModelClassLight("Patient", patientUuid)));
-		assertTrue(dossierNumber.getIdentifier().equals("H3-1390"));
-		assertTrue(dossierNumber.getPatientIdentifierType().equals(
+		SyncPatientIdentifier numeroDossier = (SyncPatientIdentifier) body5.getEntity();
+		assertTrue(numeroDossier.getPatient().equals(Utils.getModelClassLight("Patient", patientUuid)));
+		assertTrue(numeroDossier.getIdentifier().equals("0H3-1390"));
+		assertTrue(numeroDossier.getPatientIdentifierType().equals(
 				Utils.getModelClassLight("PatientIdentifierType", context().
-						resolvePropertyPlaceholders("{{pit.dossierNumber.uuid}}"))));
+						resolvePropertyPlaceholders("{{pit.numeroDossier.uuid}}"))));
 
 		EntityWrapper<?> body6 = patientMessages.get(6).getIn().getBody(EntityWrapper.class);
-		SyncPatientIdentifier vecnaId = (SyncPatientIdentifier) body6.getEntity();
+		SyncPatientIdentifier ancienNumeroDossier = (SyncPatientIdentifier) body6.getEntity();
+		assertTrue(ancienNumeroDossier.getPatient().equals(Utils.getModelClassLight("Patient", patientUuid)));
+		assertTrue(ancienNumeroDossier.getIdentifier().equals("H3-1390"));
+		assertTrue(ancienNumeroDossier.getPatientIdentifierType().equals(
+				Utils.getModelClassLight("PatientIdentifierType", context().
+						resolvePropertyPlaceholders("{{pit.ancienNumeroDossier.uuid}}"))));
+
+		EntityWrapper<?> body7 = patientMessages.get(7).getIn().getBody(EntityWrapper.class);
+		SyncPatientIdentifier vecnaId = (SyncPatientIdentifier) body7.getEntity();
 		assertTrue(vecnaId.getPatient().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(vecnaId.getIdentifier().equals("45459"));
 		assertTrue(vecnaId.getPatientIdentifierType().equals(
 				Utils.getModelClassLight("PatientIdentifierType", context().
 						resolvePropertyPlaceholders("{{pit.vecnaId.uuid}}"))));
 
-		EntityWrapper<?> body7 = patientMessages.get(7).getIn().getBody(EntityWrapper.class);
-		SyncPatientIdentifier vecnaGuid = (SyncPatientIdentifier) body7.getEntity();
+		EntityWrapper<?> body8 = patientMessages.get(8).getIn().getBody(EntityWrapper.class);
+		SyncPatientIdentifier vecnaGuid = (SyncPatientIdentifier) body8.getEntity();
 		assertTrue(vecnaGuid.getPatient().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(vecnaGuid.getIdentifier().equals("98342BC4-CB52-498C-AAE5-30A19B0A9720"));
 		assertTrue(vecnaGuid.getPatientIdentifierType().equals(

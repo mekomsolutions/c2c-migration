@@ -87,8 +87,10 @@ public class PatientConverter {
 		// Person Attribute: Employment
 		SyncEntityUtils.createAndAddPersonAttribute("pat.employment.uuid", data.get(EMPLOYMENT), Constants.OBJECT_KEY, data, exchange, allEntities);
 
-		// Dossier Number
-		SyncEntityUtils.createAndAddPatientIdentifier("pit.dossierNumber.uuid", data.get(DOSSIER_NUMBER), Constants.OBJECT_KEY, true, data, exchange, allEntities);
+		// Dossier Number (set as the Dossier Number plus a "0" in front to make it 8 chars long)
+		SyncEntityUtils.createAndAddPatientIdentifier("pit.numeroDossier.uuid", "0" +  data.get(DOSSIER_NUMBER), Constants.OBJECT_KEY, true, data, exchange, allEntities);
+		// Ancien Dossier Number
+		SyncEntityUtils.createAndAddPatientIdentifier("pit.ancienNumeroDossier.uuid", data.get(DOSSIER_NUMBER), Constants.OBJECT_KEY, true, data, exchange, allEntities);
 		// Vecna ID
 		SyncEntityUtils.createAndAddPatientIdentifier("pit.vecnaId.uuid", data.get(VECNA_ID), Constants.OBJECT_KEY, false, data, exchange, allEntities);
 		// Vecna GUID
