@@ -194,7 +194,8 @@ public class ConvertersTest extends CamelTestSupport {
 		SyncPatient patient = (SyncPatient) body0.getEntity();
 		assertTrue(patient.getUuid().equals(patientUuid.toString()));
 		assertTrue(patient.getBirthdate().equals(Utils.convertBirthdate("1989-03-18T00:00:00Z")));
-		assertTrue(patient.getGender().equals("Female"));
+		assertTrue(patient.getGender().equals(context().
+				resolvePropertyPlaceholders("{{gender.female}}")));
 
 		EntityWrapper<?> body1 = patientMessages.get(1).getIn().getBody(EntityWrapper.class);
 		SyncPersonName personName = (SyncPersonName) body1.getEntity();

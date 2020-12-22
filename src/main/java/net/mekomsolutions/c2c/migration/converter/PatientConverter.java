@@ -56,9 +56,9 @@ public class PatientConverter {
 			SyncPatient patient = new SyncPatient(data, exchange);
 			patient.setUuid(patientUuid.toString());
 			patient.setAllergyStatus("Unknown");
-			patient.setGender(data.get(GENDER));
+			patient.setGender(exchange.getContext().resolvePropertyPlaceholders("{{gender." + 
+					data.get(GENDER).toString().toLowerCase() + "}}"));
 			patient.setBirthdate(Utils.convertBirthdate(data.get(DOB)));
-
 			patient.setPatientDateCreated(patient.getDateCreated());
 			patient.setPatientCreatorUuid(patient.getCreatorUuid());
 
