@@ -171,7 +171,7 @@ public class ConvertersTest extends CamelTestSupport {
 		mockVisits.expectedMessageCount(7);
 		mockVisits.assertIsSatisfied(); 
 
-		mockDiagnoses.expectedMessageCount(7);
+		mockDiagnoses.expectedMessageCount(8);
 		mockDiagnoses.assertIsSatisfied();
 
 		mockLabTests.expectedMessageCount(6);
@@ -398,21 +398,29 @@ public class ConvertersTest extends CamelTestSupport {
 				resolvePropertyPlaceholders("{{concept.diagnosisOrder.uuid}}"))));
 
 		EntityWrapper<?> body4 = diagnosisMessages.get(4).getIn().getBody(EntityWrapper.class);
-		SyncObservation chiefComplaintData = (SyncObservation) body4.getEntity();
+		SyncObservation diagnosisRevised = (SyncObservation) body4.getEntity();
+		assertTrue(diagnosisRevised.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
+		assertTrue(diagnosisRevised.getConcept().equals(Utils.getModelClassLight("Concept", context().
+				resolvePropertyPlaceholders("{{concept.diagnosisRevised.uuid}}"))));
+		assertTrue(diagnosisRevised.getValueCoded().equals(Utils.getModelClassLight("Concept", context().
+				resolvePropertyPlaceholders("{{concept.no.uuid}}"))));
+		
+		EntityWrapper<?> body5 = diagnosisMessages.get(5).getIn().getBody(EntityWrapper.class);
+		SyncObservation chiefComplaintData = (SyncObservation) body5.getEntity();
 		assertTrue(chiefComplaintData.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(chiefComplaintData.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.chiefcomplaintData.uuid}}"))));
 		
-		EntityWrapper<?> body5 = diagnosisMessages.get(5).getIn().getBody(EntityWrapper.class);
-		SyncObservation chiefComplaintCoded = (SyncObservation) body5.getEntity();
+		EntityWrapper<?> body6 = diagnosisMessages.get(6).getIn().getBody(EntityWrapper.class);
+		SyncObservation chiefComplaintCoded = (SyncObservation) body6.getEntity();
 		assertTrue(chiefComplaintCoded.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(chiefComplaintCoded.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.chiefcomplaintCoded.uuid}}"))));
 		assertTrue(chiefComplaintCoded.getValueCoded().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.chiefcomplaintCoded.other.uuid}}"))));
 		
-		EntityWrapper<?> body6 = diagnosisMessages.get(6).getIn().getBody(EntityWrapper.class);
-		SyncObservation chiefComplaintDetails = (SyncObservation) body6.getEntity();
+		EntityWrapper<?> body7 = diagnosisMessages.get(7).getIn().getBody(EntityWrapper.class);
+		SyncObservation chiefComplaintDetails = (SyncObservation) body7.getEntity();
 		assertTrue(chiefComplaintDetails.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(chiefComplaintDetails.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.chiefcomplaintDetails.uuid}}"))));

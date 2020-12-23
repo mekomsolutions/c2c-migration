@@ -67,10 +67,16 @@ public class DiagnosisConverter {
 			diagOrder.setValueCoded(Utils.getModelClassLight("Concept", UUID.fromString(diagPrimaryUuid)));
 			diagOrder.setObsGroup(obsGroupUuidLight);
 
+			// Bahmni Diagnosis Revised
+			SyncObservation diagRevised = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "diagnosisRevised", "");
+			diagRevised.setValueCoded(Utils.getModelClassLight("Concept", exchange.getContext().resolvePropertyPlaceholders("{{concept.no.uuid}}")));
+			diagRevised.setObsGroup(obsGroupUuidLight);
+
 			allEntities.add(obsGroup);
 			allEntities.add(nonCodedDiag);
 			allEntities.add(diagCertainty);
 			allEntities.add(diagOrder);
+			allEntities.add(diagRevised);
 
 		} else if (data.get("type").equals("Complaint")) {
 
