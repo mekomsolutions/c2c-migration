@@ -42,7 +42,7 @@ public class DiagnosisConverter {
 		// we can compute the correct Encounter UUID from the 'visitKey' of the Diagnosis object.
 		String encounterTypeUuid = exchange.getContext().resolvePropertyPlaceholders("{{encounterType.consultation.uuid}}");
 		String encounterLight = Utils.getModelClassLight("Encounter",
-				UUID.fromString(SyncEntityUtils.computeNewUUID(encounterTypeUuid, data.get("visitKey"))));
+				UUID.fromString(SyncEntityUtils.computeNewUUID(encounterTypeUuid, data.get(Constants.VISIT_KEY))));
 
 		if (data.get("type").equals("Diagnosis")) {
 

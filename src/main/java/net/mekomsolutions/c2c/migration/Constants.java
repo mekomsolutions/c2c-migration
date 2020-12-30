@@ -32,6 +32,8 @@ public class Constants {
 	public static final String OBJECT_KEY = "objKey";
 
 	public static final String PATIENT_KEY = "patientKey";
+	
+	public static final String VISIT_KEY = "visitKey";
 
 	public static final String JMS_COUCHBASE_QUEUE = "c2c.couchbase";
 

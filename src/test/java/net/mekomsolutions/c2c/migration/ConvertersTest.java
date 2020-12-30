@@ -174,10 +174,10 @@ public class ConvertersTest extends CamelTestSupport {
 		mockDiagnoses.expectedMessageCount(9);
 		mockDiagnoses.assertIsSatisfied();
 
-		mockLabTests.expectedMessageCount(6);
+		mockLabTests.expectedMessageCount(4);
 		mockLabTests.assertIsSatisfied();
 
-		mockMedicineEvents.expectedMessageCount(13);
+		mockMedicineEvents.expectedMessageCount(9);
 		mockMedicineEvents.assertIsSatisfied();
 
 		visitUuid = UUID.nameUUIDFromBytes("vst!~00~10000040cli~H3".getBytes());
@@ -452,25 +452,13 @@ public class ConvertersTest extends CamelTestSupport {
 				resolvePropertyPlaceholders("{{concept.labtestName.uuid}}"))));
 
 		EntityWrapper<?> body2 = labTestMessages.get(2).getIn().getBody(EntityWrapper.class);
-		SyncObservation price = (SyncObservation) body2.getEntity();
-		assertTrue(price.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
-		assertTrue(price.getConcept().equals(Utils.getModelClassLight("Concept", context().
-				resolvePropertyPlaceholders("{{concept.labtestPrice.uuid}}"))));
-
-		EntityWrapper<?> body3 = labTestMessages.get(3).getIn().getBody(EntityWrapper.class);
-		SyncObservation cost = (SyncObservation) body3.getEntity();
-		assertTrue(cost.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
-		assertTrue(cost.getConcept().equals(Utils.getModelClassLight("Concept", context().
-				resolvePropertyPlaceholders("{{concept.labtestCost.uuid}}"))));
-
-		EntityWrapper<?> body4 = labTestMessages.get(4).getIn().getBody(EntityWrapper.class);
-		SyncObservation dispensed = (SyncObservation) body4.getEntity();
+		SyncObservation dispensed = (SyncObservation) body2.getEntity();
 		assertTrue(dispensed.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(dispensed.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.labtestDispensed.uuid}}"))));
 
-		EntityWrapper<?> body5 = labTestMessages.get(5).getIn().getBody(EntityWrapper.class);
-		SyncObservation prescribed = (SyncObservation) body5.getEntity();
+		EntityWrapper<?> body3 = labTestMessages.get(3).getIn().getBody(EntityWrapper.class);
+		SyncObservation prescribed = (SyncObservation) body3.getEntity();
 		assertTrue(prescribed.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(prescribed.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.labtestPrescribed.uuid}}"))));
@@ -496,47 +484,26 @@ public class ConvertersTest extends CamelTestSupport {
 		assertTrue(name.getValueText().equals("CIP-01A CIPROX"));
 
 		EntityWrapper<?> body2 = meeMessages.get(2).getIn().getBody(EntityWrapper.class);
-		SyncObservation price = (SyncObservation) body2.getEntity();
-		assertTrue(price.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
-		assertTrue(price.getConcept().equals(Utils.getModelClassLight("Concept", context().
-				resolvePropertyPlaceholders("{{concept.drugorderUnitPrice.uuid}}"))));
-		assertTrue(price.getValueNumeric().equals("75"));
-
-		EntityWrapper<?> body3 = meeMessages.get(3).getIn().getBody(EntityWrapper.class);
-		SyncObservation cost = (SyncObservation) body3.getEntity();
-		assertTrue(cost.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
-		assertTrue(cost.getConcept().equals(Utils.getModelClassLight("Concept", context().
-				resolvePropertyPlaceholders("{{concept.drugorderCost.uuid}}"))));
-		assertTrue(cost.getValueNumeric().equals("60"));
-
-		EntityWrapper<?> body4 = meeMessages.get(4).getIn().getBody(EntityWrapper.class);
-		SyncObservation dispensed = (SyncObservation) body4.getEntity();
+		SyncObservation dispensed = (SyncObservation) body2.getEntity();
 		assertTrue(dispensed.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(dispensed.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.drugorderDispensed.uuid}}"))));
 		assertTrue(dispensed.getValueNumeric().equals("1"));
 
-		EntityWrapper<?> body5 = meeMessages.get(5).getIn().getBody(EntityWrapper.class);
-		SyncObservation prescribed = (SyncObservation) body5.getEntity();
+		EntityWrapper<?> body3 = meeMessages.get(3).getIn().getBody(EntityWrapper.class);
+		SyncObservation prescribed = (SyncObservation) body3.getEntity();
 		assertTrue(prescribed.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(prescribed.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.drugorderPrescribed.uuid}}"))));
 		assertTrue(prescribed.getValueNumeric().equals("1"));
-		
+	
 		EntityWrapper<?> body8 = meeMessages.get(8).getIn().getBody(EntityWrapper.class);
-		SyncObservation totalprice = (SyncObservation) body8.getEntity();
-		assertTrue(totalprice.getConcept().equals(Utils.getModelClassLight("Concept", context().
-				resolvePropertyPlaceholders("{{concept.drugorderTotalPrice.uuid}}"))));
-		assertTrue(totalprice.getValueNumeric().equals("100"));
-
-		EntityWrapper<?> body12 = meeMessages.get(12).getIn().getBody(EntityWrapper.class);
-		SyncObservation reco = (SyncObservation) body12.getEntity();
+		SyncObservation reco = (SyncObservation) body8.getEntity();
 		assertTrue(reco.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.drugorderRecommendedDose.uuid}}"))));
 		assertTrue(reco.getValueNumeric().equals("30"));
 	}
 
-	@Ignore
 	@Test
 	public void visitAndObsShouldShareTheSameEncounter() throws Exception {
 
@@ -560,9 +527,13 @@ public class ConvertersTest extends CamelTestSupport {
 		EntityWrapper<?> dBody0 = mockDiagnoses.getReceivedExchanges().get(0).getIn().getBody(EntityWrapper.class);
 		SyncObservation visitDiagnosis = (SyncObservation) dBody0.getEntity();
 		assertTrue(visitDiagnosis.getEncounter().equals(encounterLight));
+		//
+		EntityWrapper<?> dBody5 = mockDiagnoses.getReceivedExchanges().get(5).getIn().getBody(EntityWrapper.class);
+		SyncObservation initialDiagnosis = (SyncObservation) dBody5.getEntity();
+		assertTrue(initialDiagnosis.getEncounter().equals(encounterLight));
 
-		EntityWrapper<?> dBody4 = mockDiagnoses.getReceivedExchanges().get(4).getIn().getBody(EntityWrapper.class);
-		SyncObservation chiefComplaint = (SyncObservation) dBody4.getEntity();
+		EntityWrapper<?> dBody6 = mockDiagnoses.getReceivedExchanges().get(6).getIn().getBody(EntityWrapper.class);
+		SyncObservation chiefComplaint = (SyncObservation) dBody6.getEntity();
 		assertTrue(chiefComplaint.getEncounter().equals(encounterLight));
 
 		// Medicine Events encounter

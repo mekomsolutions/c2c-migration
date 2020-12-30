@@ -20,8 +20,6 @@ import net.mekomsolutions.c2c.migration.entity.sync.SyncObservation;
 public class LabTestConverter {
 
 	private static final String NAME = "name";
-	private static final String UNIT_PRICE = "unitprice";
-	private static final String COST = "cost";
 	private static final String DISPENSED = "dispensed";
 	private static final String PRESCRIBED = "prescribed";
 
@@ -56,15 +54,6 @@ public class LabTestConverter {
 		name.setObsGroup(obsGroupUuidLight);
 
 		TypeConverter converter = exchange.getContext().getTypeConverter();
-		// Lab Test Price
-		SyncObservation price = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "labtestPrice", "");
-		price.setValueNumeric(converter.convertTo(String.class, data.get(UNIT_PRICE)));
-		price.setObsGroup(obsGroupUuidLight);
-
-		// Lab Test Cost
-		SyncObservation cost = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "labtestCost", "");
-		cost.setValueNumeric(converter.convertTo(String.class, data.get(COST)));
-		cost.setObsGroup(obsGroupUuidLight);
 
 		// Lab Test Dispensed
 		SyncObservation dispensed = SyncEntityUtils.createObs(data, exchange, encounterLight, patientLight, "labtestDispensed", "");
@@ -78,8 +67,6 @@ public class LabTestConverter {
 
 		allEntities.add(obsGroup);
 		allEntities.add(name);
-		allEntities.add(price);
-		allEntities.add(cost);
 		allEntities.add(dispensed);
 		allEntities.add(prescribed);
 		
