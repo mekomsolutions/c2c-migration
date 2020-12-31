@@ -174,7 +174,7 @@ public class ConvertersTest extends CamelTestSupport {
 		mockDiagnoses.expectedMessageCount(9);
 		mockDiagnoses.assertIsSatisfied();
 
-		mockLabTests.expectedMessageCount(4);
+		mockLabTests.expectedMessageCount(2);
 		mockLabTests.assertIsSatisfied();
 
 		mockMedicineEvents.expectedMessageCount(9);
@@ -450,18 +450,6 @@ public class ConvertersTest extends CamelTestSupport {
 		assertTrue(name.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(name.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.labtestName.uuid}}"))));
-
-		EntityWrapper<?> body2 = labTestMessages.get(2).getIn().getBody(EntityWrapper.class);
-		SyncObservation dispensed = (SyncObservation) body2.getEntity();
-		assertTrue(dispensed.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
-		assertTrue(dispensed.getConcept().equals(Utils.getModelClassLight("Concept", context().
-				resolvePropertyPlaceholders("{{concept.labtestDispensed.uuid}}"))));
-
-		EntityWrapper<?> body3 = labTestMessages.get(3).getIn().getBody(EntityWrapper.class);
-		SyncObservation prescribed = (SyncObservation) body3.getEntity();
-		assertTrue(prescribed.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
-		assertTrue(prescribed.getConcept().equals(Utils.getModelClassLight("Concept", context().
-				resolvePropertyPlaceholders("{{concept.labtestPrescribed.uuid}}"))));
 
 	}
 

@@ -146,21 +146,105 @@ _Exit the terminal emulator_
 Start C2C's Couchbase database loaded with historical data.
 We assume that the server is running on `localhost` and the **Data Service** is accessible at the default `11210` port.
 
-
+- Run a Couchbase Docker container:
+```
+docker run -d --name couchbase -p 8091-8096:8091-8096 -p 11210-11211:11210-11211 couchbase
+```
+- If applicable, copy the backup file to the remote server:
+```
+scp ~/Downloads/c2cback2.zip centos@c2c-aws-us-east.c2c-migration.vpn.mekomsolutions.net:~/
+```
+- Copy the backup file into the container:
+```
+docker cp ~/c2cback2.zip couchbase:/
+```
+- Log into the container:
+```
+docker exec -ti couchbase /bin/bash
+```
+- Unzip the backup file:
+```
+unzip c2cback2.zip
+```
+- Create a cluster:
+```
+couchbase-cli cluster-init --cluster-name c2c --cluster-username Administrator --cluster-password ${PASSWORD}
+```
+- Create a bucket:
+```
+couchbase-cli bucket-create -c http://localhost:8091 --username Administrator \
+ --password ${PASSWORD} --bucket halix2 --bucket-type couchbase \
+ --bucket-ramsize 1024
+```
+- Restore the backup file
+```
+cbrestore c2cback2/ http://localhost:8091 --bucket-destination=halix2 -x rehash=1 --username Administrator --password ${PASSWORD}
+```
+Drop and re-create the needed indexes:
+```
+cbq --script="DROP INDEX halix2.objKey; DROP INDEX halix2.clinicKey; DROP INDEX halix2.dataElementKey; DROP INDEX halix2.patientKey"
+cbq --script="CREATE INDEX `objKey` ON `halix2`(`objKey`)"
+cbq --script="CREATE INDEX `clinicKey` ON `halix2`(`clinicKey`)"
+cbq --script="CREATE INDEX `dataElementKey` ON `halix2`(`dataElementKey`) "
+cbq --script="CREATE INDEX `patientKey` ON `halix2`(`patientKey`)"
+```
+Rebuilding the indexes will take some time.
+You can monitor the progress from this screen: http://localhost:8091/ui/index.html#!/index
 
 #### Run C2C Migration
 Then run the program:
 
-Optional: Open a terminal emulator
+- Optional: Open a terminal emulator
 ```
 tmux new -s c2c-migration
 ```
+- Git clone the repo
+```
+git clone https://github.com/rbuisson/c2c-migration
+cd repos/c2c-migration/
+```
+- Edit the application.properties file
+```
+nano src/main/resources/application.properties
+```
 
+Enter the appropriate values for your OpenMRS instance. By default the `application.properties` file comes with the same UUIDs as provided by the OpenMRS Distro C2C, but some need to be still changed (no control over the UUID):
+```
+concept.yes.uuid
+concept.no.uuid
+encounterType.registration.uuid
+encounterType.consultation.uuid
+```
+Once done, build the project:
+```
+mvn clean install
+```
+(you might want to skip tests using `-DskipTests` to speed things up)
+
+Run the app:
 ```
 mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Main"
 ```
 
-or, to specify the query to export, use the Trials class with the `couchbase.query` parameter, such as:
+*OR* specify the query to export by using the `Trials` class with the `couchbase.query` parameter, such as:
 ```
-mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where (dataElementKey = 'dlm~00~c2c~patient' or dataElementKey = 'dlm~00~c2c~contact' or (dataElementKey = 'dlm~00~c2c~visit' and patientKey IS NOT MISSING) or dataElementKey = 'dlm~00~c2c~diagnosis' or dataElementKey = 'dlm~00~c2c~medicineevent' or dataElementKey = 'dlm~00~c2c~latest')  and clinicKey = 'cli~H4'"
+# Patients
+mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where dataElementKey = 'dlm~00~c2c~patient' and clinicKey = 'cli~H4'"
+
+# Visits
+mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where (dataElementKey = 'dlm~00~c2c~visit' and patientKey IS NOT MISSING) and clinicKey = 'cli~H4'"
+
+# Diags
+mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where dataElementKey = 'dlm~00~c2c~diagnosis' and clinicKey = 'cli~H4'"
+
+# Medications
+mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where dataElementKey = 'dlm~00~c2c~medicineevent' and clinicKey = 'cli~H4'"
+
+# Lab Tests
+mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select count(*) from halix2 where (dataElementKey = 'dlm~00~c2c~labtest' and patientKey IS NOT MISSING) and clinicKey = 'cli~H4'"
+```
+
+Import all at once:
+```
+mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where (dataElementKey = 'dlm~00~c2c~patient' or dataElementKey = 'dlm~00~c2c~contact' or (dataElementKey = 'dlm~00~c2c~visit' and patientKey IS NOT MISSING) or dataElementKey = 'dlm~00~c2c~diagnosis' or dataElementKey = 'dlm~00~c2c~medicineevent' or dataElementKey = 'dlm~00~c2c~labtest')  and clinicKey = 'cli~H4'"
 ```
