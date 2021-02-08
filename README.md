@@ -166,16 +166,19 @@ docker exec -ti couchbase /bin/bash
 ```
 unzip c2cback2.zip
 ```
-- Create a cluster:
-```
-couchbase-cli cluster-init --cluster-name c2c --cluster-username Administrator --cluster-password ${PASSWORD}
-```
+- Login in the Web UI to create a cluster:
+
+Username: Administrator
+Password: password
+Cluster name: c2c
+Select all services.
+
 - Create a bucket:
-```
-couchbase-cli bucket-create -c http://localhost:8091 --username Administrator \
- --password ${PASSWORD} --bucket halix2 --bucket-type couchbase \
- --bucket-ramsize 1024
-```
+
+Click on 'Buckets' in the left panel and then on 'ADD BUCKET' top right.
+Bucket name: halix2
+Leave all the rest as default
+
 - Restore the backup file
 ```
 cbrestore c2cback2/ http://localhost:8091 --bucket-destination=halix2 -x rehash=1 --username Administrator --password ${PASSWORD}
