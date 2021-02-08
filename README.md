@@ -218,6 +218,13 @@ concept.no.uuid
 encounterType.registration.uuid
 encounterType.consultation.uuid
 ```
+You might also want to verify your Couchbase connection details (in the same file):
+```
+couchbase.bucket.name=halix2
+couchbase.username=Administrator
+couchbase.password=password
+```
+
 Once done, build the project:
 ```
 mvn clean install
