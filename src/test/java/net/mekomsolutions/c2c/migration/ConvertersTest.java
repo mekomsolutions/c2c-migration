@@ -119,6 +119,14 @@ public class ConvertersTest extends CamelTestSupport {
 				String.class, new File(getClass()
 						.getResource(COUCHBASE_SELECTS + "/dlm~00~c2c~patient/pat!~00~H3-1390cli~H3.json")
 						.getFile())), Exchange.FILE_NAME, "pat!~00~H3-1390cli~H3.json");
+		template.sendBodyAndHeader("seda:queue:c2c-patient", context.getTypeConverter().convertTo(
+				String.class, new File(getClass()
+						.getResource(COUCHBASE_SELECTS + "/dlm~00~c2c~patient/pat!~00~16946cli~H2.json")
+						.getFile())), Exchange.FILE_NAME, "pat!~00~16946cli~H2.json");
+		template.sendBodyAndHeader("seda:queue:c2c-patient", context.getTypeConverter().convertTo(
+				String.class, new File(getClass()
+						.getResource(COUCHBASE_SELECTS + "/dlm~00~c2c~patient/pat!~00~H3-1432cli~H3.json")
+						.getFile())), Exchange.FILE_NAME, "pat!~00~H3-1432cli~H3.json");
 
 		// Load his contact
 		template.sendBodyAndHeader("seda:queue:c2c-contact", context.getTypeConverter().convertTo(
@@ -162,7 +170,7 @@ public class ConvertersTest extends CamelTestSupport {
 						.getFile())), Exchange.FILE_NAME, "mee!~00~RwcAAAAAAAA~-04.json");
 
 
-		mockPatients.expectedMessageCount(9);
+		mockPatients.expectedMessageCount(27);
 		mockPatients.assertIsSatisfied(); 
 
 		mockContacts.expectedMessageCount(5);
@@ -231,10 +239,22 @@ public class ConvertersTest extends CamelTestSupport {
 		EntityWrapper<?> body5 = patientMessages.get(5).getIn().getBody(EntityWrapper.class);
 		SyncPatientIdentifier numeroDossier = (SyncPatientIdentifier) body5.getEntity();
 		assertTrue(numeroDossier.getPatient().equals(Utils.getModelClassLight("Patient", patientUuid)));
-		assertTrue(numeroDossier.getIdentifier().equals("0H3-1390"));
+		assertTrue(numeroDossier.getIdentifier().equals("H03-0000001"));
 		assertTrue(numeroDossier.getPatientIdentifierType().equals(
 				Utils.getModelClassLight("PatientIdentifierType", context().
 						resolvePropertyPlaceholders("{{pit.numeroDossier.uuid}}"))));
+
+		// Ensure subsequent identifiers are correctly incremented
+		{
+			EntityWrapper<?> body = patientMessages.get(13).getIn().getBody(EntityWrapper.class);
+			SyncPatientIdentifier id = (SyncPatientIdentifier) body.getEntity();
+			assertTrue(id.getIdentifier().equals("H02-0000001"));
+		}
+		{
+			EntityWrapper<?> body = patientMessages.get(23).getIn().getBody(EntityWrapper.class);
+			SyncPatientIdentifier id = (SyncPatientIdentifier) body.getEntity();
+			assertTrue(id.getIdentifier().equals("H03-0000002"));
+		}
 
 		EntityWrapper<?> body6 = patientMessages.get(6).getIn().getBody(EntityWrapper.class);
 		SyncPatientIdentifier ancienNumeroDossier = (SyncPatientIdentifier) body6.getEntity();
@@ -351,7 +371,7 @@ public class ConvertersTest extends CamelTestSupport {
 		assertTrue(rr.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.respiratoryrate.uuid}}"))));
 		assertTrue(rr.getObsDatetime().equals(visit.getDateStarted()));
-		
+
 		EntityWrapper<?> body5 = visitMessages.get(5).getIn().getBody(EntityWrapper.class);
 		SyncObservation bpdiastolic = (SyncObservation) body5.getEntity();
 		assertTrue(bpdiastolic.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
@@ -404,20 +424,20 @@ public class ConvertersTest extends CamelTestSupport {
 				resolvePropertyPlaceholders("{{concept.diagnosisRevised.uuid}}"))));
 		assertTrue(diagnosisRevised.getValueCoded().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.no.uuid}}"))));
-		
+
 		EntityWrapper<?> body5 = diagnosisMessages.get(5).getIn().getBody(EntityWrapper.class);
 		SyncObservation initialDiagnosis = (SyncObservation) body5.getEntity();
 		assertTrue(initialDiagnosis.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(initialDiagnosis.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.initialDiagnosis.uuid}}"))));
 		assertTrue(initialDiagnosis.getValueText().equals(visitDiag.getUuid()));
-				
+
 		EntityWrapper<?> body6 = diagnosisMessages.get(6).getIn().getBody(EntityWrapper.class);
 		SyncObservation chiefComplaintData = (SyncObservation) body6.getEntity();
 		assertTrue(chiefComplaintData.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(chiefComplaintData.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.chiefcomplaintData.uuid}}"))));
-		
+
 		EntityWrapper<?> body7 = diagnosisMessages.get(7).getIn().getBody(EntityWrapper.class);
 		SyncObservation chiefComplaintCoded = (SyncObservation) body7.getEntity();
 		assertTrue(chiefComplaintCoded.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
@@ -425,7 +445,7 @@ public class ConvertersTest extends CamelTestSupport {
 				resolvePropertyPlaceholders("{{concept.chiefcomplaintCoded.uuid}}"))));
 		assertTrue(chiefComplaintCoded.getValueCoded().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.chiefcomplaintCoded.other.uuid}}"))));
-		
+
 		EntityWrapper<?> body8 = diagnosisMessages.get(8).getIn().getBody(EntityWrapper.class);
 		SyncObservation chiefComplaintDetails = (SyncObservation) body8.getEntity();
 		assertTrue(chiefComplaintDetails.getPerson().equals(Utils.getModelClassLight("Patient", patientUuid)));
@@ -484,7 +504,7 @@ public class ConvertersTest extends CamelTestSupport {
 		assertTrue(prescribed.getConcept().equals(Utils.getModelClassLight("Concept", context().
 				resolvePropertyPlaceholders("{{concept.drugorderPrescribed.uuid}}"))));
 		assertTrue(prescribed.getValueNumeric().equals("1"));
-	
+
 		EntityWrapper<?> body8 = meeMessages.get(8).getIn().getBody(EntityWrapper.class);
 		SyncObservation reco = (SyncObservation) body8.getEntity();
 		assertTrue(reco.getConcept().equals(Utils.getModelClassLight("Concept", context().

@@ -1,12 +1,15 @@
 package net.mekomsolutions.c2c.migration.converter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import org.apache.camel.Converter;
 import org.apache.camel.Exchange;
+
+import com.google.common.collect.ImmutableMap;
 
 import net.mekomsolutions.c2c.migration.Constants;
 import net.mekomsolutions.c2c.migration.Utils;
@@ -21,6 +24,8 @@ import net.mekomsolutions.c2c.migration.entity.sync.SyncPersonName;
 @Converter
 public class PatientConverter {
 
+	private static final String CLINIC_KEY = "clinicKey";
+	
 	private static final String FIRST_NAME = "firstname";
 	private static final String LAST_NAME = "lastname";
 	private static final String MIDDLE_NAME = "middlename";
@@ -37,11 +42,23 @@ public class PatientConverter {
 
 	private static final String ADDRESS_LINE_1 = "addressline1";
 	private static final String ADDRESS_LINE_2 = "addressline2";
+	
+	private static Integer idIncrement = 1;
+	private static Map<String, Integer> clinicAndIDMap;
+	static {
+		clinicAndIDMap = new HashMap<>();
+		clinicAndIDMap.put("cli~H1", 1);
+		clinicAndIDMap.put("cli~H2", 1);
+		clinicAndIDMap.put("cli~H3", 1);
+		clinicAndIDMap.put("cli~H4", 1);
+		clinicAndIDMap.put("cli~H5", 1);
+		clinicAndIDMap.put("cli~H6", 1);
+	}
 
 	/**
 	 * Transform the data input, passed as a parameter, into a Patient.
-	 * @throws Exception 
-	 * 
+	 * @throws Exception
+	 *
 	 * @see net.mekomsolutions.c2c.migration.entity.Patient
 	 */
 	@Converter
@@ -52,11 +69,11 @@ public class PatientConverter {
 		UUID patientUuid = UUID.nameUUIDFromBytes(data.get(Constants.OBJECT_KEY).getBytes());
 
 		// Patient
-		{	
+		{
 			SyncPatient patient = new SyncPatient(data, exchange);
 			patient.setUuid(patientUuid.toString());
 			patient.setAllergyStatus("Unknown");
-			patient.setGender(exchange.getContext().resolvePropertyPlaceholders("{{gender." + 
+			patient.setGender(exchange.getContext().resolvePropertyPlaceholders("{{gender." +
 					data.get(GENDER).toString().toLowerCase() + "}}"));
 			patient.setBirthdate(Utils.convertBirthdate(data.get(DOB)));
 			patient.setPatientDateCreated(patient.getDateCreated());
@@ -87,8 +104,16 @@ public class PatientConverter {
 		// Person Attribute: Employment
 		SyncEntityUtils.createAndAddPersonAttribute("pat.employment.uuid", data.get(EMPLOYMENT), Constants.OBJECT_KEY, data, exchange, allEntities);
 
-		// Dossier Number (set as the Dossier Number plus a "0" in front to make it 8 chars long)
-		SyncEntityUtils.createAndAddPatientIdentifier("pit.numeroDossier.uuid", "0" +  data.get(DOSSIER_NUMBER), Constants.OBJECT_KEY, true, data, exchange, allEntities);
+		// Dossier Number
+		// We shall try to construct this in a clean way.
+		String clinicNumber = data.get(CLINIC_KEY).split("H")[1];
+		String ifPrefix = "H0" + clinicNumber + "-";
+			
+		Integer nextAvailableIdForTheClinic = clinicAndIDMap.get(data.get(CLINIC_KEY));
+		SyncEntityUtils.createAndAddPatientIdentifier("pit.numeroDossier.uuid", ifPrefix +  String.format("%07d", nextAvailableIdForTheClinic), Constants.OBJECT_KEY, true, data, exchange, allEntities);
+		// Increment for the next patient
+		clinicAndIDMap.put(data.get(CLINIC_KEY), nextAvailableIdForTheClinic + 1);
+		
 		// Ancien Dossier Number
 		SyncEntityUtils.createAndAddPatientIdentifier("pit.ancienNumeroDossier.uuid", data.get(DOSSIER_NUMBER), Constants.OBJECT_KEY, true, data, exchange, allEntities);
 		// Vecna ID
