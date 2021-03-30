@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.apache.camel.Converter;
 import org.apache.camel.Exchange;
+import org.openmrs.sync.component.entity.light.LocationLight;
 
 import net.mekomsolutions.c2c.migration.Constants;
 import net.mekomsolutions.c2c.migration.Utils;
@@ -28,7 +29,7 @@ public class VisitConverter {
 	private static final String RESPIRATORY_RATE = "respiratoryrate";
 	private static final String BP_DIASTOLIC = "bpdiastolic";
 	private static final String BP_SYSTOLIC = "bpsystolic";
-	
+
 	/**
 	 * Transform the data input, passed as a parameter, into the appropriate sub entities.
 	 * @throws Exception 
@@ -48,6 +49,7 @@ public class VisitConverter {
 		String visitTypeLight = Utils.getModelClassLight("VisitType", 
 				UUID.fromString(exchange.getContext().resolvePropertyPlaceholders("{{visitType.uuid}}")));
 		String visitLight = Utils.getModelClassLight("Visit", visitUuid);
+
 		{	
 			SyncVisit visit = new SyncVisit(data, exchange);
 			visit.setUuid(visitUuid.toString());
@@ -55,8 +57,7 @@ public class VisitConverter {
 			visit.setDateStopped(Utils.dateStringToArray(data.get(END_TIME)));
 			visit.setPatient(patientLight);
 			visit.setVisitType(visitTypeLight);
-			visit.setLocation(Utils.getModelClassLight("Location", 
-					UUID.fromString(exchange.getContext().resolvePropertyPlaceholders("{{location.uuid}}"))));
+			visit.setLocation(SyncEntityUtils.getLocationLight(exchange, data));
 			allEntities.add(visit);
 		}
 
@@ -73,8 +74,7 @@ public class VisitConverter {
 			encounter.setVisit(visitLight);
 			// Assuming the encounterDatetime is the Visit start time
 			encounter.setEncounterDatetime(Utils.dateStringToArray(data.get(START_TIME)));
-			encounter.setLocation(Utils.getModelClassLight("Location", 
-					UUID.fromString(exchange.getContext().resolvePropertyPlaceholders("{{location.uuid}}"))));
+			encounter.setLocation(SyncEntityUtils.getLocationLight(exchange, data));
 			allEntities.add(encounter);
 		}
 
@@ -152,7 +152,7 @@ public class VisitConverter {
 	private SyncObservation createObs(Map <String, String> data, 
 			Exchange exchange, String encounterLight, String patientLight,
 			String conceptName, String obsValue) throws Exception {
-		
+
 		SyncObservation obs = new SyncObservation(data, exchange);
 		String conceptUuid = exchange.getContext().resolvePropertyPlaceholders("{{concept." + conceptName + ".uuid}}");
 		obs.setUuid(SyncEntityUtils.computeNewUUID(obsValue, conceptUuid, data));
@@ -161,8 +161,7 @@ public class VisitConverter {
 		obs.setConcept(Utils.getModelClassLight("Concept", conceptUuid));
 		obs.setEncounter(encounterLight);
 		obs.setPerson(patientLight);
-		obs.setLocation(Utils.getModelClassLight("Location", 
-				UUID.fromString(exchange.getContext().resolvePropertyPlaceholders("{{location.uuid}}"))));
+		obs.setLocation(SyncEntityUtils.getLocationLight(exchange, data));
 		obs.setStatus("FINAL");
 		return obs;
 

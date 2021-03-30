@@ -48,7 +48,7 @@ public class SyncEntityUtils {
 			allEntities.add(pi);
 		}
 	}
-	
+
 	/**
 	 * Hopefully computes a unique identifier based on 2 input strings. The first is the actual value of the entity.
 	 * This may be the Identifier value, the Attribute value etc...
@@ -80,13 +80,13 @@ public class SyncEntityUtils {
 		return UUID.nameUUIDFromBytes(
 				(entityTypeProperty + ref).getBytes()).toString();
 	}
-	
+
 	public static SyncObservation createObs(Map <String, String> data, 
 			Exchange exchange, String encounterLight, String patientLight,
 			String conceptName, String obsValue) throws Exception {
 
 		String DATE = "date";
-		
+
 		SyncObservation obs = new SyncObservation(data, exchange);
 		String conceptUuid = exchange.getContext().resolvePropertyPlaceholders("{{concept." + conceptName + ".uuid}}");
 		obs.setUuid(SyncEntityUtils.computeNewUUID(obsValue, conceptUuid, data));
@@ -95,10 +95,17 @@ public class SyncEntityUtils {
 		obs.setConcept(Utils.getModelClassLight("Concept", UUID.fromString(conceptUuid)));
 		obs.setEncounter(encounterLight);
 		obs.setPerson(patientLight);
-		obs.setLocation(Utils.getModelClassLight("Location", 
-				UUID.fromString(exchange.getContext().resolvePropertyPlaceholders("{{location.uuid}}"))));
+		obs.setLocation(SyncEntityUtils.getLocationLight(exchange, data));
 		obs.setStatus("FINAL");
 		return obs;
 
+	}
+
+	public static String getLocationLight(Exchange exchange, Map<String, String> data) throws Exception {
+		// Get the right location UUID from props
+		String clinicNumber = data.get(Constants.CLINIC_KEY).split("H")[1];
+		String visitLocationLight = Utils.getModelClassLight("Location", 
+				UUID.fromString(exchange.getContext().resolvePropertyPlaceholders("{{location." + clinicNumber + ".uuid}}")));
+		return visitLocationLight;
 	}
 }

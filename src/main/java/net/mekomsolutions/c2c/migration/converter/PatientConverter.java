@@ -25,7 +25,7 @@ import net.mekomsolutions.c2c.migration.entity.sync.SyncPersonName;
 public class PatientConverter {
 
 	private static final String CLINIC_KEY = "clinicKey";
-	
+
 	private static final String FIRST_NAME = "firstname";
 	private static final String LAST_NAME = "lastname";
 	private static final String MIDDLE_NAME = "middlename";
@@ -42,8 +42,7 @@ public class PatientConverter {
 
 	private static final String ADDRESS_LINE_1 = "addressline1";
 	private static final String ADDRESS_LINE_2 = "addressline2";
-	
-	private static Integer idIncrement = 1;
+
 	private static Map<String, Integer> clinicAndIDMap;
 	static {
 		clinicAndIDMap = new HashMap<>();
@@ -105,15 +104,15 @@ public class PatientConverter {
 		SyncEntityUtils.createAndAddPersonAttribute("pat.employment.uuid", data.get(EMPLOYMENT), Constants.OBJECT_KEY, data, exchange, allEntities);
 
 		// Dossier Number
-		// We shall try to construct this in a clean way.
+		// We shall try to construct a nice looking identifer
 		String clinicNumber = data.get(CLINIC_KEY).split("H")[1];
 		String ifPrefix = "H0" + clinicNumber + "-";
-			
+
 		Integer nextAvailableIdForTheClinic = clinicAndIDMap.get(data.get(CLINIC_KEY));
 		SyncEntityUtils.createAndAddPatientIdentifier("pit.numeroDossier.uuid", ifPrefix +  String.format("%07d", nextAvailableIdForTheClinic), Constants.OBJECT_KEY, true, data, exchange, allEntities);
 		// Increment for the next patient
 		clinicAndIDMap.put(data.get(CLINIC_KEY), nextAvailableIdForTheClinic + 1);
-		
+
 		// Ancien Dossier Number
 		SyncEntityUtils.createAndAddPatientIdentifier("pit.ancienNumeroDossier.uuid", data.get(DOSSIER_NUMBER), Constants.OBJECT_KEY, true, data, exchange, allEntities);
 		// Vecna ID

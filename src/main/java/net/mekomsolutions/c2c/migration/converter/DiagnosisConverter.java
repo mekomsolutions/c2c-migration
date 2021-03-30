@@ -78,7 +78,6 @@ public class DiagnosisConverter {
 			initDiag.setValueText(obsGroup.getUuid());
 			initDiag.setObsGroup(obsGroupUuidLight);
 
-			
 			allEntities.add(obsGroup);
 			allEntities.add(nonCodedDiag);
 			allEntities.add(diagCertainty);

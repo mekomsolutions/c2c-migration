@@ -119,6 +119,7 @@ public class ConvertersTest extends CamelTestSupport {
 				String.class, new File(getClass()
 						.getResource(COUCHBASE_SELECTS + "/dlm~00~c2c~patient/pat!~00~H3-1390cli~H3.json")
 						.getFile())), Exchange.FILE_NAME, "pat!~00~H3-1390cli~H3.json");
+		// And 2 other patients
 		template.sendBodyAndHeader("seda:queue:c2c-patient", context.getTypeConverter().convertTo(
 				String.class, new File(getClass()
 						.getResource(COUCHBASE_SELECTS + "/dlm~00~c2c~patient/pat!~00~16946cli~H2.json")
@@ -139,6 +140,11 @@ public class ConvertersTest extends CamelTestSupport {
 				String.class, new File(getClass()
 						.getResource(COUCHBASE_SELECTS + "/dlm~00~c2c~visit/vst!~00~10000040cli~H3.json")
 						.getFile())), Exchange.FILE_NAME, "vst!~00~10000040cli~H3.json");
+		// And another one, on a different location
+		template.sendBodyAndHeader("seda:queue:c2c-visit", context.getTypeConverter().convertTo(
+				String.class, new File(getClass()
+						.getResource(COUCHBASE_SELECTS + "/dlm~00~c2c~visit/vst!~00~1000018cli~H4.json")
+						.getFile())), Exchange.FILE_NAME, "vst!~00~1000018cli~H4.json");
 
 		// Load a diagnosis for that visit
 		template.sendBodyAndHeader("seda:queue:c2c-diagnosis", context.getTypeConverter().convertTo(
@@ -176,7 +182,7 @@ public class ConvertersTest extends CamelTestSupport {
 		mockContacts.expectedMessageCount(5);
 		mockContacts.assertIsSatisfied();
 
-		mockVisits.expectedMessageCount(7);
+		mockVisits.expectedMessageCount(15);
 		mockVisits.assertIsSatisfied(); 
 
 		mockDiagnoses.expectedMessageCount(9);
@@ -190,6 +196,7 @@ public class ConvertersTest extends CamelTestSupport {
 
 		visitUuid = UUID.nameUUIDFromBytes("vst!~00~10000040cli~H3".getBytes());
 		patientUuid = UUID.nameUUIDFromBytes("pat!~00~H3-1390cli~H3".getBytes());
+
 
 	}
 
@@ -342,6 +349,15 @@ public class ConvertersTest extends CamelTestSupport {
 		assertTrue(visit.getPatient().equals(Utils.getModelClassLight("Patient", patientUuid)));
 		assertTrue(visit.getDateStarted().equals(Utils.dateStringToArray("2017-07-28T08:48:17.429Z")));
 		assertTrue(visit.getDateStopped().equals(Utils.dateStringToArray("2017-07-28T10:05:15.358Z")));
+		assertTrue(visit.getLocation().equals(Utils.getModelClassLight("Location", context().
+				resolvePropertyPlaceholders("{{location.3.uuid}}"))));
+
+		{
+			EntityWrapper<?> body = visitMessages.get(7).getIn().getBody(EntityWrapper.class);
+			SyncVisit v = (SyncVisit) body.getEntity();
+			assertTrue(v.getLocation().equals(Utils.getModelClassLight("Location", context().
+					resolvePropertyPlaceholders("{{location.4.uuid}}"))));
+		}
 
 		EntityWrapper<?> body1 = visitMessages.get(1).getIn().getBody(EntityWrapper.class);
 		SyncEncounter encounter = (SyncEncounter) body1.getEntity();

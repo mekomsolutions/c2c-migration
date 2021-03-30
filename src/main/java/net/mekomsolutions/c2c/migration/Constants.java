@@ -37,6 +37,8 @@ public class Constants {
 
 	public static final String JMS_COUCHBASE_QUEUE = "c2c.couchbase";
 
+	public static final Object CLINIC_KEY = "clinicKey";
+
 	private static Map<String, String> createFull() {
 
 		Map<String, String> result = new HashMap<>();
