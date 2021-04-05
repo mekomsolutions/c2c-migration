@@ -246,21 +246,21 @@ public class ConvertersTest extends CamelTestSupport {
 		EntityWrapper<?> body5 = patientMessages.get(5).getIn().getBody(EntityWrapper.class);
 		SyncPatientIdentifier numeroDossier = (SyncPatientIdentifier) body5.getEntity();
 		assertTrue(numeroDossier.getPatient().equals(Utils.getModelClassLight("Patient", patientUuid)));
-		assertTrue(numeroDossier.getIdentifier().equals("H03-0000001"));
+		assertTrue(numeroDossier.getIdentifier().equals("H03-0045459"));
 		assertTrue(numeroDossier.getPatientIdentifierType().equals(
 				Utils.getModelClassLight("PatientIdentifierType", context().
 						resolvePropertyPlaceholders("{{pit.numeroDossier.uuid}}"))));
 
-		// Ensure subsequent identifiers are correctly incremented
+		// Ensure other Dossier Numbers identifiers are correctly set
 		{
 			EntityWrapper<?> body = patientMessages.get(13).getIn().getBody(EntityWrapper.class);
 			SyncPatientIdentifier id = (SyncPatientIdentifier) body.getEntity();
-			assertTrue(id.getIdentifier().equals("H02-0000001"));
+			assertTrue(id.getIdentifier().equals("H02-0621357"));
 		}
 		{
 			EntityWrapper<?> body = patientMessages.get(23).getIn().getBody(EntityWrapper.class);
 			SyncPatientIdentifier id = (SyncPatientIdentifier) body.getEntity();
-			assertTrue(id.getIdentifier().equals("H03-0000002"));
+			assertTrue(id.getIdentifier().equals("H03-0047798"));
 		}
 
 		EntityWrapper<?> body6 = patientMessages.get(6).getIn().getBody(EntityWrapper.class);

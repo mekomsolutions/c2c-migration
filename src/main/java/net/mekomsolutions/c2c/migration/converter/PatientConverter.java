@@ -43,17 +43,6 @@ public class PatientConverter {
 	private static final String ADDRESS_LINE_1 = "addressline1";
 	private static final String ADDRESS_LINE_2 = "addressline2";
 
-	private static Map<String, Integer> clinicAndIDMap;
-	static {
-		clinicAndIDMap = new HashMap<>();
-		clinicAndIDMap.put("cli~H1", 1);
-		clinicAndIDMap.put("cli~H2", 1);
-		clinicAndIDMap.put("cli~H3", 1);
-		clinicAndIDMap.put("cli~H4", 1);
-		clinicAndIDMap.put("cli~H5", 1);
-		clinicAndIDMap.put("cli~H6", 1);
-	}
-
 	/**
 	 * Transform the data input, passed as a parameter, into a Patient.
 	 * @throws Exception
@@ -103,15 +92,10 @@ public class PatientConverter {
 		// Person Attribute: Employment
 		SyncEntityUtils.createAndAddPersonAttribute("pat.employment.uuid", data.get(EMPLOYMENT), Constants.OBJECT_KEY, data, exchange, allEntities);
 
-		// Dossier Number
-		// We shall try to construct a nice looking identifer
+		// Dossier Number, it appears that the Vecna ID is a trustable unique ID, using it.
 		String clinicNumber = data.get(CLINIC_KEY).split("H")[1];
 		String ifPrefix = "H0" + clinicNumber + "-";
-
-		Integer nextAvailableIdForTheClinic = clinicAndIDMap.get(data.get(CLINIC_KEY));
-		SyncEntityUtils.createAndAddPatientIdentifier("pit.numeroDossier.uuid", ifPrefix +  String.format("%07d", nextAvailableIdForTheClinic), Constants.OBJECT_KEY, true, data, exchange, allEntities);
-		// Increment for the next patient
-		clinicAndIDMap.put(data.get(CLINIC_KEY), nextAvailableIdForTheClinic + 1);
+		SyncEntityUtils.createAndAddPatientIdentifier("pit.numeroDossier.uuid", ifPrefix +  String.format("%07d", Integer.parseInt(data.get(VECNA_ID))), Constants.OBJECT_KEY, true, data, exchange, allEntities);
 
 		// Ancien Dossier Number
 		SyncEntityUtils.createAndAddPatientIdentifier("pit.ancienNumeroDossier.uuid", data.get(DOSSIER_NUMBER), Constants.OBJECT_KEY, true, data, exchange, allEntities);
