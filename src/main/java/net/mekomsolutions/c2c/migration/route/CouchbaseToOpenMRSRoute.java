@@ -11,9 +11,9 @@ import net.mekomsolutions.c2c.migration.entity.Patient;
 import net.mekomsolutions.c2c.migration.entity.Visit;
 
 public class CouchbaseToOpenMRSRoute extends RouteBuilder {
-	
+
 	public void configure() throws Exception {
-		
+
 		from("jms:queue:c2c.couchbase")
 		.split().jsonpath("$.{{couchbase.bucket.name}}").streaming()
 		.log("BODY: \\n ${body}\\n HEADERS: \\n${headers}")
@@ -31,12 +31,12 @@ public class CouchbaseToOpenMRSRoute extends RouteBuilder {
 		.to("direct:c2c-labtest")
 		.when(header("type").isEqualTo("dlm~00~c2c~medicineevent"))
 		.to("direct:c2c-medicineevent");
-		
+
 		from("direct:c2c-contact").convertBodyTo(Contact.class)
 		.split(simple("${body.entities}"))
 		.to("jms:queue:openmrs-save");
 
-		from("direct:c2c-patient").log("See the message body: \\n\\n${body}\\n\\n").convertBodyTo(Patient.class)
+		from("direct:c2c-patient").convertBodyTo(Patient.class)
 		.split(simple("${body.entities}"))
 		.to("jms:queue:openmrs-save");
 
@@ -55,7 +55,7 @@ public class CouchbaseToOpenMRSRoute extends RouteBuilder {
 		from("direct:c2c-medicineevent").convertBodyTo(MedicineEvent.class)
 		.split(simple("${body.entities}"))
 		.to("jms:queue:openmrs-save");
-		
+
 		from("jms:queue:openmrs-save")
 		.setHeader("modelClass", simple("${body.modelClass}"))
 		.setHeader("uuid", simple("${body.uuid}"))
