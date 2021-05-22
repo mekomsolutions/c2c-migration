@@ -251,7 +251,7 @@ mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouch
 mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where dataElementKey = 'dlm~00~c2c~medicineevent' and clinicKey = 'cli~H4'"
 
 # Lab Tests
-mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select count(*) from halix2 where (dataElementKey = 'dlm~00~c2c~labtest' and patientKey IS NOT MISSING) and clinicKey = 'cli~H4'"
+mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where (dataElementKey = 'dlm~00~c2c~labtest' and patientKey IS NOT MISSING) and clinicKey = 'cli~H4'"
 ```
 
 Import all at once:
