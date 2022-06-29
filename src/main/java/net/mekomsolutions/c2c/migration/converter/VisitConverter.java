@@ -54,7 +54,11 @@ public class VisitConverter {
 			SyncVisit visit = new SyncVisit(data, exchange);
 			visit.setUuid(visitUuid.toString());
 			visit.setDateStarted(Utils.dateStringToArray(data.get(START_TIME)));
-			visit.setDateStopped(Utils.dateStringToArray(data.get(END_TIME)));
+			if (data.get(END_TIME) != null) {
+				visit.setDateStopped(Utils.dateStringToArray(data.get(END_TIME)));
+			} else {
+				visit.setDateStopped(Utils.dateStringToArray(data.get(START_TIME)));
+			}
 			visit.setPatient(patientLight);
 			visit.setVisitType(visitTypeLight);
 			visit.setLocation(SyncEntityUtils.getLocationLight(exchange, data));
