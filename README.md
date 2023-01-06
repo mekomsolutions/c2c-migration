@@ -10,6 +10,34 @@ Java project to migrate Care 2 Communities' historical data to OpenMRS. This pro
 <img src="./readme/openmrs-long.png" alt="OpenMRS Logo" height="80">
 </p>
 
+## Context
+
+The historical data received by Care 2 Communities is provided as a Couchbase object database dump. It contains all patient data across all clinics.
+Every object in the db (patient, visit, medication order…) is attached to a given clinic via its `clinicKey` key. Eg, `'cli~H4'`, `'cli~H3'`…
+
+I’ve created a Java Camel application that parses messages from the Couchbase database (passed with an extract query) and transforms each element output into an OpenMRS DB Sync Receiver compatible message.
+
+For example, a patient object in the Couchbase db will output:
+
+- A OpenMRS Patient
+- A OpenMRS Person
+- A OpenMRS Person Name
+- Some OpenMRS Person Attribute
+- Some OpenMRS Patient Identifiers
+- …
+
+Those outputs messages are sent to an ActiveMQ (Artemis) queue that is then consumed by a DB Sync Receiver application, which parses and saves the entities in the OpenMRS relational database.
+
+The OpenMRS database ideally needs to have been initialized with the C2C backend configurations (based on latest version of the distro), so that the metadata (attr. types, identifier types…) needed is created in advance.
+
+Thus, few services needs to be started to complete this migration:
+
+- the Couchbase server (with the C2C database loaded)
+- the C2C Bahmni distribution (at least the OpenMRS + MySQL services) so that the OpenMRS db is already initialized with the required metadata.
+- the Artemis message broker
+- the DB Sync receiver
+- the C2C Migration app
+
 ## Run the project:
 
 ### Build:
