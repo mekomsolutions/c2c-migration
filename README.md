@@ -270,16 +270,16 @@ mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Main"
 mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where dataElementKey = 'dlm~00~c2c~patient' and clinicKey = 'cli~H4'"
 
 # Visits
-mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where (dataElementKey = 'dlm~00~c2c~visit' and patientKey IS NOT MISSING) and clinicKey = 'cli~H4'"
+mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where (dataElementKey = 'dlm~00~c2c~visit' and patientKey IS NOT MISSING) and clinicKey = 'cli~H4' and deleted != true"
 
 # Diags
-mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where dataElementKey = 'dlm~00~c2c~diagnosis' and clinicKey = 'cli~H4'"
+mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where dataElementKey = 'dlm~00~c2c~diagnosis' and clinicKey = 'cli~H4' and deleted != true"
 
 # Medications
-mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where dataElementKey = 'dlm~00~c2c~medicineevent' and clinicKey = 'cli~H4'"
+mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where (dataElementKey = 'dlm~00~c2c~medicineevent' and patientKey IS NOT MISSING) and clinicKey = 'cli~H4' and deleted != true"
 
 # Lab Tests
-mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where (dataElementKey = 'dlm~00~c2c~labtest' and patientKey IS NOT MISSING) and clinicKey = 'cli~H4'"
+mvn exec:java -Dexec.mainClass="net.mekomsolutions.c2c.migration.Trials" -Dcouchbase.query="select * from halix2 where (dataElementKey = 'dlm~00~c2c~labtest' and patientKey IS NOT MISSING) and clinicKey = 'cli~H4' and deleted != true"
 ```
 
 Import all at once:
