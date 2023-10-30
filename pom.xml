@@ -27,7 +27,7 @@
 
 		<couchbase-version>3.0.1</couchbase-version>
 		<camelopenmrs-version>1.0-SNAPSHOT</camelopenmrs-version>
-		<activemq-version>5.15.11</activemq-version>
+		<activemq-version>5.15.16</activemq-version>
 		<artemis-version>2.13.0</artemis-version>
 		<camel-version>2.24.2</camel-version>
 
